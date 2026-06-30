@@ -119,40 +119,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-white py-20">
-          <div className="mx-auto max-w-7xl px-8">
-            <h2 className="text-center text-4xl font-bold text-green-700">
-              Featured Brands
-            </h2>
-
-            <p className="mt-3 text-center text-gray-600">
-              We distribute India&apos;s leading FMCG brands.
-            </p>
-
-            <div className="mt-12 grid gap-6 md:grid-cols-5">
-              <div className="rounded-xl border p-6 text-center shadow hover:shadow-lg">
-                <h3 className="font-bold">Nestlé</h3>
-              </div>
-
-              <div className="rounded-xl border p-6 text-center shadow hover:shadow-lg">
-                <h3 className="font-bold">HUL</h3>
-              </div>
-
-              <div className="rounded-xl border p-6 text-center shadow hover:shadow-lg">
-                <h3 className="font-bold">ITC</h3>
-              </div>
-
-              <div className="rounded-xl border p-6 text-center shadow hover:shadow-lg">
-                <h3 className="font-bold">Britannia</h3>
-              </div>
-
-              <div className="rounded-xl border p-6 text-center shadow hover:shadow-lg">
-                <h3 className="font-bold">Parle</h3>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="bg-green-50 py-20">
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-8 md:grid-cols-2">
             <div>
