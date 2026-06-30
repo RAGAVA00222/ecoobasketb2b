@@ -1,4 +1,6 @@
 import Navbar from "../components/Navbar";
+import InquiryForm from "../components/InquiryForm";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -31,20 +33,26 @@ export default function Home() {
               </a>
 
               <a
-                href="/contact"
-                className="rounded-lg border border-green-600 px-6 py-3 text-green-700 transition hover:bg-green-50"
+                href="https://www.ecoobasket.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full transition-all duration-300"
               >
-                Request Quote
+                Order Online
               </a>
             </div>
           </div>
 
           <div className="flex justify-center">
-            <img
-              src="https://images.unsplash.com/photo-1542838132-92c53300491e"
-              className="rounded-xl shadow-xl"
-              alt="Warehouse"
-            />
+            <div className="bg-gradient-to-r from-green-50 to-white rounded-2xl transition duration-500 hover:scale-[1.02]">
+              <Image
+                src="/images/hero/ecoobasket-store.jpg"
+                alt="Ecoo Basket FMCG Wholesale Store"
+                width={700}
+                height={500}
+                className="rounded-2xl shadow-2xl object-cover w-full h-auto"
+              />
+            </div>
           </div>
         </section>
 
@@ -84,27 +92,27 @@ export default function Home() {
 
             <div className="mt-12 grid gap-8 md:grid-cols-4">
               <div className="rounded-xl bg-white p-6 shadow">
-                <h3 className="text-xl font-bold">🚚 Fast Delivery</h3>
+                <h3 className="text-xl font-bold">✅ 500+ Products</h3>
                 <p className="mt-3 text-gray-600">
-                  Quick delivery across Chennai and surrounding areas.
+                  A focused range of essentials for retailers and distributors.
                 </p>
               </div>
 
               <div className="rounded-xl bg-white p-6 shadow">
-                <h3 className="text-xl font-bold">🏷 Best Wholesale Price</h3>
-                <p className="mt-3 text-gray-600">Competitive pricing for retailers.</p>
+                <h3 className="text-xl font-bold">✅ 20+ Trusted Brands</h3>
+                <p className="mt-3 text-gray-600">Reliable supply from well-known FMCG names.</p>
               </div>
 
               <div className="rounded-xl bg-white p-6 shadow">
-                <h3 className="text-xl font-bold">📦 5000+ Products</h3>
+                <h3 className="text-xl font-bold">✅ Fast Delivery</h3>
                 <p className="mt-3 text-gray-600">
-                  Grocery, Beverages, Personal Care & Home Care.
+                  Timely dispatch and dependable support for your business.
                 </p>
               </div>
 
               <div className="rounded-xl bg-white p-6 shadow">
-                <h3 className="text-xl font-bold">🤝 Trusted Partner</h3>
-                <p className="mt-3 text-gray-600">Reliable B2B wholesale supplier.</p>
+                <h3 className="text-xl font-bold">✅ Dedicated B2B Support</h3>
+                <p className="mt-3 text-gray-600">A responsive team for wholesale inquiries and order planning.</p>
               </div>
             </div>
           </div>
@@ -147,10 +155,12 @@ export default function Home() {
         <section className="bg-green-50 py-20">
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-8 md:grid-cols-2">
             <div>
-              <img
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800"
+              <Image
+                src="/images/warehouse.svg"
                 alt="Warehouse"
-                className="rounded-xl shadow-lg"
+                width={800}
+                height={533}
+                className="rounded-xl shadow-lg object-cover w-full h-auto"
               />
             </div>
 
@@ -167,19 +177,12 @@ export default function Home() {
               </p>
 
               <ul className="space-y-3 text-gray-700">
-                <li>✅ 5000+ FMCG Products</li>
-                <li>✅ 200+ Trusted Brands</li>
+                <li>✅ 500+ FMCG Products</li>
+                <li>✅ 20+ Trusted Brands</li>
                 <li>✅ Fast Delivery</li>
-                <li>✅ Best Wholesale Pricing</li>
+                <li>✅ Competitive Wholesale Pricing</li>
                 <li>✅ Dedicated B2B Support</li>
               </ul>
-
-              <a
-                href="/downloads"
-                className="mt-8 inline-flex rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-700"
-              >
-                View Downloads
-              </a>
             </div>
           </div>
         </section>
@@ -188,17 +191,17 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-8">
             <div className="grid gap-8 text-center md:grid-cols-4">
               <div>
-                <h2 className="text-5xl font-bold">5000+</h2>
+                <h2 className="text-5xl font-bold">500+</h2>
                 <p className="mt-3">Products</p>
               </div>
 
               <div>
-                <h2 className="text-5xl font-bold">200+</h2>
-                <p className="mt-3">Brands</p>
+                <h2 className="text-5xl font-bold">20+</h2>
+                <p className="mt-3">Trusted Brands</p>
               </div>
 
               <div>
-                <h2 className="text-5xl font-bold">1000+</h2>
+                <h2 className="text-5xl font-bold">100+</h2>
                 <p className="mt-3">Retailers Served</p>
               </div>
 
@@ -288,35 +291,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full rounded-lg border p-3"
-                />
-
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full rounded-lg border p-3"
-                />
-
-                <input
-                  type="tel"
-                  placeholder="Mobile Number"
-                  className="w-full rounded-lg border p-3"
-                />
-
-                <textarea
-                  rows={5}
-                  placeholder="Tell us what products you need..."
-                  className="w-full rounded-lg border p-3"
-                ></textarea>
-
-                <button className="rounded-lg bg-green-600 px-8 py-3 text-white hover:bg-green-700">
-                  Send Inquiry
-                </button>
-              </form>
+              <InquiryForm />
             </div>
           </div>
         </section>

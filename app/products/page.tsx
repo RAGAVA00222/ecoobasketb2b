@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
+import Image from "next/image";
 
 const categories = [
   {
     title: "Grocery",
-    image:
-      "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80",
+    image: "/images/categories/grocery.svg",
     description:
       "Staple food essentials for retailers, supermarkets, and homes.",
     items: ["Rice", "Sugar", "Flour", "Pulses", "Cooking Oil"],
@@ -13,8 +13,7 @@ const categories = [
   },
   {
     title: "Beverages",
-    image:
-      "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&fit=crop&w=900&q=80",
+    image: "/images/categories/beverages.svg",
     description:
       "Tea, coffee, juices, and soft drinks for everyday demand.",
     items: ["Tea", "Coffee", "Soft Drinks", "Juices"],
@@ -22,8 +21,7 @@ const categories = [
   },
   {
     title: "Personal Care",
-    image:
-      "https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?auto=format&fit=crop&w=900&q=80",
+    image: "/images/categories/personal-care.svg",
     description:
       "Daily personal care essentials trusted by modern households.",
     items: ["Soap", "Shampoo", "Toothpaste", "Face Wash"],
@@ -31,8 +29,7 @@ const categories = [
   },
   {
     title: "Home Care",
-    image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80",
+    image: "/images/categories/home-care.svg",
     description:
       "Effective cleaning and hygiene products for homes and businesses.",
     items: ["Detergent", "Floor Cleaner", "Dishwash"],
@@ -40,8 +37,7 @@ const categories = [
   },
   {
     title: "Snacks & Biscuits",
-    image:
-      "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=900&q=80",
+    image: "/images/categories/snacks-biscuits.svg",
     description:
       "Popular snack packs and biscuits for retail shelves and festive demand.",
     items: ["Biscuits", "Namkeen", "Chips", "Cookies"],
@@ -49,8 +45,7 @@ const categories = [
   },
   {
     title: "Dairy Products",
-    image:
-      "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=900&q=80",
+    image: "/images/categories/dairy.svg",
     description:
       "Milk products and daily dairy staples for bulk and retail supply.",
     items: ["Milk", "Butter", "Paneer", "Curd"],
@@ -84,9 +79,11 @@ export default function ProductsPage() {
                 key={category.title}
                 className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
               >
-                <img
+                <Image
                   src={category.image}
                   alt={category.title}
+                  width={900}
+                  height={320}
                   className="h-48 w-full object-cover"
                 />
                 <div className="p-6">

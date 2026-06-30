@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -6,6 +7,7 @@ const navItems = [
   { label: "Products", href: "/products" },
   { label: "Brands", href: "/brands" },
   { label: "Services", href: "/services" },
+  { label: "Founders", href: "/founders" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -14,10 +16,14 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="block">
-          <h1 className="text-2xl font-bold tracking-tight text-green-700 sm:text-3xl">
-            ECOO BASKET
-          </h1>
-          <p className="text-xs text-gray-500 sm:text-sm">Your Wholesale Partner</p>
+              <Image
+                src="/images/logo/ecoobasket-logo.png"
+                alt="Ecoo Basket Official Logo"
+                width={180}
+                height={60}
+                priority
+                className="h-12 md:h-[60px] w-auto object-contain"
+              />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
@@ -32,12 +38,14 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link
-          href="/contact"
-          className="rounded-full bg-green-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-700 sm:px-5"
+        <a
+          href="https://www.ecoobasket.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full transition-all duration-300"
         >
-          Request Quote
-        </Link>
+          Order Online
+        </a>
       </div>
     </header>
   );

@@ -7,7 +7,6 @@ const quickLinks = [
   { label: "Brands", href: "/brands" },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
-  { label: "Downloads", href: "/downloads" },
 ];
 
 const categories = ["Grocery", "Beverages", "Personal Care", "Home Care", "Snacks & Biscuits", "Dairy Products"];
