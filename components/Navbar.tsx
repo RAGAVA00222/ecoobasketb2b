@@ -17,12 +17,11 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="block">
               <Image
-                src="/images/logo/ecoobasket-logo.png"
-                alt="Ecoo Basket Official Logo"
+                src="/images/logo.svg"
+                alt="Ecoo Basket Logo"
                 width={180}
                 height={60}
                 priority
-                className="h-12 md:h-[60px] w-auto object-contain"
               />
         </Link>
 

@@ -46,11 +46,12 @@ export default function Home() {
           <div className="flex justify-center">
             <div className="bg-gradient-to-r from-green-50 to-white rounded-2xl transition duration-500 hover:scale-[1.02]">
               <Image
-                src="/images/hero/ecoobasket-store.jpg"
-                alt="Ecoo Basket FMCG Wholesale Store"
+                src="/images/hero-store.svg"
+                alt="Ecoo Basket Kirana Store"
                 width={700}
                 height={500}
-                className="rounded-2xl shadow-2xl object-cover w-full h-auto"
+                priority
+                className="rounded-xl shadow-xl object-cover"
               />
             </div>
           </div>
