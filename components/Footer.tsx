@@ -19,6 +19,13 @@ const socialIcons = {
   ),
 };
 
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/ & /g, "-and-")
+    .replace(/[\s_]+/g, "-")
+    .replace(/[^\w-]+/g, "");
+
 export default function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-950 text-gray-300" role="contentinfo">
@@ -72,8 +79,13 @@ export default function Footer() {
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               {PRODUCT_CATEGORIES.map((category) => (
-                <li key={category} className="hover:text-white transition">
-                  {category}
+                <li key={category}>
+                  <Link
+                    href={`/products#${slugify(category)}`}
+                    className="transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 rounded px-1 py-0.5"
+                  >
+                    {category}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -86,8 +98,13 @@ export default function Footer() {
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               {SERVICES.map((service) => (
-                <li key={service} className="hover:text-white transition">
-                  {service}
+                <li key={service}>
+                  <Link
+                    href={`/services#${slugify(service)}`}
+                    className="transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 rounded px-1 py-0.5"
+                  >
+                    {service}
+                  </Link>
                 </li>
               ))}
             </ul>

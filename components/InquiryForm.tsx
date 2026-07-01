@@ -29,7 +29,7 @@ export default function InquiryForm() {
 
     window.location.href = `mailto:${COMPANY.email}?subject=${subject}&body=${body}`;
     setStatus(
-      "Your email app should open with the inquiry details. Please send it to complete the request."
+      `Your email app should open. If it doesn't, please send your inquiry to ${COMPANY.email}.`
     );
   };
 
@@ -65,6 +65,7 @@ export default function InquiryForm() {
           placeholder="Mobile Number"
           className="w-full rounded-lg border border-gray-300 p-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
           required
+          pattern="[0-9\s\-\+\(\)]+"
           aria-required="true"
         />
       </div>
@@ -80,6 +81,7 @@ export default function InquiryForm() {
           placeholder="Email Address"
           className="w-full rounded-lg border border-gray-300 p-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
           required
+          pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
           aria-required="true"
         />
       </div>
