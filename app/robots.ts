@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { COMPANY } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://ecoobasketb2b.com/sitemap.xml",
+    sitemap: `${COMPANY.website_b2b}/sitemap.xml`,
   };
 }

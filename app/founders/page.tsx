@@ -1,27 +1,32 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "../../components/Navbar";
 import { generatePageMetadata } from "@/lib/metadata";
 import { COMPANY } from "@/lib/constants";
+import Navbar from "../../components/Navbar";
+import Image from "next/image";
+import { JsonLd } from "@/components/JsonLd";
 
 const leaders = [
   {
     name: "Mrs. Nirmala Devi Nagaraj",
     role: "Founder & Director",
-    bio: "Nirmala Devi Nagaraj established Ecoo Basket with a vision to build a reliable, transparent, and technology-driven FMCG wholesale distribution network focused on quality, supplier partnerships, and long-term customer value.",
-    focus: ["Strategic Business Planning", "FMCG Wholesale Distribution", "Supplier Relationship Management", "Customer Satisfaction", "Business Growth & Expansion"],
+    bio: "With a vision for a transparent and tech-driven distribution network, Nirmala established Ecoo Basket to empower retailers through quality products and lasting partnerships.",
+    imageUrl: "/images/founders/nirmala-devi-nagaraj.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/nirmaladevinagaraj",
   },
   {
     name: "Mrs. SriKeerthana Devi Chakkaravathi",
     role: "Co-Founder",
-    bio: "SriKeerthana Devi Chakkaravathi leads operations, branding, customer engagement, and digital transformation initiatives to simplify wholesale procurement and strengthen the customer experience.",
-    focus: ["Operations Management", "Marketing & Branding", "Customer Experience", "Digital Strategy", "Business Development"],
+    bio: "SriKeerthana leads operations and digital transformation, focusing on simplifying procurement and enhancing the customer experience through innovation and branding.",
+    imageUrl: "/images/founders/srikeerthana-devi.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/srikeerthanadevic",
   },
   {
     name: "Mr. Ragavendren Chakkaravathi",
     role: "Chief Sales Officer (CSO)",
-    bio: "With over 15 years of experience in retail sales, Kirana trade, FMCG distribution, and supply chain management, Ragavendren Chakkaravathi leads sales strategy and market expansion for Ecoo Basket.",
-    focus: ["Retail Sales Management", "Kirana Store Network Development", "FMCG Distribution", "Supply Chain Management", "Channel Sales", "Territory Expansion", "Customer Relationship Management", "Retail Business Growth"],
+    bio: "Leveraging 15+ years in FMCG and retail, Ragavendren drives sales strategy and market expansion, building a robust network of Kirana partners and managing the supply chain.",
+    imageUrl: "/images/founders/ragavendren-chakkaravathi.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/ragavendrenc",
   },
 ];
 
@@ -53,6 +58,19 @@ export default function FoundersPage() {
       <Navbar />
       <main className="flex-1 bg-gray-50">
         <section className="bg-gradient-to-br from-green-700 to-emerald-600 px-4 py-20 sm:px-6 lg:px-8 lg:py-24 text-white">
+          {leaders.map((leader) => (
+            <JsonLd
+              key={leader.name}
+              data={{
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: leader.name,
+                jobTitle: leader.role,
+                url: leader.linkedinUrl,
+                image: `${COMPANY.website_b2b}${leader.imageUrl}`,
+              }}
+            />
+          ))}
           <div className="mx-auto max-w-7xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-100">Meet Our Leadership</p>
             <h1 className="mt-4 max-w-4xl text-4xl font-bold sm:text-5xl">
@@ -65,31 +83,45 @@ export default function FoundersPage() {
         </section>
 
         <section className="mx-auto max-w-7xl px-8 py-20">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {leaders.map((leader) => (
               <article
                 key={leader.name}
-                className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:shadow-md"
+                className="group space-y-4 text-center"
               >
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-3xl font-semibold text-green-700">
-                  {leader.name.split(" ").slice(-1)[0][0]}
+                <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full lg:h-48 lg:w-48">
+                  <Image
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    src={leader.imageUrl}
+                    alt={`Photograph of ${leader.name}`}
+                    width={200}
+                    height={200}
+                  />
                 </div>
-                <h2 className="mt-6 text-2xl font-semibold text-green-700">
-                  {leader.name}
-                </h2>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-                  {leader.role}
-                </p>
-                <p className="mt-4 text-gray-600">{leader.bio}</p>
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-                    Leadership Focus
-                  </h3>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700" role="list">
-                    {leader.focus.map((item) => (
-                      <li key={item}>• {item}</li>
-                    ))}
-                  </ul>
+                <div className="space-y-2">
+                  <div className="space-y-1 text-lg font-medium leading-6">
+                    <h3>{leader.name}</h3>
+                    <p className="text-green-600">{leader.role}</p>
+                  </div>
+                  <p className="text-gray-600">{leader.bio}</p>
+                  <div className="flex justify-center">
+                    <a
+                      href={leader.linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-green-600"
+                    >
+                      <span className="sr-only">LinkedIn</span>
+                      <svg
+                        className="h-6 w-6"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}

@@ -1,8 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Organization } from "schema-dts";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, SOCIAL_LINKS } from "@/lib/constants";
 import "./globals.css";
+import { JsonLd } from "@/components/JsonLd";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -49,12 +53,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema: Organization = {
+    "@type": "Organization",
+    name: COMPANY.name,
+    url: COMPANY.website_b2b,
+    logo: `${COMPANY.website_b2b}/logo.png`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: COMPANY.phone,
+      contactType: "Customer Service",
+    },
+    sameAs: SOCIAL_LINKS.map((link) => link.href),
+  };
+
   return (
-    <html lang="en" className="h-full antialiased">
-      <head>
-        <meta charSet="utf-8" />
-      </head>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-gray-50">
+        <head>
+          <JsonLd data={{ "@context": "https://schema.org", ...organizationSchema }} />
+        </head>
         {children}
         <Footer />
         <WhatsAppButton />

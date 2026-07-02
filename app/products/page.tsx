@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Image from "next/image";
 import { generatePageMetadata } from "@/lib/metadata";
+import { slugify } from "@/lib/utils";
 
 const categories = [
   {
@@ -55,6 +56,8 @@ const categories = [
   },
 ];
 
+
+
 export const metadata: Metadata = generatePageMetadata({
   title: "Products",
   description:
@@ -92,6 +95,7 @@ export default function ProductsPage() {
             {categories.map((category) => (
               <article
                 key={category.title}
+                id={slugify(category.title)}
                 className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md"
               >
                 <Image

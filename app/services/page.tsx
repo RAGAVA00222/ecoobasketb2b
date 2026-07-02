@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Navbar from "../../components/Navbar";
 import { generatePageMetadata } from "@/lib/metadata";
+import { slugify } from "@/lib/utils";
 
 const servicesData = [
   {
@@ -35,6 +36,8 @@ const servicesData = [
   },
 ];
 
+
+
 export const metadata: Metadata = generatePageMetadata({
   title: "Services",
   description:
@@ -67,6 +70,7 @@ export default function ServicesPage() {
             {servicesData.map((service) => (
               <article
                 key={service.title}
+                id={slugify(service.title)}
                 className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition hover:shadow-md"
               >
                 <h2 className="text-xl font-semibold text-green-700">

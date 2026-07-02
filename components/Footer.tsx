@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { COMPANY, FOOTER_QUICK_LINKS, PRODUCT_CATEGORIES, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
+import { slugify } from "@/lib/utils";
 
 const socialIcons = {
   instagram: (
@@ -19,12 +20,7 @@ const socialIcons = {
   ),
 };
 
-const slugify = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/ & /g, "-and-")
-    .replace(/[\s_]+/g, "-")
-    .replace(/[^\w-]+/g, "");
+
 
 export default function Footer() {
   return (

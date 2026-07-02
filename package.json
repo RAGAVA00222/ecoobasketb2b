@@ -9,10 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@swc/helpers": "^0.5.23",
+    "geist": "^1.7.2",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "schema-dts": "^1.1.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

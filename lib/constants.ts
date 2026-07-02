@@ -1,10 +1,12 @@
+import type { Company, SocialLink, NavItem } from "./types";
+
 /**
  * Global constants for Ecoo Basket
  * This file contains all magic numbers, strings, and configuration values
  */
 
 // Company information
-export const COMPANY = {
+export const COMPANY: Company = {
   name: "Ecoo Basket",
   tagline: "India's Trusted FMCG Wholesale Distribution Partner",
   phone: "+91 93423 58226",
@@ -23,7 +25,7 @@ export const COMPANY = {
 };
 
 // SEO Keywords
-export const SEO = {
+export const SEO: { baseKeywords: string[]; locations: string[] } = {
   baseKeywords: [
     "FMCG wholesale",
     "wholesale distributor",
@@ -35,7 +37,7 @@ export const SEO = {
 };
 
 // Social links
-export const SOCIAL_LINKS = [
+export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: "Instagram",
     href: "https://instagram.com/ecoobasket",
@@ -54,7 +56,7 @@ export const SOCIAL_LINKS = [
 ];
 
 // Navigation items
-export const NAV_ITEMS = [
+export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
@@ -64,17 +66,16 @@ export const NAV_ITEMS = [
 ];
 
 // Footer quick links
-export const FOOTER_QUICK_LINKS = [
+export const FOOTER_QUICK_LINKS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
-  { label: "Brands", href: "/brands" },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
 ];
 
 // Product categories
-export const PRODUCT_CATEGORIES = [
+export const PRODUCT_CATEGORIES: string[] = [
   "Grocery",
   "Beverages",
   "Personal Care",
@@ -84,7 +85,7 @@ export const PRODUCT_CATEGORIES = [
 ];
 
 // Services
-export const SERVICES = [
+export const SERVICES: string[] = [
   "Wholesale Distribution",
   "Retail Supply",
   "Hotel & Restaurant Supply",
@@ -94,7 +95,7 @@ export const SERVICES = [
 ];
 
 // Responsive breakpoints (Tailwind)
-export const BREAKPOINTS = {
+export const BREAKPOINTS: { [key: string]: string } = {
   mobile: "375px",
   tablet: "768px",
   desktop: "1024px",
@@ -102,14 +103,14 @@ export const BREAKPOINTS = {
 };
 
 // Animation durations (in milliseconds)
-export const ANIMATION_DURATION = {
+export const ANIMATION_DURATION: { [key: string]: number } = {
   fast: 150,
   normal: 300,
   slow: 500,
 };
 
 // Z-index values
-export const Z_INDEX = {
+export const Z_INDEX: { [key: string]: number } = {
   dropdown: 10,
   sticky: 20,
   fixed: 40,
@@ -118,7 +119,7 @@ export const Z_INDEX = {
 };
 
 // Common spacing values
-export const SPACING = {
+export const SPACING: { [key: string]: string } = {
   xs: "0.5rem",
   sm: "1rem",
   md: "1.5rem",
@@ -128,7 +129,7 @@ export const SPACING = {
 };
 
 // Colors
-export const COLORS = {
+export const COLORS: { [key: string]: string } = {
   primary: "#16a34a", // green-600
   primaryDark: "#15803d", // green-700
   secondary: "#f3f4f6", // gray-100

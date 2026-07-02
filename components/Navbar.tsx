@@ -20,8 +20,8 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 rounded" aria-label={`${COMPANY.name} - Home`}>
-          <Image
-            src="/images/logo.png.jpeg"
+           <Image
+            src="/images/logo.jpeg"
             alt={`${COMPANY.name} logo`}
             width={180}
             height={60}

@@ -1,50 +1,22 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
+import { COMPANY } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ecoobasketb2b.com";
+  const baseUrl = COMPANY.website_b2b;
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/products`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/brands`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/downloads`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-  ];
+  // Add all your static routes here
+  const staticRoutes = ["/", "/founders", "/contact", "/products"];
+
+  const sitemapEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: "monthly",
+    priority: route === "/" ? 1.0 : 0.8,
+  }));
+
+  // If you add dynamic pages later (e.g., for individual products),
+  // you would fetch them from your database and map them here.
+  // const productEntries = ...
+
+  return [...sitemapEntries];
 }
