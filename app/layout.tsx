@@ -16,7 +16,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: `${COMPANY.name} | FMCG Wholesale & Distribution`,
+  title: {
+    default: `${COMPANY.name} | FMCG Wholesale & Distribution`,
+    template: `%s | ${COMPANY.name}`,
+  },
   description:
     "Ecoo Basket is a trusted FMCG wholesale and distribution partner supplying groceries, beverages, personal care, home care and bulk essentials across India.",
   keywords: [
@@ -32,20 +35,37 @@ export const metadata: Metadata = {
   },
   robots: "index, follow",
   openGraph: {
-    title: `${COMPANY.name} | FMCG Wholesale & Distribution`,
     description:
       "Trusted FMCG wholesale partner for retailers, supermarkets, hotels, restaurants, and institutions.",
     url: COMPANY.website_b2b,
     siteName: COMPANY.name,
     type: "website",
     locale: "en_IN",
+    images: [
+      {
+        url: "/images/social-banner.png", // Assuming this image exists in `public/images/`
+        width: 1200,
+        height: 630,
+        alt: `${COMPANY.name} - FMCG Wholesale & Distribution Partner`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY.name} | FMCG Wholesale & Distribution`,
-    description:
-      "Trusted FMCG wholesale partner for retailers, supermarkets, hotels, restaurants, and institutions.",
   },
+};
+
+const organizationSchema: Organization = {
+  "@type": "Organization",
+  name: COMPANY.name,
+  url: COMPANY.website_b2b,
+  logo: `${COMPANY.website_b2b}/logo.png`,
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: COMPANY.phone,
+    contactType: "Customer Service",
+  },
+  sameAs: SOCIAL_LINKS.map((link) => link.href),
 };
 
 export default function RootLayout({
@@ -53,25 +73,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationSchema: Organization = {
-    "@type": "Organization",
-    name: COMPANY.name,
-    url: COMPANY.website_b2b,
-    logo: `${COMPANY.website_b2b}/logo.png`,
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: COMPANY.phone,
-      contactType: "Customer Service",
-    },
-    sameAs: SOCIAL_LINKS.map((link) => link.href),
-  };
-
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}>
+      <JsonLd
+        data={organizationSchema as any}
+      />
       <body className="flex min-h-full flex-col bg-gray-50">
-        <head>
-          <JsonLd data={{ "@context": "https://schema.org", ...organizationSchema }} />
-        </head>
         {children}
         <Footer />
         <WhatsAppButton />

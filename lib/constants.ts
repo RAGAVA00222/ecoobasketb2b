@@ -1,4 +1,14 @@
-import type { Company, SocialLink, NavItem } from "./types";
+import type {
+  Company,
+  SocialLink,
+  NavItem,
+  SEO as SEOType,
+  Breakpoints,
+  AnimationDuration,
+  ZIndex,
+  Spacing,
+  Colors,
+} from "./types";
 
 /**
  * Global constants for Ecoo Basket
@@ -25,7 +35,7 @@ export const COMPANY: Company = {
 };
 
 // SEO Keywords
-export const SEO: { baseKeywords: string[]; locations: string[] } = {
+export const SEO: SEOType = {
   baseKeywords: [
     "FMCG wholesale",
     "wholesale distributor",
@@ -95,7 +105,7 @@ export const SERVICES: string[] = [
 ];
 
 // Responsive breakpoints (Tailwind)
-export const BREAKPOINTS: { [key: string]: string } = {
+export const BREAKPOINTS: Breakpoints = {
   mobile: "375px",
   tablet: "768px",
   desktop: "1024px",
@@ -103,14 +113,14 @@ export const BREAKPOINTS: { [key: string]: string } = {
 };
 
 // Animation durations (in milliseconds)
-export const ANIMATION_DURATION: { [key: string]: number } = {
+export const ANIMATION_DURATION: AnimationDuration = {
   fast: 150,
   normal: 300,
   slow: 500,
 };
 
 // Z-index values
-export const Z_INDEX: { [key: string]: number } = {
+export const Z_INDEX: ZIndex = {
   dropdown: 10,
   sticky: 20,
   fixed: 40,
@@ -119,7 +129,7 @@ export const Z_INDEX: { [key: string]: number } = {
 };
 
 // Common spacing values
-export const SPACING: { [key: string]: string } = {
+export const SPACING: Spacing = {
   xs: "0.5rem",
   sm: "1rem",
   md: "1.5rem",
@@ -129,7 +139,7 @@ export const SPACING: { [key: string]: string } = {
 };
 
 // Colors
-export const COLORS: { [key: string]: string } = {
+export const COLORS: Colors = {
   primary: "#16a34a", // green-600
   primaryDark: "#15803d", // green-700
   secondary: "#f3f4f6", // gray-100

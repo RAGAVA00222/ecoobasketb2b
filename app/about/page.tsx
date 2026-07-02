@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Navbar from "../../components/Navbar";
+import Navbar from "@/components/Navbar";
 import { generatePageMetadata } from "@/lib/metadata";
 
 const stats = [

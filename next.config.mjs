@@ -1,11 +1,29 @@
+import { withSentryConfig } from "@sentry/nextjs";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-
-  // Use the unoptimized image loader for static exports to GitHub Pages
-  images: {
-    unoptimized: true,
-  },
+  // Your Next.js configuration options go here.
 };
 
-export default nextConfig;
+export default withSentryConfig(
+  nextConfig,
+  {
+    // For all available options, see:
+    // https://github.com/getsentry/sentry-webpack-plugin#options
+
+    // Suppresses source map uploading logs during build
+    silent: true,
+    org: "your-sentry-org-slug",
+    project: "your-sentry-project-slug",
+  },
+  {
+    // For all available options, see:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+    // Hides source maps from generated client bundles
+    hideSourceMaps: true,
+
+    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    disableLogger: true,
+  }
+);

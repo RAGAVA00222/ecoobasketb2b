@@ -15,6 +15,7 @@ import Link from "next/link";
 import BackToTopButton from "../components/BackToTopButton";
 import Navbar from "../components/Navbar";
 import { JsonLd } from "@/components/JsonLd";
+
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = generatePageMetadata({
@@ -93,7 +94,7 @@ const newProductCategories = [
   },
   {
     name: "Stationery",
-    image: "/images/categories/stationary.webp",
+    image: "/images/categories/stationery.webp",
   },
   {
     name: "Hotel & Restaurant Supplies",
@@ -194,28 +195,31 @@ const stats = [
   { name: "Delivery Network", value: "24/7" },
 ];
 
-export default function HomePage() {
-  const websiteSchema: WebSite = {
-    "@type": "WebSite",
-    url: COMPANY.website_b2b,
-    name: COMPANY.name,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${COMPANY.website_b2b}/products?q={search_term_string}`,
-      },
-      queryInput: "required name=search_term_string",
+const websiteSchema: WebSite = {
+  "@type": "WebSite",
+  url: COMPANY.website_b2b,
+  name: COMPANY.name,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${COMPANY.website_b2b}/products?q={search_term_string}`,
     },
-  };
+  } as any,
+};
 
+export default function HomePage() {
   return (
     <>
       <Navbar />
       <JsonLd data={{ "@context": "https://schema.org", ...websiteSchema }} />
       <BackToTopButton />
 
+
+
+
       <main className="bg-gray-50">
+
         {/* Hero Section */}
         <section className="relative bg-white">
           <div className="mx-auto max-w-7xl">

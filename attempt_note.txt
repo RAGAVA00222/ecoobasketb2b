@@ -1,0 +1,2 @@
+Audit note: `app/page.tsx` no longer imports or renders SentryClientTest/SentryServerTest.
+Next step is to delete the two component files if no other imports reference them.
