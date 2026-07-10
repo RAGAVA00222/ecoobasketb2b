@@ -6,21 +6,23 @@
    ========================================================= */
 
 :root{
-  --ink:        #14171F;
-  --ink-soft:   #454B58;
-  --paper:      #F6F4EF;
-  --paper-dim:  #EDEAE1;
-  --navy:       #1B2A4A;
-  --navy-deep:  #101a30;
-  --amber:      #D9A03B;
-  --amber-deep: #B87F1F;
-  --brick:      #A8452F;
-  --route:      #4C7A5E;
-  --line:       #DAD5C7;
-  --line-dark:  rgba(246,244,239,0.18);
+  /* Forest-green + gold palette. Variable NAMES kept (navy/amber/brick)
+     so existing inline styles re-skin automatically to the green theme. */
+  --ink:        #14201A;   /* near-black green */
+  --ink-soft:   #47554C;
+  --paper:      #F4F7F0;   /* soft green-tinted cream */
+  --paper-dim:  #E7EDE1;
+  --navy:       #14432B;   /* PRIMARY: deep forest green */
+  --navy-deep:  #0E2E1E;   /* darker forest */
+  --amber:      #D9A83B;   /* gold accent */
+  --amber-deep: #B8871F;
+  --brick:      #B5652F;   /* warm terracotta — natural companion to green + gold */
+  --route:      #3E8159;   /* fresh leaf green */
+  --line:       #D9E1CE;   /* green-tinted hairline */
+  --line-dark:  rgba(244,247,240,0.18);
 
-  --display: 'Space Grotesk', sans-serif;
-  --body:    'IBM Plex Sans', sans-serif;
+  --display: 'Poppins', sans-serif;
+  --body:    'Inter', sans-serif;
   --mono:    'IBM Plex Mono', monospace;
 
   --maxw: 1180px;
@@ -254,6 +256,7 @@ section{padding:84px 0;}
   font-family:var(--display);font-size:40px;color:var(--navy);
   border-bottom:1px solid var(--line);
 }
+.person-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
 .person-body{padding:22px 24px 26px;}
 .person-body h3{font-size:18px;}
 .person-role{font-family:var(--mono);font-size:11px;color:var(--brick);letter-spacing:0.06em;text-transform:uppercase;margin-top:4px;display:block;}
@@ -335,6 +338,20 @@ footer a:hover{color:var(--amber);}
   text-transform:uppercase;padding:5px 12px;border:1px solid var(--line);border-radius:20px;
   color:var(--ink-soft);margin-right:8px;margin-bottom:8px;
 }
+
+/* ---------- product cards ---------- */
+.prod{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  overflow:hidden;transition:border-color .15s, transform .15s, box-shadow .15s;
+}
+.prod:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 12px 26px rgba(20,67,43,0.10);}
+.prod .prod-img{aspect-ratio:4/3;background:var(--paper-dim);overflow:hidden;border-bottom:1px solid var(--line);}
+.prod .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+.prod:hover .prod-img img{transform:scale(1.04);}
+.prod-body{padding:20px 22px 24px;}
+.prod-body .idx{font-family:var(--mono);font-size:11px;color:var(--brick);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:8px;}
+.prod-body h3{font-size:18px;margin-bottom:8px;}
+.prod-body p{font-size:14px;}
 
 /* ---------- mobile layout refinements ---------- */
 @media (max-width:960px){
