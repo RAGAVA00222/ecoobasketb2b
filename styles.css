@@ -339,6 +339,8 @@ footer h4{color:var(--paper);font-family:var(--mono);font-size:12px;letter-spaci
 footer a{display:block;font-size:14px;color:#9CA0AB;margin-bottom:10px;transition:color .15s;}
 footer a:hover{color:var(--amber);}
 .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.foot-social a:hover{border-color:var(--amber);background:rgba(217,160,59,0.08);}
+.foot-social a:hover svg *{stroke:var(--amber) !important;}
 .foot-legal{
   border-top:1px solid #2A2E38;margin-top:48px;padding-top:22px;
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
