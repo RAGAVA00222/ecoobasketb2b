@@ -404,3 +404,17 @@ footer a:hover{color:var(--amber);}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
 .reveal.in{opacity:1;transform:none;}
 @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* ---------- horizontal timeline (extends .timeline) ---------- */
+.timeline-h{display:flex;flex-wrap:wrap;border-left:0;margin-left:0;}
+.timeline-h .tl-item{flex:1 1 180px;min-width:180px;border-left:0;border-top:2px dashed var(--line);padding:28px 22px 0 0;}
+.timeline-h .tl-item::before{left:0;top:-7px;}
+@media (max-width:760px){
+  .timeline-h{flex-direction:column;}
+  .timeline-h .tl-item{border-top:0;border-left:2px dashed var(--line);padding:0 0 34px 30px;}
+  .timeline-h .tl-item::before{left:-7px;top:2px;}
+}
+
+/* ---------- simple line icons (services / sectors) ---------- */
+.line-ico{width:28px;height:28px;display:block;margin-bottom:14px;color:var(--amber);}
+.line-ico + .idx, .line-ico + h3{margin-top:0;}
