@@ -421,3 +421,14 @@ footer a:hover{color:var(--amber);}
 /* ---------- simple line icons (services / sectors) ---------- */
 .line-ico{width:28px;height:28px;display:block;margin-bottom:14px;color:var(--amber);}
 .line-ico + .idx, .line-ico + h3{margin-top:0;}
+
+/* category showcase grids — explicit column counts that divide evenly
+   (no orphaned single card on the last row at any breakpoint) */
+.cat-grid{display:grid;gap:16px;grid-template-columns:repeat(2,1fr);}
+@media (min-width:560px){
+  .cat-grid.cat-6{grid-template-columns:repeat(3,1fr);}
+  .cat-grid.cat-4{grid-template-columns:repeat(4,1fr);}
+}
+@media (min-width:920px){
+  .cat-grid.cat-6{grid-template-columns:repeat(6,1fr);}
+}
