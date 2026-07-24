@@ -50,16 +50,16 @@ type BtnProps = {
 
 export function Button({ href, children, variant = "primary", external, className = "" }: BtnProps) {
   const base =
-    "inline-flex items-center gap-2 rounded-[2px] px-6 py-3 text-[14.5px] font-semibold transition-colors";
+    "inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[14.5px] font-semibold transition-all duration-200 active:translate-y-px";
   const styles: Record<string, string> = {
-    // Primary + green both resolve to forest green with white text (9.6:1).
-    primary: "bg-accent text-invert hover:bg-accent-deep",
-    green: "bg-accent text-invert hover:bg-accent-deep",
-    // Secondary: white with green border, light-green hover fill.
-    outline: "border border-accent text-accent hover:bg-mint",
-    // On forest/dark backgrounds:
+    // Primary + green: text-safe emerald (#15803D, white 4.7:1) with emerald lift on hover.
+    primary: "bg-accent text-invert shadow-[0_14px_28px_-14px_rgba(22,163,74,0.6)] hover:bg-accent-deep hover:-translate-y-0.5",
+    green: "bg-accent text-invert shadow-[0_14px_28px_-14px_rgba(22,163,74,0.6)] hover:bg-accent-deep hover:-translate-y-0.5",
+    // Secondary: white with emerald border, soft-tint hover.
+    outline: "border border-line bg-surface text-accent shadow-[0_6px_18px_-12px_rgba(15,23,42,0.28)] hover:border-accent-strong hover:bg-mint hover:-translate-y-0.5",
+    // On dark/emerald backgrounds:
     outlineInvert: "border border-[rgba(255,255,255,0.55)] text-invert hover:bg-[rgba(255,255,255,0.12)]",
-    solidInvert: "bg-invert text-accent hover:bg-mint",
+    solidInvert: "bg-invert text-accent shadow-[0_16px_30px_-16px_rgba(2,6,23,0.4)] hover:bg-mint hover:-translate-y-0.5",
   };
   const cls = `${base} ${styles[variant]} ${className}`;
   if (external) {
