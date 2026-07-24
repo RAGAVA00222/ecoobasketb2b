@@ -65,6 +65,7 @@ export default function ServicesPage() {
               </Reveal>
             ))}
           </div>
+          {/* CONTENT NEEDED: AI feature capability confirmation (which are real vs aspirational) */}
           <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.08em] text-invert/60">
             Feature set shown qualitatively — capability depth pending confirmation
           </p>

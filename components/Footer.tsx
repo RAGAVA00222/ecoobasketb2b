@@ -3,7 +3,7 @@ import Image from "next/image";
 import { footerNav, site } from "@/content/site";
 
 // Certification / registration marks. CIN is real (public MCA record).
-// GST / MSME / ISO are placeholders until real numbers/marks are supplied.
+// CONTENT NEEDED: GST / MSME (Udyam) / ISO real registration numbers or marks.
 const certBadges: { label: string; value?: string; pending?: boolean }[] = [
   { label: "CIN", value: site.cin },
   { label: "GST", pending: true },

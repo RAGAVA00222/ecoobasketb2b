@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import PageScaffold from "@/components/PageScaffold";
+import Placeholder from "@/components/Placeholder";
+import { Container, Section, Eyebrow } from "@/components/primitives";
 
 export const metadata: Metadata = {
   title: "Gallery | Ecoo Basket Chennai",
@@ -7,12 +8,46 @@ export const metadata: Metadata = {
   alternates: { canonical: "/gallery" },
 };
 
-export default function Page() {
+// CONTENT NEEDED: real photography for each tile below.
+const tiles = [
+  { label: "Warehouse floor", span: "md:col-span-2 md:row-span-2 aspect-[4/3]" },
+  { label: "Delivery vehicle", span: "aspect-square" },
+  { label: "Route loading", span: "aspect-square" },
+  { label: "Team on the floor", span: "aspect-[4/3]" },
+  { label: "Retail partner store", span: "aspect-[4/3]" },
+  { label: "Nuts & Spices packing", span: "aspect-square" },
+  { label: "Stock rotation", span: "aspect-square" },
+];
+
+export default function GalleryPage() {
   return (
-    <PageScaffold
-      eyebrow={"Gallery"}
-      title={"Inside the operation."}
-      intro={"Photography of the warehouse, routes and team will be shown here."}
-    />
+    <>
+      <section className="border-b border-line bg-base">
+        <Container className="py-14 md:py-20">
+          <Eyebrow>Gallery</Eyebrow>
+          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">Inside the operation.</h1>
+          <p className="mt-5 max-w-[620px] text-muted">Real photography of the warehouse, routes, packing and team will live here.</p>
+        </Container>
+      </section>
+
+      {/* CONTENT NEEDED: gallery photography (all tiles are placeholders) */}
+      <Section tone="surface">
+        <Container>
+          <div className="mb-6"><Placeholder label="gallery photography — all tiles" /></div>
+          <div className="grid auto-rows-[minmax(0,1fr)] grid-cols-2 gap-3 md:grid-cols-4">
+            {tiles.map((t, i) => (
+              <div
+                key={i}
+                className={`flex flex-col items-center justify-center gap-2 rounded-[3px] border border-dashed border-line bg-base p-4 text-center ${t.span}`}
+              >
+                <span aria-hidden className="text-2xl text-line">▨</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">{t.label}</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.08em] text-accent">photo pending</span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    </>
   );
 }

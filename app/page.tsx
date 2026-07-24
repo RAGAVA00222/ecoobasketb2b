@@ -36,6 +36,7 @@ export default function Home() {
             </div>
           </div>
           <div className="md:col-span-6">
+            {/* CONTENT NEEDED: real warehouse hero photography (current image is generic/AI-style) */}
             <div className="overflow-hidden rounded-[4px] border border-line">
               <Image
                 src="/assets/images/warehouse/01_Warehouse_Logistics.jpg"
