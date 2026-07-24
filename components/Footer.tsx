@@ -2,9 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { footerNav, site } from "@/content/site";
 
-// Certification badges — placeholders until real GST/CIN/MSME/ISO
-// certificates/marks are supplied. Marked clearly, not fabricated.
-const certBadges = ["GST", "CIN", "MSME / Udyam", "ISO (pending)"];
+// Certification / registration marks. CIN is real (public MCA record).
+// GST / MSME / ISO are placeholders until real numbers/marks are supplied.
+const certBadges: { label: string; value?: string; pending?: boolean }[] = [
+  { label: "CIN", value: site.cin },
+  { label: "GST", pending: true },
+  { label: "MSME / Udyam", pending: true },
+  { label: "ISO", pending: true },
+];
 
 function Social() {
   return (
@@ -42,10 +47,16 @@ export default function Footer() {
               A technology-enabled B2B FMCG distribution company headquartered in Chennai, connecting manufacturers to retailers across Tamil Nadu.
             </p>
             <Social />
-            <div className="mt-6 flex flex-wrap gap-2" aria-label="Certifications (placeholder)">
+            <div className="mt-6 flex flex-wrap gap-2" aria-label="Registration and certifications">
               {certBadges.map((b) => (
-                <span key={b} className="rounded-[2px] border border-[#2A3A46] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-invert/70">
-                  {b}
+                <span
+                  key={b.label}
+                  title={b.value ?? `${b.label} — pending`}
+                  className={`rounded-[2px] border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] ${
+                    b.pending ? "border-[#2A3A46] text-invert/45" : "border-[#3C5A73] text-invert/85"
+                  }`}
+                >
+                  {b.value ? `${b.label} ${b.value}` : `${b.label} · pending`}
                 </span>
               ))}
             </div>
