@@ -33,6 +33,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${jakarta.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body>
+        {/* Self-heal any stale service worker / cache-storage from earlier deployments */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "(function(){try{if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister()})}).catch(function(){})}if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})}).catch(function(){})}}catch(e){}})();",
+          }}
+        />
         <UtilityBar />
         <Header />
         <main>{children}</main>

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-[1200px] px-5 sm:px-8 ${className}`}>{children}</div>;
+  return <div className={`mx-auto w-full max-w-[1400px] px-5 sm:px-8 ${className}`}>{children}</div>;
 }
 
 export function Section({
@@ -43,7 +43,7 @@ export function Eyebrow({ children, onDark = false }: { children: ReactNode; onD
 type BtnProps = {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "green" | "outline" | "outlineInvert" | "solidInvert";
+  variant?: "primary" | "green" | "outline" | "outlineInvert" | "solidInvert" | "navy";
   external?: boolean;
   className?: string;
 };
@@ -60,6 +60,7 @@ export function Button({ href, children, variant = "primary", external, classNam
     // On dark/emerald backgrounds:
     outlineInvert: "border border-[rgba(255,255,255,0.55)] text-invert hover:bg-[rgba(255,255,255,0.12)]",
     solidInvert: "bg-invert text-accent shadow-[0_16px_30px_-16px_rgba(2,6,23,0.4)] hover:bg-mint hover:-translate-y-0.5",
+    navy: "bg-navy text-invert shadow-[0_14px_28px_-14px_rgba(14,42,71,0.6)] hover:bg-[#0A1E36] hover:-translate-y-0.5",
   };
   const cls = `${base} ${styles[variant]} ${className}`;
   if (external) {

@@ -1,32 +1,31 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Ecoo Basket — enterprise emerald + slate palette.
-   Emerald #16A34A carries the brand (gradients, icons, fills);
-   text/links/buttons route through #15803D so small green text
-   stays AA on white (#16A34A alone is 2.9:1 — decorative only).
-   Slate #0F172A grounds dark sections + footer; #F8FAFC is the
-   page. Udaan × Flexport × Maersk × Apple — enterprise-grade.
+   Ecoo Basket — enterprise green + navy palette.
+   Primary green #15803D carries the brand (links/buttons/text,
+   AA on white); #16A34A is brighter green for decorative fills.
+   Dark navy #0E2A47 is the accent — dark sections, footer, and
+   premium highlights. Ground is very light gray #F5F7FA on white
+   surfaces. NO gold. Unilever × Udaan × Amazon Business grade.
    ============================================================ */
 @theme {
-  --color-base:          #FAFAF7;  /* warm white — page ground            */
-  --color-surface:       #FFFFFF;  /* pure white — cards / content bands  */
-  --color-ink:           #0F172A;  /* slate-900 — headings (16:1)         */
-  --color-muted:         #475569;  /* slate-600 — body (7.4:1)            */
-  --color-line:          #E7E3DA;  /* warm hairline                       */
-  --color-accent:        #15803D;  /* text-safe emerald — links/buttons (4.7:1) */
-  --color-accent-strong: #16A34A;  /* brand emerald — fills/gradients/icons */
-  --color-accent-deep:   #166534;  /* emerald hover                       */
-  --color-dark:          #0F172A;  /* slate-900 — dark sections           */
-  --color-forest-deep:   #0F172A;  /* hero gradient terminus (slate)      */
-  --color-charcoal:      #0F172A;  /* footer / utility strip (slate)      */
+  --color-base:          #F5F7FA;  /* very light gray — page ground       */
+  --color-surface:       #FFFFFF;  /* white — cards / content bands       */
+  --color-ink:           #0E1C36;  /* dark navy — headings                */
+  --color-muted:         #47546A;  /* navy-gray — body                    */
+  --color-line:          #E3E8EF;  /* light gray hairline                 */
+  --color-accent:        #15803D;  /* primary green — links/buttons (4.7:1) */
+  --color-accent-strong: #16A34A;  /* brighter green — fills/gradients/icons */
+  --color-accent-deep:   #166534;  /* green hover/deep                    */
+  --color-navy:          #0E2A47;  /* dark navy accent                    */
+  --color-navy-soft:     #EEF2F8;  /* light navy tint                     */
+  --color-dark:          #0E2A47;  /* dark navy — dark sections           */
+  --color-forest-deep:   #0A1E36;  /* gradient terminus (deep navy)       */
+  --color-charcoal:      #0A1E36;  /* footer (deep navy)                  */
   --color-invert:        #FFFFFF;  /* text on dark                        */
-  --color-dark-accent:   #4ADE80;  /* emerald-400 — eyebrows on dark      */
-  --color-gold:          #B8873A;  /* text-safe gold — accents (4.7:1)    */
-  --color-gold-bright:   #C8A24D;  /* gold — decorative fills/dividers    */
-  --color-gold-soft:     #F6EFDD;  /* gold tint                           */
-  --color-mint:          #ECFDF5;  /* emerald-50 — soft tint / btn hover  */
-  --color-mint2:         #DCFCE7;  /* emerald-100                         */
+  --color-dark-accent:   #4ADE80;  /* green-400 — eyebrows on dark        */
+  --color-mint:          #ECFDF5;  /* green-50 — soft tint / btn hover    */
+  --color-mint2:         #DCFCE7;  /* green-100                           */
   --color-success:       #22C55E;  /* status only                         */
   --color-amber:         #F59E0B;  /* status only                         */
   --color-error:         #DC2626;  /* status only                         */
@@ -72,13 +71,13 @@ body.drawer-open { overflow: hidden; }
   font-weight: 500;
 }
 
-/* Emerald → slate gradient — interior hero bands + dark CTAs */
+/* Green → navy gradient — interior hero bands + dark CTAs */
 .forest-grad {
-  background-image: linear-gradient(130deg, var(--color-accent-strong) 0%, #115E33 45%, var(--color-forest-deep) 100%);
+  background-image: linear-gradient(130deg, var(--color-accent-strong) 0%, #115E33 42%, var(--color-forest-deep) 100%);
 }
-/* Emerald → slate for the homepage hero overlay */
+/* Navy → green for image overlays */
 .hero-grad {
-  background-image: linear-gradient(115deg, rgba(15,23,42,0.86) 0%, rgba(15,23,42,0.66) 42%, rgba(21,128,61,0.58) 100%);
+  background-image: linear-gradient(115deg, rgba(10,30,54,0.88) 0%, rgba(10,30,54,0.66) 42%, rgba(21,128,61,0.55) 100%);
 }
 /* Premium enterprise shadows */
 :root {
