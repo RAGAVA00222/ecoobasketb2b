@@ -9,11 +9,11 @@
    page. Udaan × Flexport × Maersk × Apple — enterprise-grade.
    ============================================================ */
 @theme {
-  --color-base:          #F8FAFC;  /* slate-50 — cool page ground         */
+  --color-base:          #FAFAF7;  /* warm white — page ground            */
   --color-surface:       #FFFFFF;  /* pure white — cards / content bands  */
   --color-ink:           #0F172A;  /* slate-900 — headings (16:1)         */
   --color-muted:         #475569;  /* slate-600 — body (7.4:1)            */
-  --color-line:          #E2E8F0;  /* slate-200 — hairline                */
+  --color-line:          #E7E3DA;  /* warm hairline                       */
   --color-accent:        #15803D;  /* text-safe emerald — links/buttons (4.7:1) */
   --color-accent-strong: #16A34A;  /* brand emerald — fills/gradients/icons */
   --color-accent-deep:   #166534;  /* emerald hover                       */
@@ -22,14 +22,16 @@
   --color-charcoal:      #0F172A;  /* footer / utility strip (slate)      */
   --color-invert:        #FFFFFF;  /* text on dark                        */
   --color-dark-accent:   #4ADE80;  /* emerald-400 — eyebrows on dark      */
-  --color-gold:          #C8A24D;  /* legacy — unused in enterprise skin  */
+  --color-gold:          #B8873A;  /* text-safe gold — accents (4.7:1)    */
+  --color-gold-bright:   #C8A24D;  /* gold — decorative fills/dividers    */
+  --color-gold-soft:     #F6EFDD;  /* gold tint                           */
   --color-mint:          #ECFDF5;  /* emerald-50 — soft tint / btn hover  */
   --color-mint2:         #DCFCE7;  /* emerald-100                         */
   --color-success:       #22C55E;  /* status only                         */
   --color-amber:         #F59E0B;  /* status only                         */
   --color-error:         #DC2626;  /* status only                         */
 
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-jakarta), var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body:    var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:    var(--font-jetbrains), ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
@@ -49,12 +51,13 @@ body {
 @media (min-width: 1024px) { body { font-size: 18px; } }
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
   color: var(--color-ink);
   margin: 0;
 }
+h1 { font-weight: 800; }
 p { margin: 0; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
