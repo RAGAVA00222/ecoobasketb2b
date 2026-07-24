@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { fmcgCategories, nutsSpicesCategories, aiFeatures, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -24,15 +25,11 @@ const services = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>What We Offer</Eyebrow>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(30px,4.6vw,46px)]">
-            Wholesale FMCG distribution, from a manufacturer&apos;s dock to a retailer&apos;s shelf.
-          </h1>
-          <p className="mt-5 max-w-[620px] text-muted">A full range of services, one accountable point of contact for each partner.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="What We Offer"
+        title="Wholesale FMCG distribution, from a manufacturer's dock to a retailer's shelf."
+        subtitle="A full range of services, one accountable point of contact for each partner."
+      />
 
       {/* 8 services */}
       <Section>

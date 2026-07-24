@@ -2,7 +2,7 @@ import { site } from "@/content/site";
 
 export default function UtilityBar() {
   return (
-    <div className="bg-dark text-invert">
+    <div className="bg-charcoal text-invert">
       <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-3 px-5 py-2 font-mono text-[11.5px] tracking-[0.06em] sm:px-8">
         <div className="hidden gap-4 sm:flex">
           <span>{site.cityLine}</span>

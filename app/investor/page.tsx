@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Investor Relations | Ecoo Basket",
@@ -20,13 +21,11 @@ const roadmap = [
 export default function InvestorPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Investor Relations</Eyebrow>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(30px,4.6vw,46px)]">The growth story and the road ahead.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">A roadmap and market-opportunity narrative — presented qualitatively, with no financial figures.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Investor Relations"
+        title="The growth story and the road ahead."
+        subtitle="A roadmap and market-opportunity narrative — presented qualitatively, with no financial figures."
+      />
 
       {/* CONTENT NEEDED: investor market-opportunity narrative (qualitative, no figures) */}
       <Section>

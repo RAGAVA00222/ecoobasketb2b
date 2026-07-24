@@ -15,12 +15,12 @@ function Social() {
   return (
     <div className="mt-5 flex gap-3">
       <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Ecoo Basket on Facebook"
-         className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2A3A46] transition-colors hover:border-invert">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M17 3H14.5C13.04 3 11.64 3.58 10.61 4.61 9.58 5.64 9 7.04 9 8.5V11H6.5V14.5H9V21H12.5V14.5H15L16 11H12.5V8.5C12.5 8.04 12.68 7.59 13.01 7.26 13.34 6.93 13.79 6.75 14.25 6.75H17V3Z" stroke="#FBFAF6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+         className="flex h-9 w-9 items-center justify-center rounded-full border border-[#374151] transition-colors hover:border-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M17 3H14.5C13.04 3 11.64 3.58 10.61 4.61 9.58 5.64 9 7.04 9 8.5V11H6.5V14.5H9V21H12.5V14.5H15L16 11H12.5V8.5C12.5 8.04 12.68 7.59 13.01 7.26 13.34 6.93 13.79 6.75 14.25 6.75H17V3Z" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </a>
       <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Ecoo Basket on Instagram"
-         className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2A3A46] transition-colors hover:border-invert">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" stroke="#FBFAF6" strokeWidth="1.5"/><circle cx="12" cy="12" r="4" stroke="#FBFAF6" strokeWidth="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="#FBFAF6"/></svg>
+         className="flex h-9 w-9 items-center justify-center rounded-full border border-[#374151] transition-colors hover:border-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" stroke="#FFFFFF" strokeWidth="1.5"/><circle cx="12" cy="12" r="4" stroke="#FFFFFF" strokeWidth="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="#FFFFFF"/></svg>
       </a>
     </div>
   );
@@ -28,7 +28,7 @@ function Social() {
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-invert">
+    <footer className="bg-charcoal text-invert">
       <div className="mx-auto max-w-[1200px] px-5 pb-24 pt-16 sm:px-8">
         <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr] lg:grid-cols-[1.7fr_1fr_1fr_1.1fr]">
           {/* brand + social + certs */}
@@ -40,7 +40,7 @@ export default function Footer() {
               <strong className="font-display text-[17px]">
                 {site.brand}
                 <br />
-                <span className="font-mono text-[10px] font-medium tracking-[0.04em] text-[#9FB0C0]">{site.legalName}</span>
+                <span className="font-mono text-[10px] font-medium tracking-[0.04em] text-[#9CA3AF]">{site.legalName}</span>
               </strong>
             </div>
             <p className="mt-4 max-w-[280px] text-[14px] text-invert/80">
@@ -53,7 +53,7 @@ export default function Footer() {
                   key={b.label}
                   title={b.value ?? `${b.label} — pending`}
                   className={`rounded-[2px] border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] ${
-                    b.pending ? "border-[#2A3A46] text-invert/45" : "border-[#3C5A73] text-invert/85"
+                    b.pending ? "border-[#374151] text-invert/45" : "border-gold text-[#E8CE8A]"
                   }`}
                 >
                   {b.value ? `${b.label} ${b.value}` : `${b.label} · pending`}
@@ -87,14 +87,14 @@ export default function Footer() {
             <form aria-label="Newsletter signup (coming soon)" onSubmit={undefined}>
               <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.08em] text-invert/70">Newsletter · coming soon</label>
               <div className="flex gap-2">
-                <input type="email" disabled placeholder="you@business.com" className="min-w-0 flex-1 rounded-[2px] border border-[#2A3A46] bg-transparent px-3 py-2 text-[13px] text-invert placeholder:text-invert/40" />
-                <button type="button" disabled className="rounded-[2px] border border-[#2A3A46] px-3 py-2 text-[13px] text-invert/70">Notify me</button>
+                <input type="email" disabled placeholder="you@business.com" className="min-w-0 flex-1 rounded-[2px] border border-[#374151] bg-transparent px-3 py-2 text-[13px] text-invert placeholder:text-invert/40" />
+                <button type="button" disabled className="rounded-[2px] border border-[#374151] px-3 py-2 text-[13px] text-invert/70">Notify me</button>
               </div>
             </form>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-t border-[rgba(251,250,247,0.2)] pt-6 font-mono text-[11px] text-invert">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-t border-[rgba(255,255,255,0.14)] pt-6 font-mono text-[11px] text-invert">
           <span>© 2026 {site.legalName}. All rights reserved.</span>
           <span className="flex flex-wrap gap-x-5 gap-y-1.5">
             {footerNav.legal.map((l) => (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -20,13 +21,11 @@ const culture = [
 export default function CareersPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Careers</Eyebrow>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(30px,4.6vw,46px)]">Build the distribution network Chennai actually relies on.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">We&apos;re an emerging, founder-led team — roles are added as the network grows.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Careers"
+        title="Build the distribution network Chennai actually relies on."
+        subtitle="We're an emerging, founder-led team — roles are added as the network grows."
+      />
 
       {/* CONTENT NEEDED: careers culture / "why work here" copy */}
       <Section>

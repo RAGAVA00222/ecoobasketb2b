@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Placeholder from "@/components/Placeholder";
 import { Container, Section, Eyebrow } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Download Center | Ecoo Basket",
@@ -19,13 +20,11 @@ const files = [
 export default function DownloadsPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Download Center</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">Company profile, brochures and catalogues.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">Downloadable resources will appear here as they&apos;re finalised.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Download Center"
+        title="Company profile, brochures and catalogues."
+        subtitle="Downloadable resources will appear here as they're finalised."
+      />
 
       {/* CONTENT NEEDED: downloadable files (company profile / brochure / catalogue / presentation) */}
       <Section tone="surface">

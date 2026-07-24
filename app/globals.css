@@ -1,23 +1,31 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Ecoo Basket — design tokens, grounded in the real logo
-   (deep navy + fresh green + off-white). Every text token is
-   AA (>=4.5:1) on its own background; the bright logo green
-   #2E9E3A is decorative-only (fills/markers), never text.
+   Ecoo Basket — premium corporate palette. Green-dominant (60%),
+   white background (30%), gold accent (10%). Every text token is
+   AA/AAA on its own background; emerald #16A34A and gold #C8A24D
+   are decorative/highlight-only (fills, borders), never body text
+   on white. Apple × Unilever × Stripe — enterprise, trustworthy.
    ============================================================ */
 @theme {
-  --color-base:          #FBFAF6;  /* warm off-white page bg      */
-  --color-surface:       #FFFFFF;  /* cards / raised              */
-  --color-ink:           #14324F;  /* navy — primary text (12.6:1)*/
-  --color-muted:         #566072;  /* secondary text (6.1:1)      */
-  --color-line:          #E6E2D9;  /* 1px hairline                */
-  --color-accent:        #167C2A;  /* action green — links/CTA (5.1:1) */
-  --color-accent-strong: #2E9E3A;  /* bright logo green — fills/markers only */
-  --color-accent-deep:   #0F5E20;  /* green hover                 */
-  --color-dark:          #0E2436;  /* deep-navy punctuation bg     */
-  --color-invert:        #FBFAF6;  /* text on dark (15:1)         */
-  --color-dark-accent:   #8FB6E8;  /* eyebrows on dark (7.6:1)    */
+  --color-base:          #F8FAF8;  /* soft off-white page bg              */
+  --color-surface:       #FFFFFF;  /* pure white — cards / content bands  */
+  --color-ink:           #111827;  /* charcoal — headings (16.9:1)        */
+  --color-muted:         #4B5563;  /* body / secondary text (7.5:1)       */
+  --color-line:          #D1D5DB;  /* border gray — 1px hairline          */
+  --color-accent:        #0F5132;  /* primary green — links/buttons (9.6:1) */
+  --color-accent-strong: #16A34A;  /* emerald — fills/markers only        */
+  --color-accent-deep:   #14532D;  /* dark forest — hover                 */
+  --color-dark:          #111827;  /* charcoal — dark punctuation bands   */
+  --color-forest-deep:   #14532D;  /* hero gradient terminus              */
+  --color-charcoal:      #111827;  /* footer / utility strip              */
+  --color-invert:        #FFFFFF;  /* text on dark (10:1+)                */
+  --color-dark-accent:   #E8CE8A;  /* soft gold — eyebrows/links on dark (7.5:1) */
+  --color-gold:          #C8A24D;  /* premium gold — highlights only      */
+  --color-mint:          #ECFDF5;  /* light-green — secondary btn hover   */
+  --color-success:       #22C55E;  /* status only                         */
+  --color-amber:         #F59E0B;  /* status only                         */
+  --color-error:         #DC2626;  /* status only                         */
 
   --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-body:    var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -58,6 +66,13 @@ body.drawer-open { overflow: hidden; }
   color: var(--color-accent);
   font-weight: 500;
 }
+
+/* Deep forest-green gradient — hero sections and dark CTA bands */
+.forest-grad {
+  background-image: linear-gradient(135deg, var(--color-accent) 0%, var(--color-forest-deep) 100%);
+}
+/* Subtle premium selection colour */
+::selection { background: var(--color-accent); color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

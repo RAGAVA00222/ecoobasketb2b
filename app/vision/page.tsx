@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Our Vision | FMCG Distribution Chennai",
@@ -24,13 +25,11 @@ const principles = [
 export default function VisionPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>The Road Ahead</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">Where we&apos;re headed — and how we plan to get there.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">This is a roadmap, not a promise. We&apos;d rather show you the plan honestly than dress it up as done.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="The Road Ahead"
+        title="Where we're headed — and how we plan to get there."
+        subtitle="This is a roadmap, not a promise. We'd rather show you the plan honestly than dress it up as done."
+      />
 
       <Section>
         <Container>

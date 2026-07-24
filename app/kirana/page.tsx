@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { deliveryPromise, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -27,14 +28,13 @@ const trust = [
 export default function KiranaPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>For Kirana &amp; General Trade</Eyebrow>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(30px,4.6vw,46px)]">The problems every kirana owner knows — and how we actually fix them.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">Not a sales pitch. Just the specific things that go wrong with distributors, and what we do differently.</p>
-          <div className="mt-8"><Button href="/contact" variant="green">Talk To Us About Your Shop</Button></div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="For Kirana & General Trade"
+        title="The problems every kirana owner knows — and how we actually fix them."
+        subtitle="Not a sales pitch. Just the specific things that go wrong with distributors, and what we do differently."
+      >
+        <Button href="/contact" variant="solidInvert">Talk To Us About Your Shop</Button>
+      </PageHero>
 
       <Section tone="dark">
         <Container className="grid items-center gap-10 md:grid-cols-2">

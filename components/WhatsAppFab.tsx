@@ -7,7 +7,7 @@ export default function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-40 flex h-13 w-13 items-center justify-center rounded-full bg-accent shadow-[0_6px_18px_rgba(14,36,55,0.22)]"
+      className="fixed bottom-5 right-5 z-40 flex h-13 w-13 items-center justify-center rounded-full bg-accent shadow-[0_6px_18px_rgba(15,81,50,0.32)]"
       style={{ height: 52, width: 52 }}
     >
       <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden>

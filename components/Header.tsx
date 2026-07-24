@@ -80,7 +80,7 @@ export default function Header() {
             href={site.orderUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-[2px] bg-ink px-[18px] py-2.5 text-[15px] font-semibold text-invert hover:bg-dark"
+            className="rounded-[2px] bg-accent px-[18px] py-2.5 text-[15px] font-semibold text-invert hover:bg-accent-deep"
           >
             Order Now
           </a>
@@ -105,7 +105,7 @@ export default function Header() {
       {/* backdrop */}
       <div
         onClick={() => setOpen(false)}
-        className={`fixed inset-0 z-[45] bg-[rgba(14,36,55,0.5)] transition-opacity min-[1200px]:hidden ${
+        className={`fixed inset-0 z-[45] bg-[rgba(17,24,39,0.55)] transition-opacity min-[1200px]:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
         aria-hidden
@@ -115,7 +115,7 @@ export default function Header() {
       <div
         id="mobile-drawer"
         ref={panelRef}
-        className={`fixed right-0 top-0 bottom-0 z-[55] flex w-[min(86vw,360px)] flex-col gap-0.5 overflow-y-auto border-l border-line bg-surface px-6 pb-8 pt-20 shadow-[-8px_0_40px_rgba(14,36,55,0.16)] transition-transform min-[1200px]:hidden ${
+        className={`fixed right-0 top-0 bottom-0 z-[55] flex w-[min(86vw,360px)] flex-col gap-0.5 overflow-y-auto border-l border-line bg-surface px-6 pb-8 pt-20 shadow-[-8px_0_40px_rgba(17,24,39,0.18)] transition-transform min-[1200px]:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -135,7 +135,7 @@ export default function Header() {
           href={site.orderUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 w-full rounded-[2px] bg-ink px-4 py-3 text-center text-[16px] font-semibold text-invert"
+          className="mt-4 w-full rounded-[2px] bg-accent px-4 py-3 text-center text-[16px] font-semibold text-invert hover:bg-accent-deep"
         >
           Order Now ↗
         </a>
