@@ -20,7 +20,7 @@ export default function PageHero({
   size?: "default" | "compact";
 }) {
   return (
-    <section className="forest-grad border-b border-[rgba(200,162,77,0.35)] text-invert">
+    <section className="forest-grad border-b border-[rgba(255,255,255,0.12)] text-invert">
       <Container className={size === "compact" ? "py-12 md:py-16" : "py-14 md:py-20"}>
         <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-dark-accent">
           {eyebrow}

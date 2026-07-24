@@ -15,9 +15,11 @@ export default function Testimonials() {
           <div className="mt-3 flex gap-1 text-line" aria-hidden>
             {[0, 1, 2, 3, 4].map((s) => <Star key={s} size={16} />)}
           </div>
-          <p className="mt-4 flex-1 text-[14.5px] leading-relaxed text-muted">
-            Verified partner testimonial will appear here once we publish real, attributed quotes.
-          </p>
+          <div className="mt-4 flex-1 space-y-2.5" aria-hidden>
+            <div className="h-2.5 w-full rounded bg-line" />
+            <div className="h-2.5 w-[92%] rounded bg-line" />
+            <div className="h-2.5 w-[78%] rounded bg-line" />
+          </div>
           <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-soft text-muted"><User size={20} /></span>
             <div>
