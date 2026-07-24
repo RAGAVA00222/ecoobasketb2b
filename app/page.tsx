@@ -15,8 +15,34 @@ const whyChoose = [
 ];
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: site.brand,
+    legalName: site.legalName,
+    url: site.domain,
+    logo: `${site.domain}/assets/images/logo/08_Logo_Full_Primary.png`,
+    image: `${site.domain}/assets/images/logo/06_Logo_Brand_Banner.png`,
+    description:
+      "Technology-enabled B2B FMCG distribution and own-brand Nuts & Spices, headquartered in Chennai, Tamil Nadu.",
+    telephone: "+91-93423-58226",
+    email: site.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Sf. No. 215 Pt No. 120, Sh No. 5, Rajesh Garden Main Road, Vanagaram, Poonamallee, Tiruvallur",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600095",
+      addressCountry: "IN",
+    },
+    areaServed: "Chennai",
+    openingHours: "Mo-Sa 09:00-18:00",
+    sameAs: [site.social.facebook, site.social.instagram],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* HERO — asymmetric split, real photography */}
       <section className="border-b border-line bg-base">
         <Container className="grid items-center gap-10 py-14 md:grid-cols-12 md:py-20">
