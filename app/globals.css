@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Ecoo Basket — premium corporate palette. Green-dominant (60%),
-   white background (30%), gold accent (10%). Every text token is
-   AA/AAA on its own background; emerald #16A34A and gold #C8A24D
-   are decorative/highlight-only (fills, borders), never body text
-   on white. Apple × Unilever × Stripe — enterprise, trustworthy.
+   Ecooo Basket — enterprise emerald + slate palette.
+   Emerald #16A34A carries the brand (gradients, icons, fills);
+   text/links/buttons route through #15803D so small green text
+   stays AA on white (#16A34A alone is 2.9:1 — decorative only).
+   Slate #0F172A grounds dark sections + footer; #F8FAFC is the
+   page. Udaan × Flexport × Maersk × Apple — enterprise-grade.
    ============================================================ */
 @theme {
-  --color-base:          #F8FAF8;  /* soft off-white page bg              */
+  --color-base:          #F8FAFC;  /* slate-50 — cool page ground         */
   --color-surface:       #FFFFFF;  /* pure white — cards / content bands  */
-  --color-ink:           #111827;  /* charcoal — headings (16.9:1)        */
-  --color-muted:         #4B5563;  /* body / secondary text (7.5:1)       */
-  --color-line:          #D1D5DB;  /* border gray — 1px hairline          */
-  --color-accent:        #0F5132;  /* primary green — links/buttons (9.6:1) */
-  --color-accent-strong: #16A34A;  /* emerald — fills/markers only        */
-  --color-accent-deep:   #14532D;  /* dark forest — hover                 */
-  --color-dark:          #111827;  /* charcoal — dark punctuation bands   */
-  --color-forest-deep:   #14532D;  /* hero gradient terminus              */
-  --color-charcoal:      #111827;  /* footer / utility strip              */
-  --color-invert:        #FFFFFF;  /* text on dark (10:1+)                */
-  --color-dark-accent:   #E8CE8A;  /* soft gold — eyebrows/links on dark (7.5:1) */
-  --color-gold:          #C8A24D;  /* premium gold — highlights only      */
-  --color-mint:          #ECFDF5;  /* light-green — secondary btn hover   */
+  --color-ink:           #0F172A;  /* slate-900 — headings (16:1)         */
+  --color-muted:         #475569;  /* slate-600 — body (7.4:1)            */
+  --color-line:          #E2E8F0;  /* slate-200 — hairline                */
+  --color-accent:        #15803D;  /* text-safe emerald — links/buttons (4.7:1) */
+  --color-accent-strong: #16A34A;  /* brand emerald — fills/gradients/icons */
+  --color-accent-deep:   #166534;  /* emerald hover                       */
+  --color-dark:          #0F172A;  /* slate-900 — dark sections           */
+  --color-forest-deep:   #0F172A;  /* hero gradient terminus (slate)      */
+  --color-charcoal:      #0F172A;  /* footer / utility strip (slate)      */
+  --color-invert:        #FFFFFF;  /* text on dark                        */
+  --color-dark-accent:   #4ADE80;  /* emerald-400 — eyebrows on dark      */
+  --color-gold:          #C8A24D;  /* legacy — unused in enterprise skin  */
+  --color-mint:          #ECFDF5;  /* emerald-50 — soft tint / btn hover  */
+  --color-mint2:         #DCFCE7;  /* emerald-100                         */
   --color-success:       #22C55E;  /* status only                         */
   --color-amber:         #F59E0B;  /* status only                         */
   --color-error:         #DC2626;  /* status only                         */
@@ -67,12 +69,41 @@ body.drawer-open { overflow: hidden; }
   font-weight: 500;
 }
 
-/* Deep forest-green gradient — hero sections and dark CTA bands */
+/* Emerald → slate gradient — interior hero bands + dark CTAs */
 .forest-grad {
-  background-image: linear-gradient(135deg, var(--color-accent) 0%, var(--color-forest-deep) 100%);
+  background-image: linear-gradient(130deg, var(--color-accent-strong) 0%, #115E33 45%, var(--color-forest-deep) 100%);
+}
+/* Emerald → slate for the homepage hero overlay */
+.hero-grad {
+  background-image: linear-gradient(115deg, rgba(15,23,42,0.86) 0%, rgba(15,23,42,0.66) 42%, rgba(21,128,61,0.58) 100%);
+}
+/* Premium enterprise shadows */
+:root {
+  --shadow-sm: 0 6px 18px -12px rgba(15,23,42,0.28);
+  --shadow-md: 0 16px 40px -22px rgba(15,23,42,0.30);
+  --shadow-lg: 0 30px 70px -34px rgba(15,23,42,0.42);
+  --shadow-emerald: 0 18px 36px -18px rgba(22,163,74,0.45);
+}
+.shadow-soft { box-shadow: var(--shadow-md); }
+.shadow-soft-lg { box-shadow: var(--shadow-lg); }
+/* Glass surface */
+.glass {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 /* Subtle premium selection colour */
-::selection { background: var(--color-accent); color: #fff; }
+::selection { background: var(--color-accent-strong); color: #fff; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* logistics-network + hero motion */
+@keyframes pulseRing { 0%{transform:scale(.6);opacity:.55;} 70%{transform:scale(2.4);opacity:0;} 100%{opacity:0;} }
+@keyframes dashFlow { to { stroke-dashoffset: -240; } }
+@keyframes floaty { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+.anim-pulse { transform-box: fill-box; transform-origin: center; animation: pulseRing 3s ease-out infinite; }
+.anim-dash { stroke-dasharray: 3 9; animation: dashFlow 6s linear infinite; }
+.anim-float { animation: floaty 6s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
