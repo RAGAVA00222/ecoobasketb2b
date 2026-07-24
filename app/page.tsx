@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import ManufacturerSlider from "@/components/ManufacturerSlider";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
-import { deliveryPromise, processSteps, fmcgCategories, site } from "@/content/site";
+import { deliveryPromise, fmcgCategories, site } from "@/content/site";
 
 const whyChoose = [
   { t: "Focused Distribution", d: "Timely delivery to supermarkets, grocery stores, hotels, restaurants, bakeries and institutions across Chennai." },
@@ -109,16 +110,7 @@ export default function Home() {
             <Eyebrow>How We Deliver</Eyebrow>
             <h2 className="mt-3 text-[clamp(26px,3.4vw,38px)]">Manufacturer to reorder, one accountable chain.</h2>
           </Reveal>
-          <ol className="mt-10 flex snap-x gap-0 overflow-x-auto pb-2">
-            {processSteps.map((s, i) => (
-              <li key={s.n} className="min-w-[190px] flex-1 snap-start border-t-2 border-dashed border-line pr-6 pt-6">
-                <span className="relative -top-[31px] mb-[-14px] inline-flex h-2.5 w-2.5 rounded-full bg-accent-strong ring-4 ring-base" />
-                <div className="font-mono text-[12px] text-accent">{s.n}</div>
-                <h3 className="mt-1 text-[18px]">{s.t}</h3>
-                <p className="mt-2 text-[14px] text-muted">{s.d}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-10"><ProcessTimeline /></div>
         </Container>
       </Section>
 
