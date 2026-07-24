@@ -106,7 +106,7 @@ export default function KiranaPage() {
       {/* To be upfront */}
       <Section tone="surface">
         <Container>
-          <Reveal className="mx-auto max-w-[760px] rounded-3xl border border-gold-bright/30 bg-gold-soft/50 p-8 md:p-12">
+          <Reveal className="mx-auto max-w-[760px] rounded-3xl border border-navy/20 bg-navy-soft p-8 md:p-12">
             <Eyebrow>To Be Upfront</Eyebrow>
             <h2 className="mt-3 text-[clamp(24px,3.2vw,34px)]">What we ask from you too.</h2>
             <p className="mt-4 text-muted">Trust runs both ways. We ask for consistent order patterns where possible, timely payment per agreed terms, and honest feedback when something&apos;s wrong — that&apos;s what lets us actually plan routes and hold delivery windows instead of guessing.</p>

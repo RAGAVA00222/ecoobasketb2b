@@ -37,9 +37,11 @@ export default function InvestorPage() {
             <div className="mt-5"><Eyebrow>The Opportunity</Eyebrow></div>
             <h2 className="mt-3 text-[clamp(24px,3.2vw,34px)]">A large, fragmented FMCG distribution market — starting where we can serve well.</h2>
             <p className="mt-5 text-[clamp(16px,1.5vw,18px)] leading-relaxed text-muted">
-              Chennai&apos;s neighbourhood retail runs on FMCG distribution that is often inconsistent. Ecoo Basket is
-              building a reliability-first alternative, one zone at a time. The full market-opportunity narrative goes
-              here — supplied by the company, qualitative only, no financial figures.
+              Chennai&apos;s neighbourhood retail runs on FMCG distribution that is often inconsistent — unreliable
+              delivery windows, high minimum orders, and little accountability when something goes wrong. Ecoo Basket is
+              building a reliability-first alternative, one zone at a time: technology-enabled logistics, transparent
+              GST billing, and a real account contact for every partner. It is a large, fragmented market, and our focus
+              is on serving it well where we operate before we expand.
             </p>
           </Reveal>
         </Container>
@@ -77,8 +79,10 @@ export default function InvestorPage() {
             <div className="mt-5"><Eyebrow onDark>Why Now</Eyebrow></div>
             <h2 className="mt-3 text-invert text-[clamp(24px,3.2vw,34px)]">Founder-led, disciplined, built on honest numbers.</h2>
             <p className="mt-5 text-[clamp(16px,1.5vw,18px)] leading-relaxed text-white/80">
-              A qualitative &ldquo;why now&rdquo; narrative goes here — leadership experience, the reliability gap in the
-              market, and the deliberate zone-by-zone approach. No financial highlights, revenue, or projections are shown.
+              The timing rests on three things: a founder-led team with years across HUL, Reliance Retail and BigBasket;
+              a persistent reliability gap in neighbourhood FMCG distribution; and a deliberate, zone-by-zone approach
+              that grows only as fast as we can serve well. This page is intentionally qualitative — no revenue,
+              financial highlights, or projections are shown.
             </p>
             <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.06em] text-white/60">
               This page intentionally omits financial figures

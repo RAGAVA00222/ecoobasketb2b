@@ -91,7 +91,7 @@ export default function AboutPage() {
             {mvv.map((m, i) => (
               <Reveal key={m.k} delay={i * 0.06} className="rounded-2xl border border-line bg-surface p-8 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-mint to-mint2 text-accent"><m.Icon size={23} strokeWidth={1.8} /></span>
-                <span className="mt-5 block font-mono text-[11px] uppercase tracking-[0.1em] text-gold">{m.k}</span>
+                <span className="mt-5 block font-mono text-[11px] uppercase tracking-[0.1em] text-navy">{m.k}</span>
                 <h3 className="mt-1.5 text-[19px]">{m.t}</h3>
                 <p className="mt-2.5 text-[14.5px] text-muted">{m.d}</p>
               </Reveal>
@@ -112,7 +112,7 @@ export default function AboutPage() {
               Strategy without execution is a dream. We combine a clear plan with disciplined day-to-day execution.
             </blockquote>
             <div className="mt-6 flex items-center gap-3">
-              <span className="h-px w-8 bg-gold-bright" />
+              <span className="h-px w-8 bg-accent" />
               <div>
                 <div className="font-semibold text-ink">Ragavendren Chakaravarthi</div>
                 <div className="text-[13.5px] text-muted">Chief Strategy Officer · 12 yrs across HUL, Reliance Retail &amp; BigBasket</div>

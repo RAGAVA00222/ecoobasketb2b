@@ -95,7 +95,7 @@ export default function ServicesPage() {
           <p className="mb-4 mt-12 font-mono text-[12px] uppercase tracking-[0.1em] text-accent">Own-Brand Track · Ecoo Nuts &amp; Spices Categories</p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {nutsSpicesCategories.map((c) => (
-              <div key={c} className="rounded-xl border border-gold-bright/30 bg-gold-soft/60 px-4 py-6 text-center text-[15px] font-semibold text-ink transition-all duration-300 hover:-translate-y-1">{c}</div>
+              <div key={c} className="rounded-xl border border-navy/20 bg-navy-soft/70 px-4 py-6 text-center text-[15px] font-semibold text-ink transition-all duration-300 hover:-translate-y-1">{c}</div>
             ))}
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -120,9 +120,9 @@ export default function ServicesPage() {
               <h3 className="mt-1.5 text-[20px]">Private Label Support (for your brand)</h3>
               <p className="mt-2.5 text-muted">You bring the brand, we help with sourcing, packaging, compliance, and retail placement — your product, our operational support.</p>
             </Reveal>
-            <Reveal delay={0.08} className="rounded-2xl border border-gold-bright/30 bg-gold-soft/50 p-8 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-gold shadow-soft"><Sparkles size={23} strokeWidth={1.8} /></span>
-              <span className="mt-5 block font-mono text-[11px] uppercase tracking-[0.08em] text-gold">Our Own Product</span>
+            <Reveal delay={0.08} className="rounded-2xl border border-navy/20 bg-navy-soft/70 p-8 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-navy shadow-soft"><Sparkles size={23} strokeWidth={1.8} /></span>
+              <span className="mt-5 block font-mono text-[11px] uppercase tracking-[0.08em] text-navy">Our Own Product</span>
               <h3 className="mt-1.5 text-[20px]">Ecoo Nuts &amp; Spices (our brand)</h3>
               <p className="mt-2.5 text-muted">Sourced, packed and sold by us directly — a higher-margin category we offer alongside standard multi-brand FMCG distribution.</p>
             </Reveal>

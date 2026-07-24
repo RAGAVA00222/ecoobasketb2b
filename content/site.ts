@@ -101,13 +101,14 @@ export const nutsSpicesCategories = [
 // Logo files + brand/legal confirmation are being sourced separately;
 // these render as text/placeholder marks until real logos land.
 export const manufacturers = [
+  "Nestlé",
   "HUL",
   "ITC",
   "Britannia",
-  "Nestlé",
   "Parle",
-  "Coca-Cola",
   "PepsiCo",
+  "Coca-Cola",
+  "Dabur",
 ];
 
 // Distribution process (locked qualitative steps).
