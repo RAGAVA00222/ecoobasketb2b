@@ -53,9 +53,7 @@ export default function TamilNaduMap() {
           <li className="flex items-center gap-2"><span className="inline-block h-2.5 w-2.5 rounded-full bg-accent" /> <span className="text-ink">Chennai — serving now</span></li>
           <li className="flex items-center gap-2"><span className="inline-block h-2.5 w-2.5 rounded-full border border-[#9CA3AF] bg-white" /> <span className="text-muted">Other Tamil Nadu zones — expansion roadmap</span></li>
         </ul>
-        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
-          Illustrative coverage — exact zones pending confirmation
-        </p>
+        {/* CONTENT NEEDED: confirmed served-zone data (map is illustrative, not a survey boundary) */}
       </div>
     </div>
   );

@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-type Stat = { value: number; suffix?: string; label: string };
+export type Stat = { value: number; suffix?: string; label: string };
 
 // CONTENT NEEDED: confirm these figures before publishing (shown as provided).
-const stats: Stat[] = [
+const defaultStats: Stat[] = [
   { value: 500, suffix: "+", label: "Retail Partners" },
   { value: 100, suffix: "+", label: "Trusted Brands" },
   { value: 4000, suffix: "+", label: "Products" },
@@ -47,7 +47,7 @@ function StatItem({ s, run, reduce }: { s: Stat; run: boolean; reduce: boolean |
   );
 }
 
-export default function Stats() {
+export default function Stats({ items = defaultStats }: { items?: Stat[] }) {
   const reduce = useReducedMotion();
   const [run, setRun] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -64,9 +64,10 @@ export default function Stats() {
     return () => io.disconnect();
   }, []);
 
+  const cols = items.length === 4 ? "sm:grid-cols-4" : "sm:grid-cols-3 lg:grid-cols-5";
   return (
-    <div ref={ref} className="grid grid-cols-2 gap-4 md:grid-cols-5">
-      {stats.map((s) => (
+    <div ref={ref} className={`grid grid-cols-2 gap-4 ${cols}`}>
+      {items.map((s) => (
         <StatItem key={s.label} s={s} run={run} reduce={reduce} />
       ))}
     </div>

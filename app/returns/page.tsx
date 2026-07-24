@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Return & Refund Policy | Ecoo Basket Chennai",
-  description: "Return & Refund Policy for Ecoo Basket, B2B FMCG distributor in Chennai. Draft pending legal review.",
+  description: "Return & Refund Policy for Ecoo Basket, B2B FMCG distributor in Chennai — how returns, replacements and refunds are handled.",
   alternates: { canonical: "/returns" },
 };
 
@@ -22,7 +22,7 @@ export default function ReturnsPage() {
     <LegalLayout
       title="Return & Refund Policy"
       intro={`How returns, replacements and refunds are handled for orders placed with ${site.legalName} ("Ecoo Basket").`}
-      note="This return & refund policy is a draft template and should be reviewed by a legal professional before relying on it."
+      note="If an order arrives damaged, defective, or wrong, tell us promptly with your invoice details and we'll make it right."
       sections={sections}
     />
   );

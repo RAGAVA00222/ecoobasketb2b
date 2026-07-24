@@ -2,12 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { footerNav, site } from "@/content/site";
 
-// CIN is real (public MCA record). GST / MSME / ISO pending real numbers.
+// CIN is real (public MCA record). Only real, confirmed marks are rendered.
+// CONTENT NEEDED: add GST / MSME (Udyam) / FSSAI / ISO badges once real numbers are confirmed.
 const certBadges: { label: string; value?: string; pending?: boolean }[] = [
   { label: "CIN", value: site.cin },
-  { label: "GST", pending: true },
-  { label: "MSME · Udyam", pending: true },
-  { label: "ISO", pending: true },
 ];
 
 function Social() {

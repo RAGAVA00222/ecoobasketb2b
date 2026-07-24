@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Plus, ArrowRight } from "lucide-react";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
 
@@ -28,25 +29,27 @@ export default function FaqPage() {
 
       <Section tone="surface">
         <Container>
-          <div className="mx-auto max-w-[820px]">
+          <div className="mx-auto grid max-w-[820px] gap-4">
             {faqs.map((f, i) => (
-              <details key={f.q} className="group border-b border-line py-5" open={i === 0}>
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[18px] font-medium text-ink">
+              <details key={f.q} className="group rounded-2xl border border-line bg-base p-6 shadow-soft transition-colors open:border-accent-strong/40 sm:p-7" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[17px] font-semibold text-ink">
                   {f.q}
-                  <span className="font-mono text-accent transition-transform group-open:rotate-45">+</span>
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-mint text-accent transition-transform duration-300 group-open:rotate-45"><Plus size={18} /></span>
                 </summary>
-                <p className="mt-3 text-muted">{f.a}</p>
+                <p className="mt-4 text-[15px] leading-relaxed text-muted">{f.a}</p>
               </details>
             ))}
           </div>
         </Container>
       </Section>
 
-      <section className="bg-accent py-16 text-center text-invert md:py-20">
-        <Container>
-          <h2 className="text-invert text-[clamp(24px,3.4vw,34px)]">Didn&apos;t find your answer?</h2>
-          <p className="mx-auto mt-3 max-w-[560px] text-invert/90">Ask us directly — we reply within one business day, usually sooner.</p>
-          <div className="mt-7 flex justify-center"><Button href="/contact" variant="outlineInvert">Get In Touch</Button></div>
+      {/* CTA */}
+      <section className="forest-grad relative overflow-hidden py-16 text-center text-invert md:py-24">
+        <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(60% 120% at 50% -10%, rgba(255,255,255,0.14), transparent 60%)" }} />
+        <Container className="relative">
+          <h2 className="text-invert text-[clamp(24px,3.4vw,38px)]">Didn&apos;t find your answer?</h2>
+          <p className="mx-auto mt-3 max-w-[560px] text-white/85">Ask us directly — we reply within one business day, usually sooner.</p>
+          <div className="mt-8 flex justify-center"><Button href="/contact" variant="solidInvert">Get In Touch <ArrowRight size={16} /></Button></div>
         </Container>
       </section>
     </>

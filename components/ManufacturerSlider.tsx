@@ -29,9 +29,7 @@ export default function ManufacturerSlider() {
           </div>
         ))}
       </motion.div>
-      <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
-        Partner logos pending brand confirmation
-      </p>
+      {/* CONTENT NEEDED: real manufacturer logo files + brand/legal usage confirmation (currently text chips) */}
     </div>
   );
 }

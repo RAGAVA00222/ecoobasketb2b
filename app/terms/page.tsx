@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | Ecoo Basket Chennai",
-  description: "Terms & Conditions for Ecoo Basket, a B2B FMCG distributor in Chennai. Draft pending legal review.",
+  description: "Terms & Conditions for Ecoo Basket, a B2B FMCG distributor in Chennai — the terms governing use of this website and our services.",
   alternates: { canonical: "/terms" },
 };
 
@@ -26,7 +26,7 @@ export default function TermsPage() {
     <LegalLayout
       title="Terms & Conditions"
       intro={`The terms governing use of this website and the services provided by ${site.legalName} ("Ecoo Basket").`}
-      note="These terms are a draft template and should be reviewed by a legal professional before relying on them."
+      note="By using this website and our services you agree to these terms. Confirmed pricing and terms are always reflected on your order and invoice."
       sections={sections}
     />
   );

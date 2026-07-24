@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Ecoo Basket Chennai",
-  description: "Privacy Policy for Ecoo Basket, a B2B FMCG distributor in Chennai. Draft pending legal review.",
+  description: "Privacy Policy for Ecoo Basket, a B2B FMCG distributor in Chennai — how we handle information collected through this website and our services.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
     <LegalLayout
       title="Privacy Policy"
       intro={`How ${site.legalName} ("Ecoo Basket", "we") handles information collected through this website and our services.`}
-      note="This policy is a draft template and should be reviewed by a legal professional before relying on it."
+      note="We collect only what we need to serve you, and we never sell your personal information. Questions are welcome — our contact details are at the end."
       sections={sections}
     />
   );

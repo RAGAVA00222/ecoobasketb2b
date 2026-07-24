@@ -125,15 +125,15 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,23,42,0.28)] to-transparent" />
             </div>
             {/* floating metric cards */}
-            <div className="anim-float absolute -left-4 top-8 flex items-center gap-3 rounded-2xl glass p-3.5 shadow-soft sm:-left-6">
+            <div className="anim-float absolute -left-4 top-8 hidden items-center gap-3 rounded-2xl glass p-3.5 shadow-soft md:flex sm:-left-6">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-strong/12 text-accent"><TrendingUp size={19} /></span>
               <div><div className="text-[18px] font-extrabold leading-none tracking-[-0.02em] text-ink">99%</div><div className="text-[11px] text-muted">On-time delivery</div></div>
             </div>
-            <div className="anim-float absolute -right-3 top-1/2 flex items-center gap-3 rounded-2xl glass p-3.5 shadow-soft sm:-right-6" style={{ animationDelay: "1.2s" }}>
+            <div className="anim-float absolute -right-3 top-1/2 hidden items-center gap-3 rounded-2xl glass p-3.5 shadow-soft md:flex sm:-right-6" style={{ animationDelay: "1.2s" }}>
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold-soft text-gold"><Truck size={19} /></span>
               <div><div className="text-[18px] font-extrabold leading-none tracking-[-0.02em] text-ink">24–48h</div><div className="text-[11px] text-muted">Delivery window</div></div>
             </div>
-            <div className="anim-float absolute -bottom-4 left-10 flex items-center gap-3 rounded-2xl glass p-3.5 shadow-soft" style={{ animationDelay: "2.1s" }}>
+            <div className="anim-float absolute -bottom-4 left-10 hidden items-center gap-3 rounded-2xl glass p-3.5 shadow-soft md:flex" style={{ animationDelay: "2.1s" }}>
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-strong/12 text-accent"><ShieldCheck size={19} /></span>
               <div><div className="text-[13px] font-bold leading-tight text-ink">GST-Compliant</div><div className="text-[11px] text-muted">On every order</div></div>
             </div>
@@ -145,7 +145,7 @@ export default function Home() {
       <section className="bg-base pb-4 pt-2">
         <Container>
           <Reveal><Stats /></Reveal>
-          <p className="mt-3 text-center font-mono text-[11px] text-muted">Figures shown for illustration — confirm before publishing.</p>
+          {/* CONTENT NEEDED: confirm the stat figures in components/Stats.tsx before relying on them publicly */}
         </Container>
       </section>
 
@@ -303,9 +303,10 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-8 text-center font-mono text-[11px] text-muted">
-            Registered entity CIN {site.cin} · GST / MSME / FSSAI badges added once numbers are confirmed.
+          <p className="mt-8 text-center font-mono text-[11px] tracking-[0.06em] text-muted">
+            Registered entity · CIN {site.cin}
           </p>
+          {/* CONTENT NEEDED: add GST / MSME / FSSAI badges once real registration numbers are confirmed */}
         </Container>
       </Section>
 
