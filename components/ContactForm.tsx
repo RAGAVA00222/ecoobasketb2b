@@ -48,7 +48,7 @@ export default function ContactForm() {
         <label className={label}>Message</label>
         <textarea name="cmessage" rows={4} required className={`mt-1.5 resize-y ${field}`} placeholder="Tell us about your requirements, business, and how we can help…" />
       </div>
-      <button type="submit" className="justify-center rounded-[2px] bg-ink px-6 py-3 text-[14.5px] font-semibold text-invert hover:bg-dark">
+      <button type="submit" className="justify-center rounded-[2px] bg-accent px-6 py-3 text-[14.5px] font-semibold text-invert hover:bg-accent-deep">
         Send Message →
       </button>
     </form>

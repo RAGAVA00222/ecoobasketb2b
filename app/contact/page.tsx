@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { Container, Section, Eyebrow } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -22,13 +23,11 @@ const info = [
 export default function ContactPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Reach Out</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">We&apos;re easy to reach — and we actually reply.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">Manufacturer, retailer, or just curious — here&apos;s every way to reach the team directly.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Reach Out"
+        title="We're easy to reach — and we actually reply."
+        subtitle="Manufacturer, retailer, or just curious — here's every way to reach the team directly."
+      />
 
       <Section>
         <Container>

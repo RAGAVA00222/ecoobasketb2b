@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -42,13 +43,11 @@ const values = [
 export default function FoundersPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Leadership</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">The people behind Ecoo Basket.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">A small founding team, deliberately — each with a distinct, accountable role.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Leadership"
+        title="The people behind Ecoo Basket."
+        subtitle="A small founding team, deliberately — each with a distinct, accountable role."
+      />
 
       <Section>
         <Container>

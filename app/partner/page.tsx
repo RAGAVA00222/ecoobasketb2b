@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "FMCG Supplier Partnership in Chennai",
@@ -27,14 +28,13 @@ const steps = [
 export default function PartnerPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Grow Together</Eyebrow>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(30px,4.6vw,46px)]">Partner with a distributor still small enough to answer the phone.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">We&apos;re an emerging network, not a national giant — which means your brand gets real attention, not a line item.</p>
-          <div className="mt-8"><Button href="/contact" variant="green">Start a Partnership →</Button></div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Grow Together"
+        title="Partner with a distributor still small enough to answer the phone."
+        subtitle="We're an emerging network, not a national giant — which means your brand gets real attention, not a line item."
+      >
+        <Button href="/contact" variant="solidInvert">Start a Partnership →</Button>
+      </PageHero>
 
       <Section>
         <Container className="max-w-[820px]">

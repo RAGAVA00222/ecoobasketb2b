@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Placeholder from "@/components/Placeholder";
 import { Container, Section, Eyebrow } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Gallery | Ecoo Basket Chennai",
@@ -22,13 +23,11 @@ const tiles = [
 export default function GalleryPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Gallery</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">Inside the operation.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">Real photography of the warehouse, routes, packing and team will live here.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Gallery"
+        title="Inside the operation."
+        subtitle="Real photography of the warehouse, routes, packing and team will live here."
+      />
 
       {/* CONTENT NEEDED: gallery photography (all tiles are placeholders) */}
       <Section tone="surface">

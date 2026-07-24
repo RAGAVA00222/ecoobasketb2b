@@ -43,27 +43,27 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {/* HERO — asymmetric split, real photography */}
-      <section className="border-b border-line bg-base">
+      {/* HERO — asymmetric split, forest-gradient with real photography */}
+      <section className="forest-grad border-b border-[rgba(200,162,77,0.35)] text-invert">
         <Container className="grid items-center gap-10 py-14 md:grid-cols-12 md:py-20">
           <div className="md:col-span-6">
-            <Eyebrow>{site.tagline}</Eyebrow>
-            <h1 className="mt-4 text-[clamp(34px,5.2vw,58px)]">
+            <Eyebrow onDark>{site.tagline}</Eyebrow>
+            <h1 className="mt-4 text-invert text-[clamp(34px,5.2vw,58px)]">
               The route from manufacturer&nbsp;shelf to retailer&nbsp;shelf, run properly.
             </h1>
-            <p className="mt-5 max-w-[560px] text-muted">
+            <p className="mt-5 max-w-[560px] text-[rgba(255,255,255,0.82)]">
               {site.legalName} moves multi-brand FMCG and our own Nuts &amp; Spices line from warehouse to kirana shop,
               supermarket and institution — on schedule, on invoice, on WhatsApp when you need us. Order online anytime at{" "}
-              <strong className="text-ink">Ecoo Basket</strong> (ecoobasket.com).
+              <strong className="font-semibold text-invert">Ecoo Basket</strong> (ecoobasket.com).
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={site.orderUrl} external variant="green">Order Now →</Button>
-              <Button href="/services" variant="outline">See What We Move →</Button>
+              <Button href={site.orderUrl} external variant="solidInvert">Order Now →</Button>
+              <Button href="/services" variant="outlineInvert">See What We Move →</Button>
             </div>
           </div>
           <div className="md:col-span-6">
             {/* CONTENT NEEDED: real warehouse hero photography (current image is generic/AI-style) */}
-            <div className="overflow-hidden rounded-[4px] border border-line">
+            <div className="overflow-hidden rounded-[4px] border border-[rgba(255,255,255,0.25)] shadow-[0_20px_50px_rgba(15,81,50,0.35)]">
               <Image
                 src="/assets/images/warehouse/01_Warehouse_Logistics.jpg"
                 alt="Ecoo Basket warehouse operations, Vanagaram, Chennai"
@@ -72,7 +72,7 @@ export default function Home() {
                 priority
               />
             </div>
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.08em] text-[rgba(255,255,255,0.7)]">
               Warehouse floor · Vanagaram, Chennai · photo pending real shoot
             </p>
           </div>

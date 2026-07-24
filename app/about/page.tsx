@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -30,13 +31,11 @@ const record: [string, string][] = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Our Story</Eyebrow>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(30px,4.6vw,46px)]">Built to close the gap between manufacturer and shopkeeper.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">Chennai-headquartered, founder-led, and focused on getting distribution basics right before chasing scale.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Our Story"
+        title="Built to close the gap between manufacturer and shopkeeper."
+        subtitle="Chennai-headquartered, founder-led, and focused on getting distribution basics right before chasing scale."
+      />
 
       <Section>
         <Container className="max-w-[820px]">

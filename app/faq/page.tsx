@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "FAQ | B2B FMCG Wholesale in Chennai",
@@ -19,13 +20,11 @@ const faqs = [
 export default function FaqPage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Questions &amp; Answers</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">Frequently asked questions.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">Straight answers to the things retailers and suppliers ask us most.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Questions & Answers"
+        title="Frequently asked questions."
+        subtitle="Straight answers to the things retailers and suppliers ask us most."
+      />
 
       <Section tone="surface">
         <Container>

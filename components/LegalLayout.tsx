@@ -1,4 +1,5 @@
-import { Container, Eyebrow } from "@/components/primitives";
+import { Container } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export type LegalSection = { h: string; body: React.ReactNode };
@@ -16,13 +17,7 @@ export default function LegalLayout({
 }) {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-12 md:py-16">
-          <Eyebrow>Legal</Eyebrow>
-          <h1 className="mt-4 text-[clamp(28px,4.2vw,42px)]">{title}</h1>
-          <p className="mt-4 max-w-[720px] text-muted">{intro}</p>
-        </Container>
-      </section>
+      <PageHero eyebrow="Legal" title={title} subtitle={intro} size="compact" />
       <section className="bg-surface py-14 md:py-20">
         <Container>
           <div className="mx-auto max-w-[820px]">

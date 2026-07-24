@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import TamilNaduMap from "@/components/TamilNaduMap";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Industries We Serve | FMCG Wholesale Chennai",
@@ -25,13 +26,11 @@ const expanding = [
 export default function WeServePage() {
   return (
     <>
-      <section className="border-b border-line bg-base">
-        <Container className="py-14 md:py-20">
-          <Eyebrow>Our Reach</Eyebrow>
-          <h1 className="mt-4 text-[clamp(30px,4.6vw,46px)]">Who we serve today, and where we&apos;re headed.</h1>
-          <p className="mt-5 max-w-[620px] text-muted">We&apos;d rather be precise about our current base than list every sector we might reach someday.</p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Our Reach"
+        title="Who we serve today, and where we're headed."
+        subtitle="We'd rather be precise about our current base than list every sector we might reach someday."
+      />
 
       <Section>
         <Container>
