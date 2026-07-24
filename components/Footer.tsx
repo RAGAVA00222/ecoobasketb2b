@@ -13,11 +13,11 @@ const certBadges: { label: string; value?: string; pending?: boolean }[] = [
 function Social() {
   return (
     <div className="mt-6 flex gap-2.5">
-      <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Ecooo Basket on Facebook"
+      <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Ecoo Basket on Facebook"
          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#1E293B] bg-[#0B1220] text-invert transition-colors hover:border-accent-strong hover:text-accent-strong">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v8h4v-8h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
       </a>
-      <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Ecooo Basket on Instagram"
+      <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Ecoo Basket on Instagram"
          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#1E293B] bg-[#0B1220] text-invert transition-colors hover:border-accent-strong hover:text-accent-strong">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
       </a>
