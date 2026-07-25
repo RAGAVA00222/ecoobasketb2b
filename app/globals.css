@@ -58,7 +58,13 @@ h1, h2, h3, h4 {
 }
 h1 { font-weight: 800; }
 p { margin: 0; }
-a { color: inherit; text-decoration: none; }
+/* Link reset lives in @layer base so Tailwind text-colour utilities
+   (text-accent, text-invert, …) win on <a> elements. Left unlayered, this rule
+   beats every layered text-* utility on links — which made the white-on-white
+   solidInvert CTA buttons (bg-invert + text-accent) render invisible. */
+@layer base {
+  a { color: inherit; text-decoration: none; }
+}
 img { max-width: 100%; display: block; }
 body.drawer-open { overflow: hidden; }
 
