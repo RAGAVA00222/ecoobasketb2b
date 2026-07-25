@@ -79,7 +79,7 @@ export default function InvestorPage() {
             <div className="mt-5"><Eyebrow onDark>Why Now</Eyebrow></div>
             <h2 className="mt-3 text-invert text-[clamp(24px,3.2vw,34px)]">Founder-led, disciplined, built on honest numbers.</h2>
             <p className="mt-5 text-[clamp(16px,1.5vw,18px)] leading-relaxed text-white/80">
-              The timing rests on three things: a founder-led team with years across HUL, Reliance Retail and BigBasket;
+              The timing rests on three things: a founder-led team with 12 years across HUL, Reliance Retail and BigBasket;
               a persistent reliability gap in neighbourhood FMCG distribution; and a deliberate, zone-by-zone approach
               that grows only as fast as we can serve well. This page is intentionally qualitative — no revenue,
               financial highlights, or projections are shown.

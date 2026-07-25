@@ -2,8 +2,7 @@ import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
   ReceiptText, Clock, Cpu, Truck, Boxes, Users, ClipboardList, Workflow, Smartphone,
-  MessageCircle, MapPin, PackageCheck, ShieldCheck, IndianRupee, UserCheck, FileCheck,
-  Route, Building2, ArrowRight, Plus,
+  MessageCircle, IndianRupee, UserCheck, Route, Headset, ArrowRight, Plus,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import ManufacturerSlider from "@/components/ManufacturerSlider";
@@ -11,9 +10,9 @@ import DistributionWorkflow from "@/components/DistributionWorkflow";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
-import { site } from "@/content/site";
+import { site, features } from "@/content/site";
 
-const features: { t: string; Icon: LucideIcon }[] = [
+const heroBadges: { t: string; Icon: LucideIcon }[] = [
   { t: "GST Compliant", Icon: ReceiptText },
   { t: "24–48 Hour Delivery", Icon: Clock },
   { t: "Technology Enabled", Icon: Cpu },
@@ -24,27 +23,19 @@ const services: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Wholesale Distribution", d: "Multi-brand FMCG supplied in bulk to kirana stores, general trade and modern trade with flexible order quantities.", Icon: Boxes },
   { t: "Direct Store Delivery", d: "Route-planned delivery direct to the storefront, keeping delivery windows consistent across our coverage area.", Icon: Truck },
   { t: "Retail Partnership", d: "A growing network of retail partners with direct relationships and one accountable account contact.", Icon: Users },
-  { t: "Inventory Management", d: "Stock tracking that flags what's low before a retailer runs out, and what's slow before it becomes dead stock.", Icon: ClipboardList },
+  { t: "Inventory Management", d: "Live stock visibility that keeps the right products on the shelf and clears slow movers.", Icon: ClipboardList },
   { t: "Supply Chain Management", d: "We manage the handoffs between sourcing, warehousing and last-mile so nothing stalls between steps.", Icon: Workflow },
   { t: "Digital Ordering", d: "Reorder any time through our B2B digital ordering platform, with GST-compliant invoicing on every order.", Icon: Smartphone },
 ];
 
+// Single merged benefit set (was two overlapping 6-card grids).
 const whyChoose: { t: string; d: string; Icon: LucideIcon }[] = [
-  { t: "Direct Store Delivery", d: "Products delivered straight to the storefront on planned routes.", Icon: Truck },
-  { t: "Technology Enabled", d: "Digital ordering, route planning and inventory visibility.", Icon: Cpu },
-  { t: "Multi Brand Distribution", d: "Trusted FMCG brands plus our own Nuts & Spices line.", Icon: Boxes },
-  { t: "GST Compliant", d: "A clean, GST-compliant invoice on every single order.", Icon: ReceiptText },
-  { t: "WhatsApp Ordering", d: "Reach a real person and reorder over WhatsApp.", Icon: MessageCircle },
-  { t: "Chennai Distribution Network", d: "Reliable coverage across Chennai, expanding zone by zone.", Icon: MapPin },
-];
-
-const whyTrust: { t: string; d: string; Icon: LucideIcon }[] = [
-  { t: "Reliable Delivery", d: "The delivery window we quote is the one we aim to hit — every time.", Icon: PackageCheck },
-  { t: "Quality Assurance", d: "Organised storage with stock rotation, so products move before they age out.", Icon: ShieldCheck },
+  { t: "Direct Store Delivery", d: "Route-planned delivery straight to the storefront, on the window we quote.", Icon: Truck },
+  { t: "Technology Enabled", d: "Digital ordering, route planning and inventory visibility across the chain.", Icon: Cpu },
+  { t: "GST Compliant", d: "A clean, GST-compliant invoice on every order, with licensing kept current.", Icon: ReceiptText },
+  { t: "Multi-Brand Distribution", d: "Trusted FMCG brands plus our own Nuts & Spices line, stored with rotation for quality.", Icon: Boxes },
   { t: "Competitive Pricing", d: "Strategic sourcing and operational efficiency keep pricing sharp.", Icon: IndianRupee },
-  { t: "Professional Team", d: "A founder-led team with years across HUL, Reliance Retail and BigBasket.", Icon: UserCheck },
-  { t: "Technology Driven", d: "Digital ordering, reorder signals and clean data across the chain.", Icon: Cpu },
-  { t: "Compliance First", d: "GST, licensing and regulatory basics kept current as we grow.", Icon: FileCheck },
+  { t: "Dedicated Support", d: "A real account contact, reachable on WhatsApp — not a call-centre queue.", Icon: Headset },
 ];
 
 const products = [
@@ -105,10 +96,10 @@ export default function Home() {
         <Container className="grid items-center gap-14 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-accent shadow-soft">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" /> FMCG Distribution · Chennai, India
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" /> FMCG Distribution · Chennai, Tamil Nadu
             </span>
             <h1 className="mt-6 text-[clamp(38px,5.4vw,64px)] leading-[1.03]">
-              Powering India&apos;s <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">Retail Supply Chain</span>
+              Powering Chennai&apos;s <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">Retail Supply Chain</span>
             </h1>
             <p className="mt-6 max-w-[560px] text-[clamp(16px,1.5vw,19px)] leading-relaxed text-muted">
               Technology-enabled FMCG distribution delivering trusted brands from warehouse to retailer with reliable logistics, transparent pricing, and dedicated customer support.
@@ -139,7 +130,7 @@ export default function Home() {
         {/* floating feature bar */}
         <Container className="pb-16">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {features.map((f) => (
+            {heroBadges.map((f) => (
               <div key={f.t} className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-4 shadow-soft">
                 <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-mint to-mint2 text-accent"><f.Icon size={20} strokeWidth={1.8} /></span>
                 <span className="text-[14px] font-semibold text-ink">{f.t}</span>
@@ -256,26 +247,8 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 8. WHY PARTNERS TRUST US */}
-      <Section tone="surface">
-        <Container>
-          <Reveal className="mx-auto max-w-[680px] text-center">
-            <Eyebrow>Why Partners Trust Us</Eyebrow>
-            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Built on reliability, not promises</h2>
-          </Reveal>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {whyTrust.map((t, i) => (
-              <Reveal key={t.t} delay={(i % 3) * 0.05} className="flex items-start gap-4 rounded-2xl border border-line bg-base p-6 transition-all duration-300 hover:border-accent-strong/40 hover:shadow-soft">
-                <Chip Icon={t.Icon} />
-                <div><h3 className="text-[16.5px]">{t.t}</h3><p className="mt-1.5 text-[14px] text-muted">{t.d}</p></div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
       {/* 9. CHENNAI DISTRIBUTION NETWORK */}
-      <Section>
+      <Section tone="surface">
         <Container className="grid items-center gap-14 md:grid-cols-2">
           <Reveal>
             <Eyebrow>Chennai Distribution Network</Eyebrow>
@@ -291,16 +264,18 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 10. TESTIMONIALS */}
-      <Section tone="surface">
-        <Container>
-          <Reveal className="mx-auto max-w-[680px] text-center">
-            <Eyebrow>Retail Partners</Eyebrow>
-            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">What partners say</h2>
-          </Reveal>
-          <Testimonials />
-        </Container>
-      </Section>
+      {/* 10. TESTIMONIALS — hidden until real, attributed quotes exist (features.testimonials) */}
+      {features.testimonials && (
+        <Section>
+          <Container>
+            <Reveal className="mx-auto max-w-[680px] text-center">
+              <Eyebrow>Retail Partners</Eyebrow>
+              <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">What partners say</h2>
+            </Reveal>
+            <Testimonials />
+          </Container>
+        </Section>
+      )}
 
       {/* 11. FAQ */}
       <Section>

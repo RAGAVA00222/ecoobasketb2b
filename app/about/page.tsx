@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Target, Eye, HeartHandshake, Boxes, Sparkles, Building2, ArrowRight, Quote } from "lucide-react";
+import { Target, Eye, HeartHandshake, Boxes, Sparkles, Building2, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
@@ -38,7 +38,7 @@ export default function AboutPage() {
         title="Built to close the gap between manufacturer and shopkeeper."
         subtitle="Chennai-headquartered, founder-led, and focused on getting distribution basics right before chasing scale."
       >
-        {["12+ yrs retail experience", "Founder-led", "Chennai HQ", "Two parallel tracks"].map((c) => (
+        {["12 years across HUL, Reliance Retail and BigBasket", "Founder-led", "Chennai HQ", "Two parallel tracks"].map((c) => (
           <span key={c} className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white backdrop-blur">{c}</span>
         ))}
       </PageHero>
@@ -49,7 +49,7 @@ export default function AboutPage() {
           <Reveal>
             <Eyebrow>The Problem We Set Out to Fix</Eyebrow>
             <h2 className="mt-3 text-[clamp(24px,3.2vw,34px)]">Retailers were choosing between price and reliability. We didn&apos;t think they should have to.</h2>
-            <p className="mt-5 text-muted">After 12 years moving through HUL, Reliance Retail, BigBasket, and a prior wholesale co-founder role, Ragavendren Chakaravarthi started {site.legalName} with a narrow, deliberate focus: build a distribution operation in Chennai that a small retailer can actually depend on — correct orders, fair pricing, and a real person to call.</p>
+            <p className="mt-5 text-muted">After 12 years across HUL, Reliance Retail and BigBasket — plus a prior wholesale co-founder role — Ragavendren Chakaravarthi started {site.legalName} with a narrow, deliberate focus: build a distribution operation in Chennai that a small retailer can actually depend on — correct orders, fair pricing, and a real person to call.</p>
             <p className="mt-3 text-muted">The company runs two tracks in parallel — multi-brand FMCG distribution to keep shelves stocked with what customers already ask for, and an own-brand Nuts &amp; Spices line to give retail partners a stronger-margin category alongside it.</p>
           </Reveal>
           <Reveal delay={0.1} className="relative aspect-[5/4.2] overflow-hidden rounded-3xl border border-line shadow-soft-lg">
@@ -97,28 +97,6 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
-        </Container>
-      </Section>
-
-      {/* Founder pull-quote */}
-      <Section tone="surface">
-        <Container className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr]">
-          <Reveal className="relative mx-auto aspect-square w-full max-w-[360px] overflow-hidden rounded-3xl border border-line shadow-soft-lg">
-            <Image src="/assets/images/founders/CSO-RAGAVENDREN%20CHAKARAVARTHI_.JPG.jpeg" alt="Ragavendren Chakaravarthi, Chief Strategy Officer, Ecoo Basket" fill sizes="(max-width:768px) 100vw, 360px" className="object-cover" />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <Quote size={40} className="text-accent-strong/30" />
-            <blockquote className="mt-3 text-[clamp(20px,2.4vw,28px)] font-semibold leading-[1.32] tracking-[-0.02em] text-ink">
-              Strategy without execution is a dream. We combine a clear plan with disciplined day-to-day execution.
-            </blockquote>
-            <div className="mt-6 flex items-center gap-3">
-              <span className="h-px w-8 bg-accent" />
-              <div>
-                <div className="font-semibold text-ink">Ragavendren Chakaravarthi</div>
-                <div className="text-[13.5px] text-muted">Chief Strategy Officer · 12 yrs across HUL, Reliance Retail &amp; BigBasket</div>
-              </div>
-            </div>
-          </Reveal>
         </Container>
       </Section>
 

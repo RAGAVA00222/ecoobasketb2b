@@ -17,10 +17,31 @@ const htmlRedirects = [
   ['returns', '/returns'],
 ].map(([from, to]) => ({ source: `/${from}.html`, destination: to, permanent: true }));
 
+// Cache-bust lever. Bump ASSET_VERSION on any deploy that must force clients
+// off a stale build; combined with the build timestamp it namespaces the
+// _next asset paths so browsers can't reuse an old bundle. This layers on top
+// of the runtime self-heal script (SW unregister + cache clear) in layout.
+const ASSET_VERSION = 'v3';
+
 const nextConfig = {
   reactStrictMode: true,
+  // Stamped build id → new asset namespace every deploy (and a manual bump lever).
+  generateBuildId: async () => `${ASSET_VERSION}-${Date.now()}`,
   async redirects() {
     return htmlRedirects;
+  },
+  async headers() {
+    return [
+      {
+        // Document/page routes only — never the hashed, immutable assets under
+        // /_next/static or /assets. Force the browser to revalidate the HTML so
+        // it always resolves to the latest bundle references.
+        source: '/((?!_next/|assets/|.*\\.[a-z0-9]+$).*)',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, must-revalidate' },
+        ],
+      },
+    ];
   },
 };
 

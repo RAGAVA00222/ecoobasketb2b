@@ -31,7 +31,6 @@ const people = [
     role: "Chief Strategy Officer",
     img: "/assets/images/founders/CSO-RAGAVENDREN%20CHAKARAVARTHI_.JPG.jpeg",
     quote: "Strategy without execution is a dream. We combine a clear plan with disciplined day-to-day execution.",
-    bio: "Twelve years in B2B retail — across HUL, Reliance Retail (Area Manager) and BigBasket, plus a prior co-founder/COO role at a wholesale distribution venture — before founding Ecoo Basket.",
   },
 ];
 
@@ -65,7 +64,6 @@ export default function FoundersPage() {
                   <h3 className="text-[18.5px]">{p.name}</h3>
                   <span className="mt-1 inline-block rounded-full bg-mint px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-accent">{p.role}</span>
                   <p className="mt-4 text-[14px] italic leading-relaxed text-muted">&ldquo;{p.quote}&rdquo;</p>
-                  {p.bio && <p className="mt-3 border-t border-line pt-3 text-[13.5px] text-muted">{p.bio}</p>}
                 </div>
               </Reveal>
             ))}

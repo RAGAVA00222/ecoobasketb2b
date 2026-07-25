@@ -8,7 +8,7 @@ import { manufacturers } from "@/content/site";
  * Trusted-manufacturers strip. Neutral "Partner Logo" placeholder tiles until
  * official logo files + brand/legal usage confirmation arrive.
  * CONTENT NEEDED: real logo files for intended partners —
- *   Nestlé, HUL, ITC, Britannia, Parle, PepsiCo, Coca-Cola, Dabur.
+ *   HUL, ITC, Nestlé, Britannia, Parle, Coca-Cola, PepsiCo.
  *   (PENDING BRAND CONFIRMATION — not shown as visible text.)
  */
 export default function ManufacturerSlider() {

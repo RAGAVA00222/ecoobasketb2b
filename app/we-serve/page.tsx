@@ -16,11 +16,11 @@ const servingNow: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Kirana & General Trade", d: "The largest share of our retail partners — neighbourhood stores that need dependable, regular delivery over flashy minimums.", Icon: Store },
   { t: "Pharmacies", d: "Retail pharmacies stocking FMCG and personal care alongside their core inventory.", Icon: Pill },
   { t: "Wholesale Outlets", d: "Wholesale and semi-wholesale traders who buy in volume and redistribute locally.", Icon: Boxes },
+  { t: "Supermarkets", d: "Modern trade outlets we supply across Chennai, with the volume capacity to keep shelves stocked.", Icon: Building2 },
+  { t: "HORECA (Hotels, Restaurants & Catering)", d: "Hotels, restaurants and caterers we supply with consistent FMCG stock — Now Delivery available, free above ₹10,000.", Icon: UtensilsCrossed },
 ];
 
 const expanding: { t: string; d: string; Icon: LucideIcon }[] = [
-  { t: "Supermarkets", d: "Modern trade outlets, as our volume capacity grows.", Icon: Building2 },
-  { t: "HORECA (Hotels, Restaurants & Catering)", d: "Hospitality and catering partners needing consistent FMCG supply — Now Delivery available, free above ₹10,000.", Icon: UtensilsCrossed },
   { t: "Corporate Offices", d: "Workplace pantry and hygiene essentials.", Icon: Briefcase },
   { t: "Institutions", d: "Schools, hospitals and similar bulk buyers, evaluated case by case.", Icon: GraduationCap },
 ];
@@ -45,7 +45,7 @@ export default function WeServePage() {
             {servingNow.map((s, i) => (
               <Reveal key={s.t} delay={i * 0.06} className="group rounded-2xl border border-line bg-surface p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-strong/40 hover:shadow-soft-lg">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-mint to-mint2 text-accent"><s.Icon size={23} strokeWidth={1.8} /></span>
-                <span className="mt-5 inline-block rounded-full bg-accent-strong/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-accent">Core</span>
+                <span className="mt-5 inline-block rounded-full bg-accent-strong/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-accent">Served</span>
                 <h3 className="mt-3 text-[19px]">{s.t}</h3>
                 <p className="mt-2 text-muted">{s.d}</p>
               </Reveal>

@@ -15,7 +15,7 @@ const faqs = [
   { q: "How do I place a wholesale order?", a: "You can order online through our B2B digital ordering platform at ecoobasket.com, or reach us by phone, WhatsApp, or the contact form and we'll set you up. Every order comes with a clean, GST-compliant invoice." },
   { q: "Do you offer both B2B and B2C ordering?", a: "Yes. Our core business is B2B FMCG distribution to kirana stores, general trade, pharmacies, wholesale outlets and HORECA businesses. Separately, online B2C ordering is available at ecoobasket.com." },
   { q: "What products do you distribute?", a: "Multi-brand FMCG across everyday categories — beverages, biscuits & snacks, staples & groceries, home care, personal care and stationery — plus our own-brand Nuts & Spices line." },
-  { q: "Who do you currently serve?", a: "Our core base today is Chennai's neighbourhood retail: kirana & general trade, pharmacies, and wholesale outlets. On our roadmap are supermarkets, HORECA (hotels, restaurants & catering), corporate offices and institutions." },
+  { q: "Who do you currently serve?", a: "We serve retailers across Chennai today: kirana & general trade, pharmacies, wholesale outlets, supermarkets and HORECA (hotels, restaurants & catering). Corporate offices and institutions are on our roadmap as coverage expands." },
 ];
 
 export default function FaqPage() {

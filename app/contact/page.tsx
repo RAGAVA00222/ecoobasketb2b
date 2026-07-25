@@ -12,8 +12,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const mapSrc =
-  "https://www.google.com/maps?q=Sf.+No.+215+Pt+No.+120,+Sh+No.+5,+Rajesh+Garden+Main+Road,+Vanagaram,+Poonamallee,+Tiruvallur+600095&output=embed";
+// Precise pin. When OFFICE_COORDS is set to a "lat,lng" string, Google drops a
+// building-exact marker at those coordinates. Until surveyed, we geocode the
+// road + locality (not the raw survey number, which the geocoder can't resolve),
+// which marks the street accurately — the area, not the individual unit.
+// CONTENT NEEDED: exact lat/lng (or a Maps Embed API key + place_id) for a
+// building-precise marker — e.g. OFFICE_COORDS = "13.0512,80.1580".
+const OFFICE_COORDS: string | null = null;
+const mapQuery = OFFICE_COORDS ?? "Rajesh Garden Main Road, Vanagaram, Chennai, Tamil Nadu 600095";
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=16&output=embed`;
 
 const info: { k: string; t: string; body: string; Icon: LucideIcon }[] = [
   { k: "Office", t: "Our Location", body: `${site.registeredOffice}`, Icon: MapPin },

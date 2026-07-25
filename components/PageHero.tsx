@@ -22,11 +22,11 @@ export default function PageHero({
   return (
     <section className="forest-grad border-b border-[rgba(255,255,255,0.12)] text-invert">
       <Container className={size === "compact" ? "py-12 md:py-16" : "py-14 md:py-20"}>
-        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-dark-accent">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-white">
           {eyebrow}
         </span>
         <h1 className="mt-4 max-w-[900px] text-invert text-[clamp(30px,4.6vw,46px)]">{title}</h1>
-        {subtitle && <p className="mt-5 max-w-[640px] text-[17px] text-[rgba(255,255,255,0.82)]">{subtitle}</p>}
+        {subtitle && <p className="mt-5 max-w-[640px] text-[17px] text-[rgba(255,255,255,0.92)]">{subtitle}</p>}
         {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
       </Container>
     </section>

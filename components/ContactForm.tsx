@@ -28,7 +28,7 @@ export default function ContactForm() {
         </div>
         <div>
           <label className={label}>Phone Number</label>
-          <input name="cphone" type="tel" required className={`mt-1.5 ${field}`} placeholder="+91 93423 58226" />
+          <input name="cphone" type="tel" required className={`mt-1.5 ${field}`} placeholder="Your phone number" />
         </div>
       </div>
       <div>

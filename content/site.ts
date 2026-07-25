@@ -7,7 +7,6 @@
 export const site = {
   brand: "Ecoo Basket",
   legalName: "Ecoo Hyper Retail Private Limited",
-  brandSub: "Ecoo Hyper Retail Pvt Ltd · Chennai",
   tagline: "B2B FMCG Distribution · Chennai, Tamil Nadu",
   domain: "https://www.ecoobasketb2b.com",
   orderUrl: "https://www.ecoobasket.com",
@@ -27,6 +26,11 @@ export const site = {
     facebook: "https://www.facebook.com/share/1HoGZJJUxZ/",
     instagram: "https://www.instagram.com/ecoobasket",
   },
+};
+
+// Feature flags. Testimonials stay OFF until real, attributed quotes exist.
+export const features = {
+  testimonials: false,
 };
 
 // Primary navigation — order preserved from the live site.
@@ -55,9 +59,9 @@ export const footerNav = {
   ],
   business: [
     { label: "Services", href: "/services" },
-    { label: "Industries We Serve", href: "/we-serve" },
+    { label: "We Serve", href: "/we-serve" },
     { label: "For Kirana Stores", href: "/kirana" },
-    { label: "Supplier Partnership", href: "/partner" },
+    { label: "Partner With Us", href: "/partner" },
     { label: "Gallery", href: "/gallery" },
     { label: "Download Center", href: "/downloads" },
   ],
@@ -100,15 +104,15 @@ export const nutsSpicesCategories = [
 // Manufacturer slider — CONFIRMED real distribution partners.
 // Logo files + brand/legal confirmation are being sourced separately;
 // these render as text/placeholder marks until real logos land.
+// Confirmed partner set (7). No other brand name is published on the site.
 export const manufacturers = [
-  "Nestlé",
   "HUL",
   "ITC",
+  "Nestlé",
   "Britannia",
   "Parle",
-  "PepsiCo",
   "Coca-Cola",
-  "Dabur",
+  "PepsiCo",
 ];
 
 // Distribution process (locked qualitative steps).

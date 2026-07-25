@@ -71,9 +71,10 @@ body.drawer-open { overflow: hidden; }
   font-weight: 500;
 }
 
-/* Green → navy gradient — interior hero bands + dark CTAs */
+/* Green → navy gradient — interior hero bands + dark CTAs.
+   Green stop darkened to #15803D so white text is AA (~5:1) across the band. */
 .forest-grad {
-  background-image: linear-gradient(130deg, var(--color-accent-strong) 0%, #115E33 42%, var(--color-forest-deep) 100%);
+  background-image: linear-gradient(130deg, #15803D 0%, #105030 45%, var(--color-forest-deep) 100%);
 }
 /* Navy → green for image overlays */
 .hero-grad {

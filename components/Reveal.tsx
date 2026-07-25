@@ -26,13 +26,15 @@ export default function Reveal({
     return <Tag className={className}>{children}</Tag>;
   }
 
+  // Slide-only, always-visible: opacity is never animated, so content can
+  // NEVER be stuck invisible if whileInView fails to fire (mobile/back-nav).
   return (
     <MotionTag
       className={className}
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ y: 16 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </MotionTag>
