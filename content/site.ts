@@ -18,6 +18,12 @@ export const site = {
   cityLine: "VANAGARAM, CHENNAI 600095",
   // Official incorporation record (public info only)
   cin: "U47912TN2026PTC195420",
+  // Statutory registration numbers. CIN is confirmed/public. GST + MSME are not
+  // yet available — kept null (never fabricated) and shown as clearly-marked
+  // footer placeholders until real numbers are provided. Do NOT surface these
+  // as "pending" on the public TrustBadges strip (decision D3-A).
+  gst: null as string | null, // CONTENT NEEDED: real GSTIN
+  msme: null as string | null, // CONTENT NEEDED: real MSME / Udyam number
   incorporated: "15 July 2026",
   companyType: "Private Limited Company, limited by shares",
   registeredOffice:
@@ -81,6 +87,13 @@ export const deliveryPromise = {
   cards: [
     { k: "SPEED", t: "Now Delivery", d: "Fast turnaround across Chennai — no multi-day waits for restock." },
     { k: "THRESHOLD", t: "Free Above ₹10,000", d: "Any single order over ₹10,000 ships free, anywhere in Chennai." },
+  ],
+  // Home "DeliveryPromise" section (#2) — the three facts of the hook, as its
+  // own section. Additive: `cards` above is still used by the kirana page.
+  highlights: [
+    { t: "Same-day dispatch", d: "Orders move out the same day — no multi-day wait for restock." },
+    { t: "24–48h across Chennai", d: "Delivered to your storefront within a 24–48 hour window." },
+    { t: "Free above ₹10,000", d: "Any single order over ₹10,000 ships free, anywhere in Chennai." },
   ],
 };
 

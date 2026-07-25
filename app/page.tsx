@@ -5,10 +5,12 @@ import {
   MessageCircle, IndianRupee, UserCheck, Route, Headset, ArrowRight, Plus,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import DeliveryPromise from "@/components/DeliveryPromise";
 import ManufacturerSlider from "@/components/ManufacturerSlider";
 import DistributionWorkflow from "@/components/DistributionWorkflow";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
+import TrustBadges from "@/components/TrustBadges";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import { site, features } from "@/content/site";
 
@@ -140,7 +142,10 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* 2. TRUSTED MANUFACTURERS */}
+      {/* 2. DELIVERY PROMISE — "Now Delivery" hook (free >₹10,000, same-day dispatch, 24–48h Chennai) */}
+      <DeliveryPromise />
+
+      {/* 3. TRUSTED MANUFACTURERS */}
       <Section tone="surface" className="py-12 md:py-14">
         <Container>
           <p className="mb-7 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Trusted to distribute for leading FMCG manufacturers</p>
@@ -148,7 +153,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 3. ABOUT */}
+      {/* 4. ABOUT */}
       <Section id="about">
         <Container className="grid items-center gap-14 md:grid-cols-2">
           <Reveal>
@@ -175,7 +180,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 4. SERVICES */}
+      {/* 5. SERVICES */}
       <Section tone="surface" id="services">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -195,7 +200,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 5. WHY CHOOSE ECOO BASKET (replaces statistics) */}
+      {/* 6. WHY CHOOSE ECOO BASKET (replaces statistics) */}
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -214,7 +219,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 6. DISTRIBUTION WORKFLOW */}
+      {/* 7. DISTRIBUTION WORKFLOW */}
       <Section tone="surface">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -225,7 +230,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 7. PRODUCT CATEGORIES */}
+      {/* 8. PRODUCT CATEGORIES */}
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -298,7 +303,10 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 12. CONTACT CTA */}
+      {/* 12. TRUST BADGES — qualitative compliance/credibility strip (D3-A) */}
+      <TrustBadges />
+
+      {/* 13. CONTACT CTA */}
       <section className="forest-grad relative overflow-hidden py-20 text-center text-invert md:py-28">
         <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(60% 120% at 50% -10%, rgba(255,255,255,0.14), transparent 60%)" }} />
         <Container className="relative">
