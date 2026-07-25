@@ -24,8 +24,10 @@ export default function DistributionWorkflow() {
           <motion.li
             key={s.t}
             className="relative flex flex-col items-center text-center lg:px-1"
-            initial={reduce ? false : { opacity: 0, y: 18 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+            // Slide-only, always-visible: opacity is never animated, so steps can
+            // never be stuck invisible if whileInView fails to fire (matches Reveal).
+            initial={reduce ? false : { y: 16 }}
+            whileInView={reduce ? undefined : { y: 0 }}
             viewport={{ once: true, margin: "0px 0px -10% 0px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
           >
