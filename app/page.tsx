@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import DeliveryPromise from "@/components/DeliveryPromise";
-import ManufacturerSlider from "@/components/ManufacturerSlider";
 import DistributionWorkflow from "@/components/DistributionWorkflow";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
@@ -38,17 +37,6 @@ const whyChoose: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Multi-Brand Distribution", d: "Trusted FMCG brands plus our own Nuts & Spices line, stored with rotation for quality.", Icon: Boxes },
   { t: "Competitive Pricing", d: "Strategic sourcing and operational efficiency keep pricing sharp.", Icon: IndianRupee },
   { t: "Dedicated Support", d: "A real account contact, reachable on WhatsApp — not a call-centre queue.", Icon: Headset },
-];
-
-const products = [
-  { name: "Beverages", img: "/assets/images/products/beverages.webp.jpg" },
-  { name: "Biscuits", img: "/assets/images/products/biscuits-snacks.webp.jpg" },
-  { name: "Snacks", img: "/assets/images/products/biscuits-snacks.webp.jpg" },
-  { name: "Staples", img: "/assets/images/products/staples.webp.jpg" },
-  { name: "Home Care", img: "/assets/images/products/home-care.webp.jpg" },
-  { name: "Personal Care", img: "/assets/images/products/personal-care.webp.jpg" },
-  { name: "Stationery", img: "/assets/images/products/stationery.webp.jpg" },
-  { name: "Ecoo Nuts & Spices", img: "/assets/images/products/05_Premium_Dry_Fruits.jpg" },
 ];
 
 const faqs = [
@@ -145,15 +133,7 @@ export default function Home() {
       {/* 2. DELIVERY PROMISE — "Now Delivery" hook (free >₹10,000, same-day dispatch, 24–48h Chennai) */}
       <DeliveryPromise />
 
-      {/* 3. TRUSTED MANUFACTURERS */}
-      <Section tone="surface" className="py-12 md:py-14">
-        <Container>
-          <p className="mb-7 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Trusted to distribute for leading FMCG manufacturers</p>
-          <ManufacturerSlider />
-        </Container>
-      </Section>
-
-      {/* 4. ABOUT */}
+      {/* 3. ABOUT */}
       <Section id="about">
         <Container className="grid items-center gap-14 md:grid-cols-2">
           <Reveal>
@@ -180,7 +160,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 5. SERVICES */}
+      {/* 4. SERVICES */}
       <Section tone="surface" id="services">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -200,7 +180,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 6. WHY CHOOSE ECOO BASKET (replaces statistics) */}
+      {/* 5. WHY CHOOSE ECOO BASKET (replaces statistics) */}
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -219,7 +199,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 7. DISTRIBUTION WORKFLOW */}
+      {/* 6. DISTRIBUTION WORKFLOW */}
       <Section tone="surface">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -230,30 +210,8 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 8. PRODUCT CATEGORIES */}
+      {/* 7. CHENNAI DISTRIBUTION NETWORK */}
       <Section>
-        <Container>
-          <Reveal className="mx-auto max-w-[680px] text-center">
-            <Eyebrow>Product Categories</Eyebrow>
-            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Everyday categories, dependable supply</h2>
-            <p className="mt-4 text-muted">The FMCG categories we move across our retail network. Shown for reference — not a full catalogue.</p>
-          </Reveal>
-          {/* CONTENT NEEDED: uniform original product photography (some categories share a placeholder) */}
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {products.map((p, i) => (
-              <Reveal key={p.name} delay={(i % 4) * 0.05} className="group overflow-hidden rounded-2xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={p.img} alt={`${p.name} — FMCG category distributed by Ecoo Basket`} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
-                </div>
-                <div className="px-5 py-4"><h3 className="text-[16px]">{p.name}</h3></div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* 9. CHENNAI DISTRIBUTION NETWORK */}
-      <Section tone="surface">
         <Container className="grid items-center gap-14 md:grid-cols-2">
           <Reveal>
             <Eyebrow>Chennai Distribution Network</Eyebrow>
@@ -269,7 +227,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 10. TESTIMONIALS — hidden until real, attributed quotes exist (features.testimonials) */}
+      {/* 8. TESTIMONIALS — hidden until real, attributed quotes exist (features.testimonials) */}
       {features.testimonials && (
         <Section>
           <Container>
@@ -282,8 +240,8 @@ export default function Home() {
         </Section>
       )}
 
-      {/* 11. FAQ */}
-      <Section>
+      {/* 9. FAQ */}
+      <Section tone="surface">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
             <Eyebrow>Questions &amp; Answers</Eyebrow>
@@ -291,7 +249,7 @@ export default function Home() {
           </Reveal>
           <div className="mx-auto mt-12 grid max-w-[820px] gap-4">
             {faqs.map((f, i) => (
-              <details key={f.q} className="group rounded-2xl border border-line bg-surface p-6 shadow-soft transition-colors open:border-accent-strong/40 sm:p-7" open={i === 0}>
+              <details key={f.q} className="group rounded-2xl border border-line bg-base p-6 shadow-soft transition-colors open:border-accent-strong/40 sm:p-7" open={i === 0}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[17px] font-semibold text-ink">
                   {f.q}
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-mint text-accent transition-transform duration-300 group-open:rotate-45"><Plus size={18} /></span>
@@ -303,10 +261,10 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 12. TRUST BADGES — qualitative compliance/credibility strip (D3-A) */}
+      {/* 10. TRUST BADGES — qualitative compliance/credibility strip (D3-A) */}
       <TrustBadges />
 
-      {/* 13. CONTACT CTA */}
+      {/* 11. CONTACT CTA */}
       <section className="forest-grad relative overflow-hidden py-20 text-center text-invert md:py-28">
         <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(60% 120% at 50% -10%, rgba(255,255,255,0.14), transparent 60%)" }} />
         <Container className="relative">
