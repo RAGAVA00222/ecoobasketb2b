@@ -70,6 +70,15 @@ export const footerNav = {
   ],
 };
 
+// Leadership roster — single source for /founders, the home teaser, and JSON-LD.
+// Name + title + slug + intrinsic webp dimensions ONLY. No bios, no quotes, no
+// shareholding — bios/quotes live on /founders; headshots gate on the webp file.
+export const leaders: { name: string; title: string; slug: string; w: number; h: number }[] = [
+  { name: "Nagaraj Nirmala Devi", title: "Founder & Managing Director", slug: "nagaraj-nirmala-devi", w: 800, h: 1132 },
+  { name: "Sri Keerthana Devi C", title: "Co-Founder & Director", slug: "sri-keerthana-devi-c", w: 800, h: 1000 },
+  { name: "Ragavendren", title: "Chief Strategy Officer", slug: "ragavendren", w: 800, h: 1069 },
+];
+
 // The Now Delivery hook — factual claim, locked wording.
 export const deliveryPromise = {
   eyebrow: "Delivery Promise",

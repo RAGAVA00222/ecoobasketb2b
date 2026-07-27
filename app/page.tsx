@@ -10,7 +10,8 @@ import HowWeDeliver from "@/components/HowWeDeliver";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
-import { site, features } from "@/content/site";
+import FoundersTeaser from "@/components/FoundersTeaser";
+import { site, features, leaders } from "@/content/site";
 
 const heroBadges: { t: string; Icon: LucideIcon }[] = [
   { t: "GST Compliant", Icon: ReceiptText },
@@ -70,6 +71,12 @@ export default function Home() {
     logo: `${site.domain}/assets/images/logo/08_Logo_Full_Primary.jpg`,
     email: site.email, telephone: "+91-93423-58226",
     sameAs: [site.social.facebook, site.social.instagram],
+    employee: leaders.map((l) => ({
+      "@type": "Person",
+      name: l.name,
+      jobTitle: l.title,
+      worksFor: { "@type": "Organization", name: site.legalName },
+    })),
   };
   const localLd = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
@@ -336,6 +343,9 @@ export default function Home() {
           </Reveal>
         </Container>
       </section>
+
+      {/* LEADERSHIP TEASER — after content sections, before the footer */}
+      <FoundersTeaser />
     </>
   );
 }

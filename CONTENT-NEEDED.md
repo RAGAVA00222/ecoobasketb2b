@@ -46,3 +46,9 @@ blocks a build. Never fabricate any of these values.
 ## Notes — post-merge hardening (2026-07-25)
 - Eliminated the ~287 KB of partner-logo **404-page** bytes by gating the strip (see Phase 6 note above).
 - **favicon:** the old `app/favicon.ico` was a 1536×1536 JPEG (~141 KB). Regenerated a proper icon set from `04_Logo_Icon.jpg` via sharp — `app/favicon.ico` (48², ~2.8 KB), `app/icon.png` (64²), `app/apple-icon.png` (180²).
+
+## Notes from Phase 7 (leadership / founders) — 2026-07-25
+- `/leadership` scope **cancelled** — `/founders` stays the single leadership page, improved in place (existing bios/quotes untouched; name corrected "Ragavendren Chakaravarthi" → "Ragavendren" per confirmed titles).
+- **Headshots converted (dependency satisfied):** 3 founder JPEGs → webp (q82, ≤800w) at `public/assets/images/founders/{nagaraj-nirmala-devi,sri-keerthana-devi-c,ragavendren}.webp`; originals kept. Used by /founders + the home teaser via `next/image`, gated by `lib/founderPhotos.ts`.
+- New: `leaders` roster in `content/site.ts`; `components/FoundersTeaser.tsx` (home teaser, placed before the footer); Organization JSON-LD extended with a Person per leader (name + jobTitle + worksFor only).
+- **No leadership content-needed items** — bios were already approved copy on /founders, headshots are now supplied. Nothing to remove.

@@ -5,7 +5,8 @@ import { ShieldCheck, Clock, HeartHandshake, Sprout, Quote, ArrowRight } from "l
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
-import { site } from "@/content/site";
+import { site, leaders } from "@/content/site";
+import { founderPhoto } from "@/lib/founderPhotos";
 
 export const metadata: Metadata = {
   title: "Founders | B2B FMCG Distributor in Chennai",
@@ -13,26 +14,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/founders" },
 };
 
-const people = [
-  {
-    name: "Nagaraj Nirmala Devi",
-    role: "Founder & Managing Director",
-    img: "/assets/images/founders/FOUNDER_NIRMALA%20DEVI%20NAGARAJ.JPG.jpeg",
-    quote: "Our aim is a supply ecosystem where every retailer, no matter how small, has access to quality products at fair prices.",
-  },
-  {
-    name: "Sri Keerthana Devi C",
-    role: "Co-Founder & Director",
-    img: "/assets/images/founders/CO%20FOUNDER_SRI%20KEERTHANA%20DEVI%20CHAKARAVARTH.JPG.jpeg",
-    quote: "Connecting manufacturers with retailers well is what creates real value at every point in the supply chain.",
-  },
-  {
-    name: "Ragavendren Chakaravarthi",
-    role: "Chief Strategy Officer",
-    img: "/assets/images/founders/CSO-RAGAVENDREN%20CHAKARAVARTHI_.JPG.jpeg",
-    quote: "Strategy without execution is a dream. We combine a clear plan with disciplined day-to-day execution.",
-  },
-];
+// Approved quotes (verbatim). Names/titles/dimensions/slug come from site.leaders.
+const quotes: Record<string, string> = {
+  "nagaraj-nirmala-devi": "Our aim is a supply ecosystem where every retailer, no matter how small, has access to quality products at fair prices.",
+  "sri-keerthana-devi-c": "Connecting manufacturers with retailers well is what creates real value at every point in the supply chain.",
+  "ragavendren": "Strategy without execution is a dream. We combine a clear plan with disciplined day-to-day execution.",
+};
 
 const values: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Integrity", d: "Transparent dealings in every transaction, including the uncomfortable ones.", Icon: ShieldCheck },
@@ -54,19 +41,24 @@ export default function FoundersPage() {
       <Section>
         <Container>
           <div className="grid gap-6 md:grid-cols-3">
-            {people.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.08} as="article" className="group overflow-hidden rounded-3xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
-                <div className="relative aspect-[4/3] overflow-hidden bg-base">
-                  <Image src={p.img} alt={`${p.name}, ${p.role}`} width={1120} height={1450} sizes="(max-width: 768px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-[18.5px]">{p.name}</h3>
-                  <span className="mt-1 inline-block rounded-full bg-mint px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-accent">{p.role}</span>
-                  <p className="mt-4 text-[14px] italic leading-relaxed text-muted">&ldquo;{p.quote}&rdquo;</p>
-                </div>
-              </Reveal>
-            ))}
+            {leaders.map((p, i) => {
+              const photo = founderPhoto(p.slug);
+              return (
+                <Reveal key={p.slug} delay={i * 0.08} as="article" className="group overflow-hidden rounded-3xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
+                  {photo && (
+                    <div className="relative aspect-[4/3] overflow-hidden bg-base">
+                      <Image src={photo} alt={`${p.name}, ${p.title}`} width={p.w} height={p.h} sizes="(max-width: 768px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
+                      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <h3 className="text-[18.5px]">{p.name}</h3>
+                    <span className="mt-1 inline-block rounded-full bg-mint px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.06em] text-accent">{p.title}</span>
+                    <p className="mt-4 text-[14px] italic leading-relaxed text-muted">&ldquo;{quotes[p.slug]}&rdquo;</p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </Container>
       </Section>
