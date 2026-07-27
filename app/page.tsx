@@ -49,7 +49,7 @@ const products: { name: string; img: string; own?: boolean }[] = [
 const faqs = [
   { q: "How do I place an order?", a: "Order through our B2B digital platform at ecoobasket.com, or by phone, WhatsApp or the contact form — we'll set you up with a dedicated account contact." },
   { q: "What are your delivery timelines?", a: "Same-day dispatch with 24–48 hour delivery across Chennai. Any single order above ₹10,000 delivers free anywhere in Chennai." },
-  { q: "What payment terms do you offer?", a: "Payment terms are agreed at the time of order, and every order comes with a clean, GST-compliant invoice." },
+  { q: "What payment terms do you offer?", a: "Payment is cash or UPI on delivery. We don't offer credit accounts — this keeps our pricing sharp and lets us commit to same-day dispatch on every order. Every delivery comes with a GST-compliant invoice." },
   { q: "Do you provide GST invoices?", a: "Yes — a GST-compliant invoice on every single order, reconciled and traceable end to end." },
   { q: "How are damaged or incorrect items handled?", a: "Report damaged, defective or wrong items at delivery or within a reasonable window with your invoice details, and we'll arrange a replacement, credit or refund." },
 ];
