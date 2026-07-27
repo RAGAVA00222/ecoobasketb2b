@@ -5,7 +5,7 @@ const htmlRedirects = [
   ['index', '/'],
   ['about', '/about'],
   ['services', '/services'],
-  ['we-serve', '/we-serve'],
+  ['we-serve', '/services'],
   ['kirana', '/kirana'],
   ['partner', '/partner'],
   ['founders', '/founders'],
@@ -25,10 +25,18 @@ const ASSET_VERSION = 'v3';
 
 const nextConfig = {
   reactStrictMode: true,
+  // WebP only. AVIF removed after P1 measurement (~10% larger for this asset
+  // set) + slower decode on low-end Android — see CONTENT-NEEDED.md P1 notes.
+  images: { formats: ["image/webp"] },
   // Stamped build id → new asset namespace every deploy (and a manual bump lever).
   generateBuildId: async () => `${ASSET_VERSION}-${Date.now()}`,
   async redirects() {
-    return htmlRedirects;
+    return [
+      ...htmlRedirects,
+      // /we-serve merged into /services as a "who we serve" block (Phase 5.1).
+      // Explicit 301 (Next's `permanent: true` would emit 308).
+      { source: "/we-serve", destination: "/services", statusCode: 301 },
+    ];
   },
   async headers() {
     return [

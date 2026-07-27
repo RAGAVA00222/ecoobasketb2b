@@ -34,15 +34,14 @@ export const features = {
 };
 
 // Primary navigation — order preserved from the live site.
+// Primary nav — 5 items (Home lives on the logo). About/Founders/Vision +
+// Investor/Careers/Gallery/Downloads/FAQ are footer-only. /we-serve merged into
+// /services ("who we serve" block) with a 301 — no longer a nav route.
 export const nav = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "We Serve", href: "/we-serve" },
   { label: "For Kirana Stores", href: "/kirana" },
   { label: "Partner With Us", href: "/partner" },
-  { label: "Founders", href: "/founders" },
-  { label: "Vision", href: "/vision" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -59,7 +58,6 @@ export const footerNav = {
   ],
   business: [
     { label: "Services", href: "/services" },
-    { label: "We Serve", href: "/we-serve" },
     { label: "For Kirana Stores", href: "/kirana" },
     { label: "Partner With Us", href: "/partner" },
     { label: "Gallery", href: "/gallery" },
@@ -101,18 +99,18 @@ export const nutsSpicesCategories = [
   "Dry Fruits",
 ];
 
-// Manufacturer slider — CONFIRMED real distribution partners.
-// Logo files + brand/legal confirmation are being sourced separately;
-// these render as text/placeholder marks until real logos land.
-// Confirmed partner set (7). No other brand name is published on the site.
-export const manufacturers = [
-  "HUL",
-  "ITC",
-  "Nestlé",
-  "Britannia",
-  "Parle",
-  "Coca-Cola",
-  "PepsiCo",
+// Confirmed current distribution partners (homepage logo strip, Phase 6).
+// Drop a logo file at public/assets/images/partners/<slug>.png to activate a
+// slot; a neutral brand-name chip renders until then. CONTENT NEEDED: real,
+// licensed logo files (CONTENT-NEEDED.md #1). No other brand name is published.
+export const manufacturers: { name: string; slug: string }[] = [
+  { name: "HUL", slug: "hul" },
+  { name: "ITC", slug: "itc" },
+  { name: "Nestlé", slug: "nestle" },
+  { name: "Britannia", slug: "britannia" },
+  { name: "Parle", slug: "parle" },
+  { name: "Coca-Cola", slug: "coca-cola" },
+  { name: "PepsiCo", slug: "pepsico" },
 ];
 
 // Distribution process (locked qualitative steps).

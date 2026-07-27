@@ -5,7 +5,8 @@ import {
   MessageCircle, IndianRupee, UserCheck, Route, Headset, ArrowRight, Plus,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import DistributionWorkflow from "@/components/DistributionWorkflow";
+import PartnerLogos from "@/components/PartnerLogos";
+import HowWeDeliver from "@/components/HowWeDeliver";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
@@ -35,21 +36,21 @@ const whyChoose: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Dedicated Support", d: "A real account contact, reachable on WhatsApp — not a call-centre queue.", Icon: Headset },
 ];
 
-const products = [
-  { name: "Beverages", img: "/assets/images/products/beverages.webp.jpg" },
-  { name: "Biscuits", img: "/assets/images/products/biscuits-snacks.webp.jpg" },
-  { name: "Snacks", img: "/assets/images/products/biscuits-snacks.webp.jpg" },
-  { name: "Staples", img: "/assets/images/products/staples.webp.jpg" },
-  { name: "Home Care", img: "/assets/images/products/home-care.webp.jpg" },
-  { name: "Personal Care", img: "/assets/images/products/personal-care.webp.jpg" },
-  { name: "Stationery", img: "/assets/images/products/stationery.webp.jpg" },
-  { name: "Ecoo Nuts & Spices", img: "/assets/images/products/05_Premium_Dry_Fruits.jpg" },
+// Locked 6 FMCG categories (Biscuits + Snacks merged) + own-brand Nuts & Spices.
+const products: { name: string; img: string; own?: boolean }[] = [
+  { name: "Beverages", img: "/assets/images/products/beverages.jpg" },
+  { name: "Biscuits & Snacks", img: "/assets/images/products/biscuits-snacks.jpg" },
+  { name: "Staples & Groceries", img: "/assets/images/products/staples.jpg" },
+  { name: "Home Care", img: "/assets/images/products/home-care.jpg" },
+  { name: "Personal Care", img: "/assets/images/products/personal-care.jpg" },
+  { name: "Stationery", img: "/assets/images/products/stationery.jpg" },
+  { name: "Ecoo Nuts & Spices", img: "/assets/images/products/05_Premium_Dry_Fruits.jpg", own: true },
 ];
 
 const faqs = [
   { q: "How do I place an order?", a: "Order through our B2B digital platform at ecoobasket.com, or by phone, WhatsApp or the contact form — we'll set you up with a dedicated account contact." },
   { q: "What are your delivery timelines?", a: "Same-day dispatch with 24–48 hour delivery across Chennai. Any single order above ₹10,000 delivers free anywhere in Chennai." },
-  { q: "What payment terms do you offer?", a: "Payment terms are agreed at the time of order, and every order comes with a clean, GST-compliant invoice." },
+  { q: "What payment terms do you offer?", a: "Payment is cash or UPI on delivery. We don't offer credit accounts — this keeps our pricing sharp and lets us commit to same-day dispatch on every order. Every delivery comes with a GST-compliant invoice." },
   { q: "Do you provide GST invoices?", a: "Yes — a GST-compliant invoice on every single order, reconciled and traceable end to end." },
   { q: "How are damaged or incorrect items handled?", a: "Report damaged, defective or wrong items at delivery or within a reasonable window with your invoice details, and we'll arrange a replacement, credit or refund." },
 ];
@@ -65,26 +66,41 @@ function Chip({ Icon }: { Icon: LucideIcon }) {
 export default function Home() {
   const orgLd = {
     "@context": "https://schema.org", "@type": "Organization",
-    name: site.brand, legalName: site.legalName, url: site.domain,
-    logo: `${site.domain}/assets/images/logo/08_Logo_Full_Primary.png`,
+    name: site.legalName, alternateName: site.brand, legalName: site.legalName, url: site.domain,
+    logo: `${site.domain}/assets/images/logo/08_Logo_Full_Primary.jpg`,
     email: site.email, telephone: "+91-93423-58226",
     sameAs: [site.social.facebook, site.social.instagram],
   };
   const localLd = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
-    name: site.brand, legalName: site.legalName, url: site.domain,
+    additionalType: "Wholesaler",
+    name: site.legalName, alternateName: site.brand, legalName: site.legalName, url: site.domain,
     image: `${site.domain}/assets/images/logo/06_Logo_Brand_Banner.png`,
     description: "Technology-enabled B2B FMCG distribution and own-brand Nuts & Spices, headquartered in Chennai, Tamil Nadu.",
     telephone: "+91-93423-58226", email: site.email,
     address: { "@type": "PostalAddress", streetAddress: "Sf. No. 215 Pt No. 120, Sh No. 5, Rajesh Garden Main Road, Vanagaram, Poonamallee, Tiruvallur", addressLocality: "Chennai", addressRegion: "Tamil Nadu", postalCode: "600095", addressCountry: "IN" },
-    areaServed: "Chennai", openingHours: "Mo-Sa 09:00-18:00",
+    areaServed: "Chennai",
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "09:00", closes: "18:00",
+    },
     sameAs: [site.social.facebook, site.social.instagram],
+  };
+  const faqLd = {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* 1. HERO */}
       <section className="relative overflow-hidden bg-base">
@@ -99,10 +115,10 @@ export default function Home() {
               Powering Chennai&apos;s <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">Retail Supply Chain</span>
             </h1>
             <p className="mt-6 max-w-[560px] text-[clamp(16px,1.5vw,19px)] leading-relaxed text-muted">
-              Technology-enabled FMCG distribution delivering trusted brands from warehouse to retailer with reliable logistics, transparent pricing, and dedicated customer support.
+              Same-day dispatch and 24–48-hour delivery across Chennai, with free delivery on every order above ₹10,000 — dependable FMCG wholesale for kirana stores and retailers.
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
-              <Button href="#services" variant="primary">Explore Services <ArrowRight size={17} /></Button>
+              <Button href={site.whatsapp} external variant="primary"><MessageCircle size={17} /> WhatsApp</Button>
               <Button href="/contact" variant="outline">Contact Sales</Button>
             </div>
           </Reveal>
@@ -136,6 +152,9 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      {/* DISTRIBUTION PARTNERS — trust strip, directly below the hero */}
+      <PartnerLogos />
 
       {/* 2. ABOUT */}
       <Section id="about">
@@ -203,14 +222,14 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 5. DISTRIBUTION WORKFLOW */}
+      {/* 5. HOW WE DELIVER — buyer-facing 3 steps */}
       <Section tone="surface">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
             <Eyebrow>How We Deliver</Eyebrow>
-            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Manufacturer to reorder, one accountable chain</h2>
+            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">From your order to your shelf, in three steps</h2>
           </Reveal>
-          <DistributionWorkflow />
+          <HowWeDeliver />
         </Container>
       </Section>
 
@@ -223,15 +242,31 @@ export default function Home() {
             <p className="mt-4 text-muted">The FMCG categories we move across our retail network. Shown for reference — not a full catalogue.</p>
           </Reveal>
           {/* CONTENT NEEDED: uniform original product photography (some categories share a placeholder) */}
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {products.map((p, i) => (
-              <Reveal key={p.name} delay={(i % 4) * 0.05} className="group overflow-hidden rounded-2xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
+          {/* 6 locked FMCG categories */}
+          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {products.filter((p) => !p.own).map((p, i) => (
+              <Reveal key={p.name} delay={(i % 3) * 0.05} className="group overflow-hidden rounded-2xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={p.img} alt={`${p.name} — FMCG category distributed by Ecoo Basket`} fill sizes="(max-width:640px) 50vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
+                  <Image src={p.img} alt={`${p.name} — FMCG category distributed by Ecoo Basket`} fill sizes="(max-width:640px) 50vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
                 </div>
                 <div className="px-5 py-4"><h3 className="text-[16px]">{p.name}</h3></div>
               </Reveal>
             ))}
+          </div>
+          {/* Own-brand track — visually distinct from the multi-brand categories above */}
+          {products.filter((p) => p.own).map((p) => (
+            <Reveal key={p.name} className="group mt-4 grid items-stretch overflow-hidden rounded-2xl border border-navy/30 bg-navy-soft shadow-soft ring-1 ring-navy/10 sm:grid-cols-[1.1fr_1fr]">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image src={p.img} alt={`${p.name} — Ecoo Basket own-brand range`} fill sizes="(max-width:640px) 100vw, 45vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+              </div>
+              <div className="flex flex-col justify-center gap-1.5 p-6 sm:p-8">
+                <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-navy">Our Own Brand</span>
+                <h3 className="text-[22px]">{p.name}</h3>
+              </div>
+            </Reveal>
+          ))}
+          <div className="mt-10 text-center">
+            <Button href="/downloads" variant="outline">Catalogue &amp; price list <ArrowRight size={16} /></Button>
           </div>
         </Container>
       </Section>
@@ -295,9 +330,8 @@ export default function Home() {
             <h2 className="text-invert text-[clamp(30px,4vw,52px)]">Ready to Grow Your Retail Business?</h2>
             <p className="mx-auto mt-4 max-w-[560px] text-[17px] text-white/85">Tell us your area and order pattern — we&apos;ll tell you honestly whether we&apos;re a fit today or on the roadmap, and get you set up.</p>
             <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-              <Button href="/contact" variant="solidInvert">Become Retail Partner</Button>
-              <Button href="/contact" variant="outlineInvert">Contact Sales</Button>
-              <Button href={site.whatsapp} external variant="outlineInvert"><MessageCircle size={17} /> WhatsApp</Button>
+              <Button href={site.whatsapp} external variant="solidInvert"><MessageCircle size={17} /> WhatsApp</Button>
+              <Button href="/partner" variant="outlineInvert">Become Retail Partner</Button>
             </div>
           </Reveal>
         </Container>
