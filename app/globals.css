@@ -53,10 +53,15 @@ h1, h2, h3, h4 {
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.06;
-  color: var(--color-ink);
   margin: 0;
 }
 h1 { font-weight: 800; }
+/* Heading colour lives in @layer base so Tailwind text-* utilities win on
+   headings (e.g. white text-invert H1/H2 on the green/navy bands). Left
+   unlayered, this ink default beat text-invert and rendered dark-on-dark. */
+@layer base {
+  h1, h2, h3, h4 { color: var(--color-ink); }
+}
 p { margin: 0; }
 /* Link reset lives in @layer base so Tailwind text-colour utilities
    (text-accent, text-invert, …) win on <a> elements. Left unlayered, this rule
