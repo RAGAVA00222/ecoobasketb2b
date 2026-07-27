@@ -36,13 +36,13 @@ const whyChoose: { t: string; d: string; Icon: LucideIcon }[] = [
 ];
 
 const products = [
-  { name: "Beverages", img: "/assets/images/products/beverages.webp.jpg" },
-  { name: "Biscuits", img: "/assets/images/products/biscuits-snacks.webp.jpg" },
-  { name: "Snacks", img: "/assets/images/products/biscuits-snacks.webp.jpg" },
-  { name: "Staples", img: "/assets/images/products/staples.webp.jpg" },
-  { name: "Home Care", img: "/assets/images/products/home-care.webp.jpg" },
-  { name: "Personal Care", img: "/assets/images/products/personal-care.webp.jpg" },
-  { name: "Stationery", img: "/assets/images/products/stationery.webp.jpg" },
+  { name: "Beverages", img: "/assets/images/products/beverages.jpg" },
+  { name: "Biscuits", img: "/assets/images/products/biscuits-snacks.jpg" },
+  { name: "Snacks", img: "/assets/images/products/biscuits-snacks.jpg" },
+  { name: "Staples", img: "/assets/images/products/staples.jpg" },
+  { name: "Home Care", img: "/assets/images/products/home-care.jpg" },
+  { name: "Personal Care", img: "/assets/images/products/personal-care.jpg" },
+  { name: "Stationery", img: "/assets/images/products/stationery.jpg" },
   { name: "Ecoo Nuts & Spices", img: "/assets/images/products/05_Premium_Dry_Fruits.jpg" },
 ];
 
@@ -295,9 +295,8 @@ export default function Home() {
             <h2 className="text-invert text-[clamp(30px,4vw,52px)]">Ready to Grow Your Retail Business?</h2>
             <p className="mx-auto mt-4 max-w-[560px] text-[17px] text-white/85">Tell us your area and order pattern — we&apos;ll tell you honestly whether we&apos;re a fit today or on the roadmap, and get you set up.</p>
             <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-              <Button href="/contact" variant="solidInvert">Become Retail Partner</Button>
-              <Button href="/contact" variant="outlineInvert">Contact Sales</Button>
-              <Button href={site.whatsapp} external variant="outlineInvert"><MessageCircle size={17} /> WhatsApp</Button>
+              <Button href={site.whatsapp} external variant="solidInvert"><MessageCircle size={17} /> WhatsApp</Button>
+              <Button href="/partner" variant="outlineInvert">Become Retail Partner</Button>
             </div>
           </Reveal>
         </Container>

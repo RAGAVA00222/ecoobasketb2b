@@ -13,7 +13,7 @@ function Social() {
          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#1B3555] bg-[#0A2138] text-invert transition-colors hover:border-accent-strong hover:text-accent-strong">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
       </a>
-      <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Ecoo Basket on WhatsApp"
+      <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat with Ecoo Basket on WhatsApp"
          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#1B3555] bg-[#0A2138] text-invert transition-colors hover:border-accent-strong hover:text-accent-strong">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.7-.9c.2-.3.4-.2.7-.1l1.9.9c.3.2.5.2.6.4.1.1.1.7-.2 1.4Z"/></svg>
       </a>
@@ -31,7 +31,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-white p-1.5">
-                <Image src="/assets/images/logo/04_Logo_Icon.png" alt="" width={44} height={44} className="h-full w-full object-contain" />
+                <Image src="/assets/images/logo/04_Logo_Icon.jpg" alt="" width={44} height={44} className="h-full w-full object-contain" />
               </span>
               <span className="leading-tight">
                 <strong className="font-display text-[19px]">{site.brand}</strong>

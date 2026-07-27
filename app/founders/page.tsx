@@ -57,7 +57,7 @@ export default function FoundersPage() {
             {people.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08} as="article" className="group overflow-hidden rounded-3xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
                 <div className="relative aspect-[4/3] overflow-hidden bg-base">
-                  <Image src={p.img} alt={`${p.name}, ${p.role}`} width={1120} height={1450} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <Image src={p.img} alt={`${p.name}, ${p.role}`} width={1120} height={1450} sizes="(max-width: 768px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
                   <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
                 <div className="p-6">

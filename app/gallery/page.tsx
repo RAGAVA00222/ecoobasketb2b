@@ -18,8 +18,8 @@ const shots = [
   { src: "/assets/images/services/04_Retail_Partner.jpg", label: "Retail partners" },
   { src: "/assets/images/background/06_Business_Meeting.jpg", label: "Team & operations" },
   { src: "/assets/images/products/05_Premium_Dry_Fruits.jpg", label: "Nuts & Spices line" },
-  { src: "/assets/images/products/beverages.webp.jpg", label: "Beverages" },
-  { src: "/assets/images/products/staples.webp.jpg", label: "Staples & groceries" },
+  { src: "/assets/images/products/beverages.jpg", label: "Beverages" },
+  { src: "/assets/images/products/staples.jpg", label: "Staples & groceries" },
 ];
 
 export default function GalleryPage() {

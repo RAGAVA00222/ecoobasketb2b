@@ -25,6 +25,7 @@ const ASSET_VERSION = 'v3';
 
 const nextConfig = {
   reactStrictMode: true,
+  images: { formats: ["image/avif", "image/webp"] },
   // Stamped build id → new asset namespace every deploy (and a manual bump lever).
   generateBuildId: async () => `${ASSET_VERSION}-${Date.now()}`,
   async redirects() {

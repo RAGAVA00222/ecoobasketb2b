@@ -56,7 +56,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-5 py-3 sm:px-8">
         <Link href="/" className="flex flex-shrink-0 items-center gap-3" aria-label="Ecoo Basket home">
           <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-line bg-white p-1.5">
-            <Image src="/assets/images/logo/04_Logo_Icon.png" alt="" width={44} height={44} className="h-full w-full object-contain" />
+            <Image src="/assets/images/logo/04_Logo_Icon.jpg" alt="" width={44} height={44} className="h-full w-full object-contain" />
           </span>
           <span className="leading-none">
             <span className="block font-display text-[19px] font-extrabold tracking-[-0.01em] text-ink">{site.brand}</span>
@@ -127,7 +127,7 @@ export default function Header() {
       >
         <div className="mb-4 flex items-center gap-3 border-b border-line pb-5">
           <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-line bg-white p-1.5">
-            <Image src="/assets/images/logo/04_Logo_Icon.png" alt="" width={40} height={40} className="h-full w-full object-contain" />
+            <Image src="/assets/images/logo/04_Logo_Icon.jpg" alt="" width={40} height={40} className="h-full w-full object-contain" />
           </span>
           <span className="font-display text-[17px] font-extrabold text-ink">{site.brand}</span>
         </div>
