@@ -1,11 +1,10 @@
 import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
-  ReceiptText, Clock, Cpu, Truck, Boxes, Users, ClipboardList, Workflow, Smartphone,
+  ReceiptText, Clock, Cpu, Truck, Boxes, Users, ClipboardList, Smartphone,
   MessageCircle, IndianRupee, UserCheck, Route, Headset, ArrowRight, Plus,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import ManufacturerSlider from "@/components/ManufacturerSlider";
 import DistributionWorkflow from "@/components/DistributionWorkflow";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
@@ -22,9 +21,7 @@ const heroBadges: { t: string; Icon: LucideIcon }[] = [
 const services: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Wholesale Distribution", d: "Multi-brand FMCG supplied in bulk to kirana stores, general trade and modern trade with flexible order quantities.", Icon: Boxes },
   { t: "Direct Store Delivery", d: "Route-planned delivery direct to the storefront, keeping delivery windows consistent across our coverage area.", Icon: Truck },
-  { t: "Retail Partnership", d: "A growing network of retail partners with direct relationships and one accountable account contact.", Icon: Users },
-  { t: "Inventory Management", d: "Live stock visibility that keeps the right products on the shelf and clears slow movers.", Icon: ClipboardList },
-  { t: "Supply Chain Management", d: "We manage the handoffs between sourcing, warehousing and last-mile so nothing stalls between steps.", Icon: Workflow },
+  { t: "Retail Relationship Management", d: "Ongoing relationship management for kirana and retail partners — direct contact and accountable service on every order.", Icon: Users },
   { t: "Digital Ordering", d: "Reorder any time through our B2B digital ordering platform, with GST-compliant invoicing on every order.", Icon: Smartphone },
 ];
 
@@ -140,15 +137,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* 2. TRUSTED MANUFACTURERS */}
-      <Section tone="surface" className="py-12 md:py-14">
-        <Container>
-          <p className="mb-7 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Trusted to distribute for leading FMCG manufacturers</p>
-          <ManufacturerSlider />
-        </Container>
-      </Section>
-
-      {/* 3. ABOUT */}
+      {/* 2. ABOUT */}
       <Section id="about">
         <Container className="grid items-center gap-14 md:grid-cols-2">
           <Reveal>
@@ -175,7 +164,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 4. SERVICES */}
+      {/* 3. SERVICES */}
       <Section tone="surface" id="services">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -183,9 +172,9 @@ export default function Home() {
             <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Full-stack FMCG distribution services</h2>
             <p className="mt-4 text-muted">From a manufacturer&apos;s dock to a retailer&apos;s shelf — one accountable point of contact for each partner.</p>
           </Reveal>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
-              <Reveal key={s.t} delay={(i % 3) * 0.06} className="group rounded-2xl border border-line bg-base p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-strong/40 hover:shadow-soft-lg">
+              <Reveal key={s.t} delay={(i % 4) * 0.06} className="group rounded-2xl border border-line bg-base p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-strong/40 hover:shadow-soft-lg">
                 <Chip Icon={s.Icon} />
                 <h3 className="mt-5 text-[19px] tracking-[-0.01em]">{s.t}</h3>
                 <p className="mt-2.5 text-[14.5px] text-muted">{s.d}</p>
@@ -195,7 +184,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 5. WHY CHOOSE ECOO BASKET (replaces statistics) */}
+      {/* 4. WHY CHOOSE ECOO BASKET (replaces statistics) */}
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -214,7 +203,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 6. DISTRIBUTION WORKFLOW */}
+      {/* 5. DISTRIBUTION WORKFLOW */}
       <Section tone="surface">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -225,7 +214,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 7. PRODUCT CATEGORIES */}
+      {/* 6. PRODUCT CATEGORIES */}
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -247,7 +236,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 9. CHENNAI DISTRIBUTION NETWORK */}
+      {/* 7. CHENNAI DISTRIBUTION NETWORK */}
       <Section tone="surface">
         <Container className="grid items-center gap-14 md:grid-cols-2">
           <Reveal>
@@ -264,7 +253,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 10. TESTIMONIALS — hidden until real, attributed quotes exist (features.testimonials) */}
+      {/* 8. TESTIMONIALS — hidden until real, attributed quotes exist (features.testimonials) */}
       {features.testimonials && (
         <Section>
           <Container>
@@ -277,7 +266,7 @@ export default function Home() {
         </Section>
       )}
 
-      {/* 11. FAQ */}
+      {/* 9. FAQ */}
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
@@ -298,7 +287,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 12. CONTACT CTA */}
+      {/* 10. CONTACT CTA */}
       <section className="forest-grad relative overflow-hidden py-20 text-center text-invert md:py-28">
         <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(60% 120% at 50% -10%, rgba(255,255,255,0.14), transparent 60%)" }} />
         <Container className="relative">
