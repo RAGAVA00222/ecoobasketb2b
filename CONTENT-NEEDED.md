@@ -21,3 +21,13 @@ blocks a build. Never fabricate any of these values.
 - Renamed the 6 mis-extensioned product images (`*.webp.jpg`, actually JPEG) to `*.jpg`, and `04_Logo_Icon.png` (actually JPEG) to `.jpg`. No transcoding — extension corrected to true byte format.
 - `06_Logo_Brand_Banner.png` and `08_Logo_Full_Primary.png` are ALSO JPEG-as-`.png`. Left unchanged this session because they are the OG/Twitter image (Phase 3.3 replaces it) and the JSON-LD logo (Phase 3.1). Handle during Phase 3.
 - A true transparent logo asset (SVG or transparent PNG) would be ideal — current logo marks are opaque JPEGs sitting on white chips.
+
+## Notes from Phase 3–4 (SEO/compliance + hero/grid) — 2026-07-25
+- **AVIF reverted** to WebP-only in next.config (P1 decision: ~10% larger for this asset set + slow decode on low-end Android).
+- **JSON-LD extended** (not replaced): LocalBusiness now has `additionalType: "Wholesaler"`, `alternateName: "Ecoo Basket"`, structured `openingHoursSpecification` (Mo–Sa 09:00–18:00); `name` set to the legal name for the brand-collision defence. FAQPage JSON-LD added from the 5 existing homepage Q&As.
+  - Note: `additionalType` is a text label ("Wholesaler"). Google accepts it; if a strict schema.org URL is required, supply a URI (e.g. a Wikidata/productontology link) and I'll swap it in.
+- **08_Logo_Full_Primary.png → .jpg** (was JPEG-as-png). **06_Logo_Brand_Banner.png STILL JPEG-as-png** — left because it is the OG/Twitter image; it will be corrected when item #4 (1200×630 share image) is supplied and og:image is replaced.
+- **#4 OG/Twitter image (1200×630):** still pending → og:image left as the current logo banner (skipped per brief). BLOCKS the 06 logo fix too.
+- **#2 GST + #3 FSSAI:** still pending → footer shows visible, clearly-marked "· to be updated" placeholder rows (Incorporated line removed).
+- **#5 Minimum order value + #6 Credit terms:** still pending → left blank. No value invented and no vague filler added (per brief 4.5).
+- Product grid returned to locked 6 categories (Biscuits + Snacks merged; Staples → "Staples & Groceries"); Ecoo Nuts & Spices rendered as a distinct own-brand tile. Grid links to /downloads.

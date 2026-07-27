@@ -25,7 +25,9 @@ const ASSET_VERSION = 'v3';
 
 const nextConfig = {
   reactStrictMode: true,
-  images: { formats: ["image/avif", "image/webp"] },
+  // WebP only. AVIF removed after P1 measurement (~10% larger for this asset
+  // set) + slower decode on low-end Android — see CONTENT-NEEDED.md P1 notes.
+  images: { formats: ["image/webp"] },
   // Stamped build id → new asset namespace every deploy (and a manual bump lever).
   generateBuildId: async () => `${ASSET_VERSION}-${Date.now()}`,
   async redirects() {

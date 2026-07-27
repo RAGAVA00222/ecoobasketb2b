@@ -71,9 +71,11 @@ export default function Footer() {
         {/* compliance row */}
         <div className="mt-12 flex flex-wrap gap-2.5 border-t border-[#16304F] pt-8">
           <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">CIN {site.cin}</span>
-          <span className="rounded-lg border border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#9FB0C0]">Incorporated {site.incorporated}</span>
-          {/* CONTENT NEEDED: GST row — add real GSTIN once confirmed */}
-          {/* CONTENT NEEDED: MSME / Udyam row — add real registration number once confirmed */}
+          {/* CONTENT NEEDED (CONTENT-NEEDED.md): real GSTIN + FSSAI licence number.
+              Shown as clearly-marked visible placeholders — FSSAI is mandatory for a
+              food distributor, so the row must stay visible until the number lands. */}
+          <span className="rounded-lg border border-dashed border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#8DA0B5]">GST · to be updated</span>
+          <span className="rounded-lg border border-dashed border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#8DA0B5]">FSSAI Lic. · to be updated</span>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-[#16304F] pt-7 font-mono text-[11px] text-[#8DA0B5]">
