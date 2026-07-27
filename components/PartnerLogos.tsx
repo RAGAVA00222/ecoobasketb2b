@@ -1,38 +1,43 @@
-"use client";
-
-import { useState } from "react";
+import fs from "node:fs";
+import path from "node:path";
 import { Container, Section } from "@/components/primitives";
 import { manufacturers } from "@/content/site";
 
 /**
  * Homepage trust strip — confirmed FMCG distribution partners.
- * Structural shell: each slot tries to load its logo from
- *   /assets/images/partners/<slug>.png
- * and renders a neutral brand-name chip until that file exists (drop the file
- * in to activate — no code change needed). CONTENT NEEDED: real, licensed logo
- * files (CONTENT-NEEDED.md #1). Static by design — no marquee, so nothing to
- * animate and nothing that could jank on low-end devices.
+ *
+ * Build-time gated: reads public/assets/images/partners/ and renders ONLY the
+ * partners whose logo file actually exists — so it never requests a missing
+ * file (no 404s / no 404-page bytes).
+ *
+ * Empty-state policy (approved): with ZERO logo files present the whole section
+ * does not render — an empty trust strip reads as unfinished. With 1+ files it
+ * renders only what exists, centre-laid so a partial set still looks deliberate.
+ *
+ * To activate: drop <slug>.png (or .svg/.webp/.jpg) into that directory and
+ * redeploy. Slugs come from content/site.ts → manufacturers[].slug.
+ * CONTENT NEEDED: real, licensed logo files (CONTENT-NEEDED.md #1). Static —
+ * nothing animates, nothing to jank.
  */
-function Slot({ name, slug }: { name: string; slug: string }) {
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <div className="flex h-16 w-32 flex-none items-center justify-center rounded-2xl border border-line bg-surface px-4 shadow-soft sm:w-36">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={`/assets/images/partners/${slug}.png`}
-        alt={`${name} logo`}
-        onLoad={() => setLoaded(true)}
-        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-        className={`max-h-9 max-w-full object-contain ${loaded ? "block" : "hidden"}`}
-      />
-      {!loaded && (
-        <span className="font-mono text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{name}</span>
-      )}
-    </div>
-  );
+const PARTNERS_DIR = path.join(process.cwd(), "public", "assets", "images", "partners");
+const EXTS = [".svg", ".png", ".webp", ".jpg", ".jpeg"];
+
+function presentLogos() {
+  let files: string[] = [];
+  try { files = fs.readdirSync(PARTNERS_DIR); } catch { files = []; }
+  const set = new Set(files.map((f) => f.toLowerCase()));
+  return manufacturers
+    .map((m) => {
+      const ext = EXTS.find((e) => set.has(`${m.slug}${e}`));
+      return ext ? { name: m.name, slug: m.slug, src: `/assets/images/partners/${m.slug}${ext}` } : null;
+    })
+    .filter((x): x is { name: string; slug: string; src: string } => x !== null);
 }
 
 export default function PartnerLogos() {
+  const logos = presentLogos();
+  if (logos.length === 0) return null; // no files -> section is absent entirely
+
   return (
     <Section tone="surface" className="py-12 md:py-14">
       <Container>
@@ -40,8 +45,11 @@ export default function PartnerLogos() {
           Trusted to distribute for leading FMCG brands
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5">
-          {manufacturers.map((m) => (
-            <Slot key={m.slug} name={m.name} slug={m.slug} />
+          {logos.map((m) => (
+            <div key={m.slug} className="flex h-16 w-32 flex-none items-center justify-center rounded-2xl border border-line bg-surface px-4 shadow-soft sm:w-36">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={m.src} alt={`${m.name} logo`} className="max-h-9 max-w-full object-contain" />
+            </div>
           ))}
         </div>
       </Container>

@@ -6,7 +6,7 @@ blocks a build. Never fabricate any of these values.
 
 | # | Item | Needed for | Status |
 |---|------|-----------|--------|
-| 1 | Manufacturer/partner logo files — drop at `public/assets/images/partners/<slug>.png` (hul, itc, nestle, britannia, parle, coca-cola, pepsico) | Phase 6 logo strip — **shell built**; neutral name chips render until files land | pending |
+| 1 | Manufacturer/partner logo files — drop `<slug>.(png/svg/webp/jpg)` in `public/assets/images/partners/` (hul, itc, nestle, britannia, parle, coca-cola, pepsico) **and redeploy** | Phase 6 logo strip — **build-time gated**: renders only logos that exist; **section is hidden entirely while 0 files present** (no name chips, no 404s) | pending |
 | 2 | GST number (GSTIN) | Phase 3.4 footer legal row | pending |
 | 3 | FSSAI licence number | Phase 3.4 footer legal row | pending |
 | 4 | 1200×630 OG/Twitter share image (warehouse photo, free-delivery hook legible for WhatsApp) | Phase 3.3 | pending |
@@ -34,7 +34,7 @@ blocks a build. Never fabricate any of these values.
 
 ## Notes from Phase 6 (partner logo strip) — 2026-07-25
 - Built `PartnerLogos` (static, no marquee) directly below the hero. Slots for HUL, ITC, Nestlé, Britannia, Parle, Coca-Cola, PepsiCo (`content/site.ts` → `manufacturers`).
-- **Drop-to-activate:** put `<slug>.png` in `public/assets/images/partners/` (see that dir's README) and the slot swaps its neutral name chip for the logo — no code change. Missing files render the name chip (no broken image).
+- **Build-time gated (revised post-merge):** a server-side `fs` read of `public/assets/images/partners/` renders ONLY partners whose logo file exists — never requests a missing file (no 404s). **With 0 files the whole section is hidden** (approved: an empty trust strip reads as unfinished). Drop files + **redeploy** to activate.
 - Removed the old unused `ManufacturerSlider.tsx` (superseded).
 - **#5 Minimum order figure** still pending — insertion point now also in the "How We Deliver" step 1.
 
@@ -42,3 +42,7 @@ blocks a build. Never fabricate any of these values.
 - **5.1 approved & implemented:** primary nav reduced to 5 (Services · For Kirana Stores · Partner With Us · About · Contact; Home on the logo). Founders/Vision demoted; Investor/Careers/Gallery/Downloads/FAQ remain footer-only. **/we-serve merged into /services** as a "Who We Serve" block and **removed as a route** — added a **301** `/we-serve → /services` (legacy `/we-serve.html` also points straight to /services). Dropped from sitemap + footer nav. Removed the now-unused `TamilNaduMap.tsx`. `/kirana` kept as its own page.
 - **5.2 approved & implemented:** the 7-step internal `DistributionWorkflow` replaced by a 3-step buyer-facing "How We Deliver" (Place your order → Dispatched same day → Pay on delivery), using approved copy. `DistributionWorkflow.tsx` removed.
 - **5.3 HELD** — no zones added; "Chennai Distribution Network" section untouched (see #7).
+
+## Notes — post-merge hardening (2026-07-25)
+- Eliminated the ~287 KB of partner-logo **404-page** bytes by gating the strip (see Phase 6 note above).
+- **favicon:** the old `app/favicon.ico` was a 1536×1536 JPEG (~141 KB). Regenerated a proper icon set from `04_Logo_Icon.jpg` via sharp — `app/favicon.ico` (48², ~2.8 KB), `app/icon.png` (64²), `app/apple-icon.png` (180²).
