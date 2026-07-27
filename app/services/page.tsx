@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
-import { Store, Boxes, Warehouse, ClipboardList, Workflow, ShoppingCart, LineChart, Tags, Cpu, ArrowRight, Sparkles } from "lucide-react";
+import { Store, Boxes, Warehouse, ClipboardList, Workflow, ShoppingCart, LineChart, Tags, Cpu, ArrowRight, Sparkles, Pill, Building2, UtensilsCrossed, Briefcase, GraduationCap } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
@@ -23,6 +23,20 @@ const services: { n: string; t: string; d: string; Icon: LucideIcon }[] = [
   { n: "06", t: "Procurement Services", d: "Sourcing and vendor negotiation on behalf of partners who want competitive pricing without doing the legwork themselves.", Icon: ShoppingCart },
   { n: "07", t: "Business Consulting", d: "Practical, experience-based advice for retail and FMCG businesses on distribution strategy and operational efficiency.", Icon: LineChart },
   { n: "08", t: "Private Label Manufacturing Support", d: "For brands — not our own line — that want help with sourcing, packaging, and getting a private label product onto retail shelves.", Icon: Tags },
+];
+
+// Who we serve — merged from the former /we-serve page (now 301 → /services).
+const servingNow: { t: string; d: string; Icon: LucideIcon }[] = [
+  { t: "Kirana & General Trade", d: "The largest share of our retail partners — neighbourhood stores that need dependable, regular delivery over flashy minimums.", Icon: Store },
+  { t: "Pharmacies", d: "Retail pharmacies stocking FMCG and personal care alongside their core inventory.", Icon: Pill },
+  { t: "Wholesale Outlets", d: "Wholesale and semi-wholesale traders who buy in volume and redistribute locally.", Icon: Boxes },
+  { t: "Supermarkets", d: "Modern trade outlets we supply across Chennai, with the volume capacity to keep shelves stocked.", Icon: Building2 },
+  { t: "HORECA (Hotels, Restaurants & Catering)", d: "Hotels, restaurants and caterers we supply with consistent FMCG stock — Now Delivery available, free above ₹10,000.", Icon: UtensilsCrossed },
+];
+
+const expanding: { t: string; d: string; Icon: LucideIcon }[] = [
+  { t: "Corporate Offices", d: "Workplace pantry and hygiene essentials.", Icon: Briefcase },
+  { t: "Institutions", d: "Schools, hospitals and similar bulk buyers, evaluated case by case.", Icon: GraduationCap },
 ];
 
 export default function ServicesPage() {
@@ -49,6 +63,36 @@ export default function ServicesPage() {
                 <span className="absolute right-6 top-7 font-mono text-[12px] font-semibold text-line group-hover:text-accent-strong/40">{s.n}</span>
                 <h3 className="mt-5 text-[19px] tracking-[-0.01em]">{s.t}</h3>
                 <p className="mt-2.5 text-[14.5px] text-muted">{s.d}</p>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Who we serve — merged from the former /we-serve page */}
+      <Section tone="surface" id="who-we-serve">
+        <Container>
+          <Reveal className="mx-auto max-w-[680px] text-center">
+            <Eyebrow>Who We Serve</Eyebrow>
+            <h2 className="mt-3 text-[clamp(26px,3.4vw,40px)]">The retail sectors we supply.</h2>
+            <p className="mt-4 text-muted">We&apos;d rather be precise about our current base than list every sector we might reach someday.</p>
+          </Reveal>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {servingNow.map((s, i) => (
+              <Reveal key={s.t} delay={(i % 3) * 0.05} className="group rounded-2xl border border-line bg-base p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-strong/40 hover:shadow-soft-lg">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-mint to-mint2 text-accent"><s.Icon size={23} strokeWidth={1.8} /></span>
+                <span className="mt-5 inline-block rounded-full bg-accent-strong/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-accent">Served</span>
+                <h3 className="mt-3 text-[19px]">{s.t}</h3>
+                <p className="mt-2 text-muted">{s.d}</p>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mb-4 mt-12 font-mono text-[12px] uppercase tracking-[0.1em] text-muted">Expanding toward — on our roadmap, not yet our core base</p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {expanding.map((s, i) => (
+              <Reveal key={s.t} delay={(i % 2) * 0.05} className="flex items-start gap-4 rounded-2xl border border-dashed border-line bg-base p-6 transition-all duration-300 hover:border-accent-strong/40 hover:shadow-soft">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-surface text-accent shadow-soft"><s.Icon size={21} strokeWidth={1.8} /></span>
+                <div><h3 className="text-[16.5px]">{s.t}</h3><p className="mt-1.5 text-[13.5px] text-muted">{s.d}</p></div>
               </Reveal>
             ))}
           </div>
@@ -139,7 +183,7 @@ export default function ServicesPage() {
           <p className="mx-auto mt-3 max-w-[560px] text-white/85">Tell us what you&apos;re trying to solve and we&apos;ll point you to the right one — or tell you honestly if we can&apos;t help yet.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button href="/contact" variant="solidInvert">Talk To Us</Button>
-            <Button href="/we-serve" variant="outlineInvert">See Who We Serve <ArrowRight size={16} /></Button>
+            <Button href="/kirana" variant="outlineInvert">For Kirana Stores <ArrowRight size={16} /></Button>
           </div>
         </Container>
       </section>

@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import PartnerLogos from "@/components/PartnerLogos";
-import DistributionWorkflow from "@/components/DistributionWorkflow";
+import HowWeDeliver from "@/components/HowWeDeliver";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
@@ -222,14 +222,14 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* 5. DISTRIBUTION WORKFLOW */}
+      {/* 5. HOW WE DELIVER — buyer-facing 3 steps */}
       <Section tone="surface">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">
             <Eyebrow>How We Deliver</Eyebrow>
-            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Manufacturer to reorder, one accountable chain</h2>
+            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">From your order to your shelf, in three steps</h2>
           </Reveal>
-          <DistributionWorkflow />
+          <HowWeDeliver />
         </Container>
       </Section>
 

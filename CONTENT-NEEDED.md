@@ -10,9 +10,9 @@ blocks a build. Never fabricate any of these values.
 | 2 | GST number (GSTIN) | Phase 3.4 footer legal row | pending |
 | 3 | FSSAI licence number | Phase 3.4 footer legal row | pending |
 | 4 | 1200×630 OG/Twitter share image (warehouse photo, free-delivery hook legible for WhatsApp) | Phase 3.3 | pending |
-| 5 | Minimum order value — a fixed ₹ minimum **exists**; exact figure still **PENDING** (place in FAQ + /kirana on receipt; do not guess) | Phase 4.5 | partial |
+| 5 | Minimum order value — a fixed ₹ minimum **exists**; exact figure still **PENDING**. Insertion points ready: homepage "How We Deliver" step 1, FAQ, and /kirana. Do not guess. | Phase 4.5 / 5.2 | partial |
 | 6 | Credit terms — cash/UPI on delivery, no credit accounts | Phase 4.5 | ✅ RESOLVED — approved copy applied to homepage FAQ 2026-07-25 |
-| 7 | Real Chennai zone names for "Chennai Distribution Network" copy (client must confirm accuracy) | Phase 5.3 | pending |
+| 7 | Real Chennai zone names for "Chennai Distribution Network" copy — **5.3 HELD by client**. Will be a SHORT list of zones actually served reliably today (not a broad coverage claim) and must not contradict the existing "zone by zone, not spreading thin" framing. Section left unchanged. | Phase 5.3 | pending (held) |
 | 8 | Real, attributed testimonials/quotes | Testimonials section (kept flag-off until supplied) | pending |
 | 9 | Precise contact-map coordinates (lat/lng) or a Google Maps Embed API key + place_id | /contact map (road-level placeholder pin for now) | pending |
 | 10 | Original product-category photography (some tiles currently share a placeholder) | Home product grid | pending |
@@ -36,4 +36,9 @@ blocks a build. Never fabricate any of these values.
 - Built `PartnerLogos` (static, no marquee) directly below the hero. Slots for HUL, ITC, Nestlé, Britannia, Parle, Coca-Cola, PepsiCo (`content/site.ts` → `manufacturers`).
 - **Drop-to-activate:** put `<slug>.png` in `public/assets/images/partners/` (see that dir's README) and the slot swaps its neutral name chip for the logo — no code change. Missing files render the name chip (no broken image).
 - Removed the old unused `ManufacturerSlider.tsx` (superseded).
-- **#5 Minimum order figure** and **Phase 5 items (nav / delivery steps / Chennai zones)** are proposals awaiting client approval — not yet in code.
+- **#5 Minimum order figure** still pending — insertion point now also in the "How We Deliver" step 1.
+
+## Notes from Phase 5 (IA & structure) — 2026-07-25
+- **5.1 approved & implemented:** primary nav reduced to 5 (Services · For Kirana Stores · Partner With Us · About · Contact; Home on the logo). Founders/Vision demoted; Investor/Careers/Gallery/Downloads/FAQ remain footer-only. **/we-serve merged into /services** as a "Who We Serve" block and **removed as a route** — added a **301** `/we-serve → /services` (legacy `/we-serve.html` also points straight to /services). Dropped from sitemap + footer nav. Removed the now-unused `TamilNaduMap.tsx`. `/kirana` kept as its own page.
+- **5.2 approved & implemented:** the 7-step internal `DistributionWorkflow` replaced by a 3-step buyer-facing "How We Deliver" (Place your order → Dispatched same day → Pay on delivery), using approved copy. `DistributionWorkflow.tsx` removed.
+- **5.3 HELD** — no zones added; "Chennai Distribution Network" section untouched (see #7).

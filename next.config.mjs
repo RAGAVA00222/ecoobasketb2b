@@ -5,7 +5,7 @@ const htmlRedirects = [
   ['index', '/'],
   ['about', '/about'],
   ['services', '/services'],
-  ['we-serve', '/we-serve'],
+  ['we-serve', '/services'],
   ['kirana', '/kirana'],
   ['partner', '/partner'],
   ['founders', '/founders'],
@@ -31,7 +31,12 @@ const nextConfig = {
   // Stamped build id → new asset namespace every deploy (and a manual bump lever).
   generateBuildId: async () => `${ASSET_VERSION}-${Date.now()}`,
   async redirects() {
-    return htmlRedirects;
+    return [
+      ...htmlRedirects,
+      // /we-serve merged into /services as a "who we serve" block (Phase 5.1).
+      // Explicit 301 (Next's `permanent: true` would emit 308).
+      { source: "/we-serve", destination: "/services", statusCode: 301 },
+    ];
   },
   async headers() {
     return [

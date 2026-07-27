@@ -34,15 +34,14 @@ export const features = {
 };
 
 // Primary navigation — order preserved from the live site.
+// Primary nav — 5 items (Home lives on the logo). About/Founders/Vision +
+// Investor/Careers/Gallery/Downloads/FAQ are footer-only. /we-serve merged into
+// /services ("who we serve" block) with a 301 — no longer a nav route.
 export const nav = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "We Serve", href: "/we-serve" },
   { label: "For Kirana Stores", href: "/kirana" },
   { label: "Partner With Us", href: "/partner" },
-  { label: "Founders", href: "/founders" },
-  { label: "Vision", href: "/vision" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -59,7 +58,6 @@ export const footerNav = {
   ],
   business: [
     { label: "Services", href: "/services" },
-    { label: "We Serve", href: "/we-serve" },
     { label: "For Kirana Stores", href: "/kirana" },
     { label: "Partner With Us", href: "/partner" },
     { label: "Gallery", href: "/gallery" },
