@@ -5,6 +5,7 @@ import {
   MessageCircle, IndianRupee, UserCheck, Route, Headset, ArrowRight, Plus,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import PartnerLogos from "@/components/PartnerLogos";
 import DistributionWorkflow from "@/components/DistributionWorkflow";
 import Testimonials from "@/components/Testimonials";
 import NetworkViz from "@/components/NetworkViz";
@@ -151,6 +152,9 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      {/* DISTRIBUTION PARTNERS — trust strip, directly below the hero */}
+      <PartnerLogos />
 
       {/* 2. ABOUT */}
       <Section id="about">

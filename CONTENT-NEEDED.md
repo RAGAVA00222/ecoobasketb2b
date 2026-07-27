@@ -6,7 +6,7 @@ blocks a build. Never fabricate any of these values.
 
 | # | Item | Needed for | Status |
 |---|------|-----------|--------|
-| 1 | Manufacturer/partner logo files — HUL, ITC, Nestlé, Britannia, Parle, Coca-Cola, PepsiCo | Phase 6 logo strip | pending |
+| 1 | Manufacturer/partner logo files — drop at `public/assets/images/partners/<slug>.png` (hul, itc, nestle, britannia, parle, coca-cola, pepsico) | Phase 6 logo strip — **shell built**; neutral name chips render until files land | pending |
 | 2 | GST number (GSTIN) | Phase 3.4 footer legal row | pending |
 | 3 | FSSAI licence number | Phase 3.4 footer legal row | pending |
 | 4 | 1200×630 OG/Twitter share image (warehouse photo, free-delivery hook legible for WhatsApp) | Phase 3.3 | pending |
@@ -31,3 +31,9 @@ blocks a build. Never fabricate any of these values.
 - **#2 GST + #3 FSSAI:** still pending → footer shows visible, clearly-marked "· to be updated" placeholder rows (Incorporated line removed).
 - **#5 Minimum order value + #6 Credit terms:** still pending → left blank. No value invented and no vague filler added (per brief 4.5).
 - Product grid returned to locked 6 categories (Biscuits + Snacks merged; Staples → "Staples & Groceries"); Ecoo Nuts & Spices rendered as a distinct own-brand tile. Grid links to /downloads.
+
+## Notes from Phase 6 (partner logo strip) — 2026-07-25
+- Built `PartnerLogos` (static, no marquee) directly below the hero. Slots for HUL, ITC, Nestlé, Britannia, Parle, Coca-Cola, PepsiCo (`content/site.ts` → `manufacturers`).
+- **Drop-to-activate:** put `<slug>.png` in `public/assets/images/partners/` (see that dir's README) and the slot swaps its neutral name chip for the logo — no code change. Missing files render the name chip (no broken image).
+- Removed the old unused `ManufacturerSlider.tsx` (superseded).
+- **#5 Minimum order figure** and **Phase 5 items (nav / delivery steps / Chennai zones)** are proposals awaiting client approval — not yet in code.
