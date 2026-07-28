@@ -26,7 +26,7 @@ export default function FoundersTeaser() {
                 <Link href="/founders" className="group block overflow-hidden rounded-3xl border border-line bg-base shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
                   {photo && (
                     <div className="relative aspect-[4/3] overflow-hidden bg-surface">
-                      <Image src={photo} alt={`${l.name}, ${l.title}`} width={l.w} height={l.h} sizes="(max-width: 640px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
+                      <Image src={photo} alt={`${l.name}, ${l.title}`} width={l.w} height={l.h} unoptimized sizes="(max-width: 640px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
                     </div>
                   )}
                   <div className="p-6 text-center">

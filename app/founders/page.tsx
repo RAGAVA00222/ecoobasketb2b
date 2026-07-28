@@ -47,7 +47,7 @@ export default function FoundersPage() {
                 <Reveal key={p.slug} delay={i * 0.08} as="article" className="group overflow-hidden rounded-3xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft-lg">
                   {photo && (
                     <div className="relative aspect-[4/3] overflow-hidden bg-base">
-                      <Image src={photo} alt={`${p.name}, ${p.title}`} width={p.w} height={p.h} sizes="(max-width: 768px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
+                      <Image src={photo} alt={`${p.name}, ${p.title}`} width={p.w} height={p.h} unoptimized sizes="(max-width: 768px) 100vw, 33vw" className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
                       <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
                     </div>
                   )}
