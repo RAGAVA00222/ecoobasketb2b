@@ -30,19 +30,17 @@
   --color-amber:         #F59E0B;  /* status only                         */
   --color-error:         #DC2626;  /* status only                         */
 
-  --font-display: var(--font-jakarta), var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body:    var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* --font-jakarta/-inter/-jetbrains/-tamil are supplied by next/font in
+     app/layout.tsx (self-hosted, no runtime Google request). --font-tamil sits
+     in each stack as a per-glyph fallback: Latin renders in the Latin face,
+     Tamil glyphs fall through to Noto Sans Tamil — so the bilingual /kirana
+     copy is correct without needing a lang-scoped override. */
+  --font-display: var(--font-jakarta), var(--font-inter), var(--font-tamil), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body:    var(--font-inter), var(--font-tamil), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono:    var(--font-jetbrains), ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 
-:root {
-  color-scheme: light;
-  /* System-first font stack: avoids a render-blocking external font request,
-     provides Tamil glyph coverage on Windows, and keeps the UI fast offline. */
-  --font-jakarta: "Segoe UI", Inter, Arial, sans-serif;
-  --font-inter: Inter, "Segoe UI", Arial, "Noto Sans Tamil", "Nirmala UI", sans-serif;
-  --font-jetbrains: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
-}
+:root { color-scheme: light; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
