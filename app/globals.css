@@ -35,7 +35,14 @@
   --font-mono:    var(--font-jetbrains), ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 
-:root { color-scheme: light; }
+:root {
+  color-scheme: light;
+  /* System-first font stack: avoids a render-blocking external font request,
+     provides Tamil glyph coverage on Windows, and keeps the UI fast offline. */
+  --font-jakarta: "Segoe UI", Inter, Arial, sans-serif;
+  --font-inter: Inter, "Segoe UI", Arial, "Noto Sans Tamil", "Nirmala UI", sans-serif;
+  --font-jetbrains: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+}
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {

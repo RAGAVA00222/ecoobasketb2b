@@ -1,128 +1,68 @@
 import type { Metadata } from "next";
-import type { LucideIcon } from "lucide-react";
-import { Clock, Package, ReceiptText, UserCheck, Smartphone, ShieldAlert, Eye, Repeat, Headset, Check, ArrowRight } from "lucide-react";
+import { BadgeCheck, Clock3, Headset, MessageCircle, PackageCheck, ShoppingBag, Truck, WalletCards } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { Container, Section, Eyebrow, Button } from "@/components/primitives";
-import PageHero from "@/components/PageHero";
-import { deliveryPromise } from "@/content/site";
+import { Button, Container, Eyebrow, Section } from "@/components/primitives";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "For Kirana Stores | FMCG Wholesale Chennai",
-  description: "How Ecoo Basket solves the real problems Chennai kirana store owners face with FMCG distributors — reliability, pricing and direct accountability.",
+  title: "For Kirana Stores | FMCG Wholesale in Chennai",
+  description: "Bilingual FMCG wholesale and direct store delivery for Kirana, provision and grocery stores across Chennai.",
   alternates: { canonical: "/kirana" },
 };
 
-const issues: { n: string; t: string; lead: string; fix: string; Icon: LucideIcon }[] = [
-  { n: "ISSUE 01", t: "Delivery windows nobody keeps", lead: "Salesmen promise a day, the truck shows up whenever.", fix: "route-planned delivery with a WhatsApp update if something's delayed — not silence.", Icon: Clock },
-  { n: "ISSUE 02", t: "Minimum orders too high for a small shop", lead: "You're forced to over-stock just to qualify for an order.", fix: "flexible order sizes that match what you actually sell.", Icon: Package },
-  { n: "ISSUE 03", t: "Messy or missing GST invoices", lead: "Handwritten slips that cause problems at filing time.", fix: "a clean, GST-compliant invoice on every single order.", Icon: ReceiptText },
-  { n: "ISSUE 04", t: "A different salesman every time", lead: "No one who actually knows your shop or remembers last week's issue.", fix: "one direct account contact per partner, order after order.", Icon: UserCheck },
-  { n: "ISSUE 05", t: "Reordering means chasing someone by phone", lead: "Calling around, hoping someone picks up.", fix: "reorder through our digital ordering platform whenever you need to.", Icon: Smartphone },
-  { n: "ISSUE 06", t: "Damage or shortage claims go nowhere", lead: "You report a problem and never hear back.", fix: "claims are tracked and followed up on directly by your account contact.", Icon: ShieldAlert },
-];
+const benefits = [
+  ["Best Wholesale Prices", "குறைந்த மொத்த விலை", "Competitive buying for everyday FMCG categories.", "அன்றாட FMCG பொருட்களுக்கு போட்டித்தன்மை வாய்ந்த விலை.", WalletCards],
+  ["Fast Delivery", "வேகமான டெலிவரி", "Direct store delivery across Chennai.", "சென்னை முழுவதும் நேரடி கடை டெலிவரி.", Truck],
+  ["Genuine Products", "அசல் பொருட்கள்", "Trusted brands with GST-compliant billing.", "நம்பகமான பிராண்டுகள் மற்றும் GST பில்.", BadgeCheck],
+  ["Easy Ordering", "எளிய ஆர்டர்", "Order through WhatsApp or our digital platform.", "WhatsApp அல்லது டிஜிட்டல் தளத்தில் ஆர்டர் செய்யலாம்.", ShoppingBag],
+  ["Dedicated Support", "எப்போதும் உதவி", "A responsive team for your store's needs.", "உங்கள் கடையின் தேவைகளுக்கு உடனடி உதவி.", Headset],
+  ["Reliable Restocking", "நம்பகமான மறுநிரப்பு", "Plan better with dependable supply support.", "நம்பகமான விநியோகத்துடன் சிறந்த திட்டமிடல்.", PackageCheck],
+] as const;
 
-const trust: { k: string; t: string; d: string; Icon: LucideIcon }[] = [
-  { k: "A", t: "Transparency", d: "Real pricing, real invoices, no hidden terms.", Icon: Eye },
-  { k: "B", t: "Consistency", d: "The delivery window we quote is the one we aim to hit — every time, not just the first time.", Icon: Repeat },
-  { k: "C", t: "Accessibility", d: "A real person you can reach, not a call centre queue.", Icon: Headset },
-];
+const steps = [
+  ["Tell us about your store", "உங்கள் கடையைப் பற்றி சொல்லுங்கள்", "Share your area and the categories you stock.", "உங்கள் பகுதி மற்றும் விற்பனை பொருட்களை பகிருங்கள்."],
+  ["Place your order", "உங்கள் ஆர்டரை பதிவு செய்யுங்கள்", "Use WhatsApp or speak to our team.", "WhatsApp மூலம் அல்லது எங்கள் குழுவிடம் பேசுங்கள்."],
+  ["Receive at your shop", "கடையிலேயே பெறுங்கள்", "We plan delivery directly to your store in Chennai.", "சென்னையில் உங்கள் கடைக்கு நேரடியாக டெலிவரி செய்கிறோம்."],
+] as const;
 
 export default function KiranaPage() {
-  return (
-    <>
-      <PageHero
-        eyebrow="For Kirana & General Trade"
-        title="The problems every kirana owner knows — and how we actually fix them."
-        subtitle="Not a sales pitch. Just the specific things that go wrong with distributors, and what we do differently."
-      >
-        <Button href="/contact" variant="solidInvert">Talk To Us About Your Shop</Button>
-      </PageHero>
-
-      {/* Delivery promise — slate */}
-      <Section tone="dark">
-        <Container className="grid items-center gap-12 md:grid-cols-2">
-          <Reveal>
-            <Eyebrow onDark>Delivery Promise for Kirana Stores</Eyebrow>
-            <h2 className="mt-3 text-invert text-[clamp(24px,3.2vw,34px)]">{deliveryPromise.heading}</h2>
-            <p className="mt-4 text-white/80">{deliveryPromise.body}</p>
-          </Reveal>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {deliveryPromise.cards.map((c, i) => (
-              <Reveal key={c.k} delay={i * 0.08} className="rounded-2xl border border-white/12 bg-white/[0.04] p-6">
-                <span className="font-mono text-[11px] text-dark-accent">{c.k}</span>
-                <h3 className="mt-2 text-[17px] text-invert">{c.t}</h3>
-                <p className="mt-2 text-[14px] text-white/80">{c.d}</p>
-              </Reveal>
-            ))}
+  return <>
+    <section className="forest-grad relative overflow-hidden py-20 text-invert md:py-28">
+      <div aria-hidden className="absolute -right-28 -top-24 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+      <Container className="relative grid items-center gap-12 lg:grid-cols-[1.15fr_.85fr]">
+        <Reveal>
+          <Eyebrow onDark>Built for Chennai&apos;s neighbourhood retail</Eyebrow>
+          <h1 className="mt-4 max-w-3xl text-[clamp(38px,5vw,62px)] text-invert">For Kirana Store Owners</h1>
+          <p lang="ta" className="mt-2 text-[clamp(20px,2.4vw,30px)] font-semibold text-[#bbf7d0]">கிராணா கடை உரிமையாளர்களுக்காக</p>
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/85">A dependable FMCG wholesale partner for the shelves your customers rely on every day.</p>
+          <p lang="ta" className="mt-1 max-w-2xl text-[16px] leading-relaxed text-white/75">உங்கள் வாடிக்கையாளர்கள் தினமும் நம்பும் பொருட்களுக்கு நம்பகமான FMCG மொத்த விற்பனை கூட்டாளர்.</p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button href="/partner" variant="solidInvert">Become a Partner <span lang="ta">· கூட்டாளராக இணையுங்கள்</span></Button>
+            <Button href={site.whatsapp} external variant="outlineInvert"><MessageCircle size={18} /> Order on WhatsApp</Button>
           </div>
-        </Container>
-      </Section>
+        </Reveal>
+        <Reveal delay={0.1} className="rounded-3xl border border-white/20 bg-white/10 p-7 backdrop-blur-sm md:p-9">
+          <span className="font-mono text-xs tracking-[.16em] text-[#bbf7d0]">CHENNAI ONLY</span>
+          <h2 className="mt-3 text-3xl text-invert">Stock smarter. Serve better.</h2>
+          <p lang="ta" className="mt-2 text-lg text-[#dcfce7]">சிறப்பாக இருப்பு வையுங்கள். சிறப்பாக சேவை செய்யுங்கள்.</p>
+          <div className="mt-7 grid gap-4 border-t border-white/15 pt-6 text-sm text-white/85"><p>Direct store delivery</p><p lang="ta">நேரடி கடை டெலிவரி</p><p>GST-compliant invoices</p><p lang="ta">GST-க்கு இணக்கமான பில்கள்</p></div>
+        </Reveal>
+      </Container>
+    </section>
 
-      {/* Problem & fix */}
-      <Section>
-        <Container>
-          <Reveal className="max-w-[640px]">
-            <Eyebrow>Problem &amp; Fix</Eyebrow>
-            <h2 className="mt-3 text-[clamp(24px,3.2vw,34px)]">What usually goes wrong — and our actual answer.</h2>
-          </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {issues.map((s, i) => (
-              <Reveal key={s.n} delay={(i % 2) * 0.06} className="group rounded-2xl border border-line bg-surface p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-accent-strong/40 hover:shadow-soft-lg">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-mint to-mint2 text-accent"><s.Icon size={23} strokeWidth={1.8} /></span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-line group-hover:text-accent-strong/50">{s.n}</span>
-                </div>
-                <h3 className="mt-5 text-[18px]">{s.t}</h3>
-                <p className="mt-2 text-[14.5px] text-muted">{s.lead}</p>
-                <p className="mt-3 flex gap-2 rounded-xl bg-mint/70 p-3 text-[14px] text-ink">
-                  <Check size={17} className="mt-0.5 flex-none text-accent" />
-                  <span><strong className="text-accent">Our fix:</strong> {s.fix}</span>
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
+    <Section tone="surface"><Container>
+      <Reveal className="mx-auto max-w-2xl text-center"><Eyebrow>Why choose Ecoo Basket</Eyebrow><h2 className="mt-3 text-[clamp(28px,4vw,44px)]">Everything your store needs to keep moving</h2><p lang="ta" className="mt-2 text-lg text-muted">உங்கள் கடை தொடர்ந்து இயங்க தேவையான அனைத்தும்</p></Reveal>
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{benefits.map(([en, ta, copy, tamilCopy, Icon], i) => <Reveal key={en} delay={(i % 3) * .06} className="rounded-2xl border border-line bg-base p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-soft-lg"><Icon className="text-accent" size={25}/><h3 className="mt-5 text-xl">{en}</h3><p lang="ta" className="mt-1 text-[16px] font-semibold text-accent">{ta}</p><p className="mt-3 text-sm text-muted">{copy}</p><p lang="ta" className="mt-1 text-sm text-muted">{tamilCopy}</p></Reveal>)}</div>
+    </Container></Section>
 
-      {/* How we build trust — slate */}
-      <Section tone="dark">
-        <Container>
-          <Reveal className="max-w-[640px]">
-            <Eyebrow onDark>How We Build Trust</Eyebrow>
-            <h2 className="mt-3 text-invert text-[clamp(24px,3.2vw,34px)]">Three things we hold ourselves to.</h2>
-          </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {trust.map((t, i) => (
-              <Reveal key={t.k} delay={i * 0.06} className="rounded-2xl border border-white/12 bg-white/[0.04] p-7">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-[#4ADE80]"><t.Icon size={23} strokeWidth={1.8} /></span>
-                <h3 className="mt-5 text-[18px] text-invert">{t.t}</h3>
-                <p className="mt-2 text-[14px] text-white/80">{t.d}</p>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
+    <Section><Container className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]">
+      <Reveal><Eyebrow>How it works</Eyebrow><h2 className="mt-3 text-[clamp(28px,4vw,42px)]">Simple ordering. Reliable delivery.</h2><p lang="ta" className="mt-2 text-lg text-muted">எளிய ஆர்டர். நம்பகமான டெலிவரி.</p><p className="mt-5 text-muted">We keep the process clear so you can focus on your customers.</p></Reveal>
+      <div className="grid gap-4">{steps.map(([en, ta, copy, tamilCopy], i) => <Reveal key={en} delay={i*.08} className="flex gap-5 rounded-2xl border border-line bg-surface p-6 shadow-soft"><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mint font-bold text-accent">0{i+1}</span><div><h3 className="text-lg">{en}</h3><p lang="ta" className="font-semibold text-accent">{ta}</p><p className="mt-2 text-sm text-muted">{copy}</p><p lang="ta" className="text-sm text-muted">{tamilCopy}</p></div></Reveal>)}</div>
+    </Container></Section>
 
-      {/* To be upfront */}
-      <Section tone="surface">
-        <Container>
-          <Reveal className="mx-auto max-w-[760px] rounded-3xl border border-navy/20 bg-navy-soft p-8 md:p-12">
-            <Eyebrow>To Be Upfront</Eyebrow>
-            <h2 className="mt-3 text-[clamp(24px,3.2vw,34px)]">What we ask from you too.</h2>
-            <p className="mt-4 text-muted">Trust runs both ways. We ask for consistent order patterns where possible, timely payment per agreed terms, and honest feedback when something&apos;s wrong — that&apos;s what lets us actually plan routes and hold delivery windows instead of guessing.</p>
-          </Reveal>
-        </Container>
-      </Section>
+    <Section tone="surface"><Container><Reveal className="text-center"><Eyebrow>Available categories</Eyebrow><h2 className="mt-3 text-[clamp(28px,4vw,42px)]">Everyday FMCG, ready for your shelves</h2><p lang="ta" className="mt-2 text-lg text-muted">உங்கள் அலமாரிகளுக்கு அன்றாட FMCG பொருட்கள்</p></Reveal><div className="mx-auto mt-9 flex max-w-4xl flex-wrap justify-center gap-3">{["Biscuits & Snacks", "Noodles", "Soft Drinks", "Tea & Coffee", "Personal Care", "Home Care", "Staples"].map((x)=><span key={x} className="rounded-full border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink shadow-soft">{x}</span>)}</div></Container></Section>
 
-      {/* CTA */}
-      <section className="forest-grad relative overflow-hidden py-16 text-center text-invert md:py-24">
-        <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(60% 120% at 50% -10%, rgba(255,255,255,0.14), transparent 60%)" }} />
-        <Container className="relative">
-          <h2 className="text-invert text-[clamp(24px,3.4vw,38px)]">Want to see if we cover your area?</h2>
-          <p className="mx-auto mt-3 max-w-[560px] text-white/85">Tell us where your shop is and what you currently stock — we&apos;ll tell you honestly whether we&apos;re a fit today.</p>
-          <div className="mt-8 flex justify-center"><Button href="/contact" variant="solidInvert">Get In Touch <ArrowRight size={16} /></Button></div>
-        </Container>
-      </section>
-    </>
-  );
+    <section className="forest-grad py-20 text-center text-invert"><Container><Reveal><h2 className="text-[clamp(30px,4vw,48px)] text-invert">Become Our Partner Today</h2><p lang="ta" className="mt-2 text-xl text-[#dcfce7]">இன்றே எங்கள் கூட்டாளராக இணையுங்கள்</p><p className="mx-auto mt-5 max-w-xl text-white/80">Tell us where your shop is and the categories you need. We&apos;ll confirm Chennai delivery availability.</p><div className="mt-8 flex flex-wrap justify-center gap-3"><Button href="/partner" variant="solidInvert">Register Now <span lang="ta">· இப்போதே பதிவு செய்யுங்கள்</span></Button><Button href={site.whatsapp} external variant="outlineInvert"><Clock3 size={17}/> Order on WhatsApp</Button></div></Reveal></Container>
+    </section>
+  </>;
 }

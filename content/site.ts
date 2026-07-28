@@ -38,10 +38,11 @@ export const features = {
 // Investor/Careers/Gallery/Downloads/FAQ are footer-only. /we-serve merged into
 // /services ("who we serve" block) with a 301 — no longer a nav route.
 export const nav = [
-  { label: "Services", href: "/services" },
-  { label: "For Kirana Stores", href: "/kirana" },
-  { label: "Partner With Us", href: "/partner" },
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
+  { label: "Kirana Stores", href: "/kirana" },
   { label: "Contact", href: "/contact" },
 ];
 

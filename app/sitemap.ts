@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 
 const routes = [
-  "", "about", "services", "kirana", "partner", "founders", "vision",
+  "", "about", "services", "products", "kirana", "partner", "founders", "vision",
   "contact", "faq", "investor", "careers", "gallery", "downloads",
   "privacy", "terms", "returns",
 ];

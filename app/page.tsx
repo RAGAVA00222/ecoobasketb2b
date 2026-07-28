@@ -119,14 +119,14 @@ export default function Home() {
               <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" /> FMCG Distribution · Chennai, Tamil Nadu
             </span>
             <h1 className="mt-6 text-[clamp(38px,5.4vw,64px)] leading-[1.03]">
-              Powering Chennai&apos;s <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">Retail Supply Chain</span>
+              FMCG wholesale that keeps <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">Chennai stores moving</span>
             </h1>
             <p className="mt-6 max-w-[560px] text-[clamp(16px,1.5vw,19px)] leading-relaxed text-muted">
               Same-day dispatch and 24–48-hour delivery across Chennai, with free delivery on every order above ₹10,000 — dependable FMCG wholesale for kirana stores and retailers.
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
-              <Button href={site.whatsapp} external variant="primary"><MessageCircle size={17} /> WhatsApp</Button>
-              <Button href="/contact" variant="outline">Contact Sales</Button>
+              <Button href="/partner" variant="primary">Become a Partner <ArrowRight size={17} /></Button>
+              <Button href={site.whatsapp} external variant="outline"><MessageCircle size={17} /> Order on WhatsApp</Button>
             </div>
           </Reveal>
 
