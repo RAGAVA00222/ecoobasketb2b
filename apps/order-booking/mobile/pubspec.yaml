@@ -34,5 +34,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/
+  # No bundled assets: product images come from cloud storage and are cached
+  # on device by cached_network_image.

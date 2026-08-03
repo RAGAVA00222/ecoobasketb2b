@@ -324,19 +324,19 @@ class _NoOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.receipt_long_outlined,
+          Icon(Icons.receipt_long_outlined,
               size: 46, color: Color(0xFFB6C1BB)),
-          const SizedBox(height: 12),
-          const Text(
+          SizedBox(height: 12),
+          Text(
             'No orders yet today',
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 6),
-          const Text(
+          SizedBox(height: 6),
+          Text(
             'Tap New Order on the dashboard to start.',
             style: TextStyle(color: Color(0xFF6B7A73)),
           ),

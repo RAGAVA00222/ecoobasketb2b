@@ -86,6 +86,32 @@ device use the LAN or public address of the server. The address is also
 editable in-app under **Settings → Server address**, which is how devices get
 pointed at production after install.
 
+### Getting an APK
+
+The **Order Booking APK** GitHub Actions workflow builds a sideloadable release
+APK and attaches it to the run as a downloadable artifact.
+
+- Actions tab → **Order Booking APK** → **Run workflow**. It takes the server
+  address as an input, so a build can be pointed at staging or production
+  without a code change.
+- It also runs on every push that touches `apps/order-booking/mobile/**`.
+- Download from the **Artifacts** section of the finished run
+  (`ecoo-order-booking-apk`, kept 30 days), then sideload it — the phone will
+  need "install from unknown sources" for whichever app opens the file.
+
+The workflow regenerates the `android/` shell, adds the manifest permissions,
+and runs `flutter analyze` and `flutter test` before building, so a failing
+build never produces an APK.
+
+**The release APK is signed with Flutter's debug key**, because no keystore is
+committed. That is fine for internal distribution to the distributor's own
+salesmen, and not acceptable for the Play Store. For a Play Store build, add a
+keystore as repository secrets and a `key.properties` step to the workflow.
+
+The APK cannot be built inside the Claude Code container: the Android SDK is
+only served from `dl.google.com`, which this environment's network policy
+blocks.
+
 After `flutter create`, add to `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
@@ -211,5 +237,17 @@ Not checked in: the Flutter `android/` platform shell (regenerate with
 cloud storage — the API stores and serves URLs only, and the app caches them
 on device.
 
-The Flutter code has not been compiled in this environment (no Dart toolchain
-available here); the Python test suite has been run and passes.
+## Test status
+
+Both suites pass:
+
+- **43 Dart tests** (`flutter test`, Flutter 3.44.8) covering money formatting
+  and Indian lakh grouping, mobile normalisation, the order draft's incremental
+  totals, save-and-next reset, product search ranking, and the SQLite DAO —
+  round-trips, day scoping, load-sheet aggregation, soft delete, and the sync
+  outbox. `flutter analyze` reports no issues.
+- **13 Python tests** (`pytest`) covering server-side totals, sync idempotency,
+  per-order batch isolation, price snapshotting, admin gating and the contents
+  of the generated workbook.
+
+The APK itself is built in CI, not here — see *Getting an APK* above.

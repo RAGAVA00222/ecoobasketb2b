@@ -318,7 +318,7 @@ class _Row extends StatelessWidget {
               children: [
                 TextSpan(
                   text: leadValue,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
                     color: AppTheme.greenDark,
