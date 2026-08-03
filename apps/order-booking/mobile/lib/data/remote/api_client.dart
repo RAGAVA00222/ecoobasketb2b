@@ -25,11 +25,16 @@ class SyncOutcome {
 }
 
 class ApiClient {
-  ApiClient({required this.baseUrl, http.Client? client})
-      : _client = client ?? http.Client();
+  ApiClient({required String Function() baseUrl, http.Client? client})
+      : _baseUrl = baseUrl,
+        _client = client ?? http.Client();
 
-  final String baseUrl;
+  /// Resolved per request, not captured once, so a server address changed in
+  /// Settings applies to the very next call without restarting the app.
+  final String Function() _baseUrl;
   final http.Client _client;
+
+  String get baseUrl => _baseUrl();
 
   /// Short by design. Sync is a background nicety — it must never be the
   /// reason a salesman waits, so a slow network is abandoned quickly and

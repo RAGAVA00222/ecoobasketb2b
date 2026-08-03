@@ -3,21 +3,26 @@ name: Order Booking APK
 # Builds a sideloadable Android APK for apps/order-booking/mobile and attaches
 # it to the run as a downloadable artifact.
 #
-# This lives in CI rather than being built locally because the Android SDK is
-# only served from dl.google.com, which the dev container's network policy
-# blocks. GitHub's runners can reach it.
+# There is no Play Store configuration and no release keystore. The APK is
+# signed with Flutter's debug key, which is what makes it installable by
+# sideloading. (A truly unsigned APK cannot be installed at all — Android
+# refuses to install any package without a signature.)
+#
+# The build lives in CI because the Android SDK is served only from
+# dl.google.com, which the dev container's network policy blocks.
 
 on:
   workflow_dispatch:
     inputs:
       api_base_url:
-        description: "Server address the app should talk to (changeable later in Settings)"
+        description: "Default server address baked into this build (still changeable in Settings)"
         required: false
         default: "https://orders.ecoobasketb2b.com"
   push:
-    paths:
-      - "apps/order-booking/mobile/**"
-      - ".github/workflows/order-booking-apk.yml"
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -41,25 +46,28 @@ jobs:
           cache: true
 
       # The android/ platform shell is not checked in — only lib/, test/ and
-      # pubspec.yaml are. It is generated in a scratch directory and copied in,
-      # rather than `flutter create .` over the real project, so the template
-      # can never overwrite lib/main.dart or analysis_options.yaml.
+      # pubspec.yaml are. It is generated into a scratch directory and copied
+      # in, rather than `flutter create .` over the real project, so the
+      # template can never overwrite lib/main.dart or analysis_options.yaml.
       - name: Generate the Android platform shell
         run: |
           shell_dir="$(mktemp -d)/shell"
           flutter create --platforms=android \
             --org com.ecoobasket --project-name ecoo_order_booking "$shell_dir"
           cp -r "$shell_dir/android" ./android
+          rm -f android/local.properties
 
-      - name: Set the app label and the permissions sync needs
+      - name: Configure the manifest
         run: |
           python3 - <<'PY'
-          import pathlib, re
+          import pathlib, re, sys
+
           manifest = pathlib.Path("android/app/src/main/AndroidManifest.xml")
           xml = manifest.read_text()
 
-          # INTERNET carries sync and the Excel download; ACCESS_NETWORK_STATE
-          # is what connectivity_plus reads to notice signal coming back.
+          # INTERNET carries sync and the Excel download. ACCESS_NETWORK_STATE
+          # is what connectivity_plus reads to notice signal coming back, which
+          # is what triggers the outbox drain.
           perms = ["android.permission.INTERNET",
                    "android.permission.ACCESS_NETWORK_STATE"]
           missing = [p for p in perms if p not in xml]
@@ -70,27 +78,58 @@ jobs:
 
           xml = xml.replace('android:label="ecoo_order_booking"',
                             'android:label="Ecoo Orders"')
+
+          # Android 9+ blocks plaintext HTTP by default. A distributor's server
+          # is very often a plain-HTTP box on the LAN or a bare VPS, and the
+          # address is a runtime setting, so the app cannot know its scheme at
+          # build time. Delete this line once the server is on HTTPS.
+          if "usesCleartextTraffic" not in xml:
+              xml = xml.replace("<application",
+                                '<application\n        android:usesCleartextTraffic="true"',
+                                1)
+
           manifest.write_text(xml)
-          print(xml.split("<application")[0])
+
+          # Fail loudly rather than shipping an APK that cannot reach the server.
+          for needed in perms + ["usesCleartextTraffic", 'android:label="Ecoo Orders"']:
+              if needed not in xml:
+                  sys.exit(f"manifest is missing {needed}")
+          print(xml)
           PY
 
       - run: flutter pub get
 
-      # Analyze and test before building: a red APK is worse than no APK.
+      # Gate the build on both. A red APK is worse than no APK.
       - run: flutter analyze
       - run: flutter test
 
-      - name: Build release APK
+      - name: Build APK
         run: |
           flutter build apk --release \
             --dart-define=ECOO_API_BASE_URL="${{ inputs.api_base_url || 'https://orders.ecoobasketb2b.com' }}"
 
-      - name: Report size
-        run: ls -lh build/app/outputs/flutter-apk/app-release.apk
+      # Proves the artifact is actually installable without needing a device:
+      # an APK Android will accept must carry a valid signature.
+      - name: Verify the APK is signed and installable
+        run: |
+          apk=build/app/outputs/flutter-apk/app-release.apk
+          ls -lh "$apk"
+          apksigner=$(find "$ANDROID_HOME/build-tools" -name apksigner | sort | tail -1)
+          "$apksigner" verify --verbose --print-certs "$apk"
+          aapt2=$(find "$ANDROID_HOME/build-tools" -name aapt2 | sort | tail -1)
+          "$aapt2" dump badging "$apk" | grep -E "^package|^application-label|uses-permission"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ecoo-order-booking-apk
+          name: ecoo-order-booking-apk-${{ github.run_number }}
           path: apps/order-booking/mobile/build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 30
+          retention-days: 90
           if-no-files-found: error
+
+      - name: Where to get it
+        run: |
+          echo "### APK ready" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Download **ecoo-order-booking-apk-${{ github.run_number }}** from the Artifacts section of [this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Unzip it and sideload \`app-release.apk\`. Signed with the debug key — no Play Store config, no release keystore." >> $GITHUB_STEP_SUMMARY

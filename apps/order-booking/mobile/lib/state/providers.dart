@@ -18,22 +18,61 @@ final appDatabaseProvider = Provider<AppDatabase>(
   (ref) => throw UnimplementedError('appDatabaseProvider must be overridden'),
 );
 
-final appConfigProvider = Provider<AppConfig>(
-  (ref) => throw UnimplementedError('appConfigProvider must be overridden'),
+/// The values read off disk at startup. Overridden in main() so the first
+/// frame already has them.
+final initialAppConfigProvider = Provider<AppConfig>(
+  (ref) => throw UnimplementedError('initialAppConfigProvider must be overridden'),
 );
 
 class AppConfig {
   const AppConfig({required this.apiBaseUrl, required this.salesmanCode});
+
   final String apiBaseUrl;
   final String salesmanCode;
 
   static const metaBaseUrl = 'api_base_url';
   static const metaSalesmanCode = 'salesman_code';
+
+  /// The build-time default, supplied by CI via
+  /// `--dart-define=ECOO_API_BASE_URL=...`. It is only a default — whatever
+  /// the device has saved wins, so one APK serves every deployment.
   static const defaultBaseUrl = String.fromEnvironment(
     'ECOO_API_BASE_URL',
     defaultValue: 'https://orders.ecoobasketb2b.com',
   );
+
+  AppConfig copyWith({String? apiBaseUrl, String? salesmanCode}) => AppConfig(
+        apiBaseUrl: apiBaseUrl ?? this.apiBaseUrl,
+        salesmanCode: salesmanCode ?? this.salesmanCode,
+      );
 }
+
+/// Live config. Changing the server address writes it to the meta table and
+/// updates state in place — no app restart, because the API client reads the
+/// address per request rather than capturing it at construction.
+class AppConfigNotifier extends Notifier<AppConfig> {
+  @override
+  AppConfig build() => ref.watch(initialAppConfigProvider);
+
+  Future<void> setApiBaseUrl(String value) async {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return;
+    await ref.read(appDatabaseProvider).writeMeta(AppConfig.metaBaseUrl, trimmed);
+    state = state.copyWith(apiBaseUrl: trimmed);
+  }
+
+  Future<void> setSalesmanCode(String value) async {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return;
+    await ref
+        .read(appDatabaseProvider)
+        .writeMeta(AppConfig.metaSalesmanCode, trimmed);
+    state = state.copyWith(salesmanCode: trimmed);
+  }
+}
+
+final appConfigProvider =
+    NotifierProvider<AppConfigNotifier, AppConfig>(AppConfigNotifier.new);
 
 final productDaoProvider =
     Provider<ProductDao>((ref) => ProductDao(ref.watch(appDatabaseProvider)));
@@ -43,7 +82,12 @@ final orderDaoProvider =
     Provider<OrderDao>((ref) => OrderDao(ref.watch(appDatabaseProvider)));
 
 final apiClientProvider = Provider<ApiClient>((ref) {
-  final client = ApiClient(baseUrl: ref.watch(appConfigProvider).apiBaseUrl);
+  // `read` inside the closure, not `watch` at build time: the client resolves
+  // the address on each request, so editing it in Settings takes effect on the
+  // next sync instead of needing the app restarted.
+  final client = ApiClient(
+    baseUrl: () => ref.read(appConfigProvider).apiBaseUrl,
+  );
   ref.onDispose(client.dispose);
   return client;
 });

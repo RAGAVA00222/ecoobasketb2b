@@ -44,10 +44,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 title: const Text('Salesman code'),
                 subtitle: Text(config.salesmanCode),
                 trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () => _editMeta(
+                onTap: () => _edit(
                   title: 'Salesman code',
                   initial: config.salesmanCode,
-                  metaKey: AppConfig.metaSalesmanCode,
+                  apply: ref.read(appConfigProvider.notifier).setSalesmanCode,
                 ),
               ),
               const Divider(height: 1),
@@ -60,10 +60,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () => _editMeta(
+                onTap: () => _edit(
                   title: 'Server address',
                   initial: config.apiBaseUrl,
-                  metaKey: AppConfig.metaBaseUrl,
+                  keyboardType: TextInputType.url,
+                  apply: ref.read(appConfigProvider.notifier).setApiBaseUrl,
                 ),
               ),
             ],
@@ -181,10 +182,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Future<void> _editMeta({
+  Future<void> _edit({
     required String title,
     required String initial,
-    required String metaKey,
+    required Future<void> Function(String) apply,
+    TextInputType? keyboardType,
   }) async {
     final controller = TextEditingController(text: initial);
     final value = await showDialog<String>(
@@ -194,6 +196,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         content: TextField(
           controller: controller,
           autofocus: true,
+          keyboardType: keyboardType,
           decoration: InputDecoration(labelText: title),
         ),
         actions: [
@@ -211,12 +214,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
     if (value == null || value.isEmpty) return;
 
-    await ref.read(appDatabaseProvider).writeMeta(metaKey, value);
+    await apply(value);
     if (!mounted) return;
-    // Config is read once at startup so nothing downstream has to watch it;
-    // the trade-off is that a change needs a restart to take effect.
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Saved — restart the app to apply')),
+      const SnackBar(content: Text('Saved')),
     );
   }
 }

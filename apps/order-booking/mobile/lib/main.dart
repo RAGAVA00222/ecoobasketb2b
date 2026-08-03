@@ -24,7 +24,7 @@ Future<void> main() async {
     ProviderScope(
       overrides: [
         appDatabaseProvider.overrideWithValue(database),
-        appConfigProvider.overrideWithValue(config),
+        initialAppConfigProvider.overrideWithValue(config),
       ],
       child: const EcooOrderApp(),
     ),

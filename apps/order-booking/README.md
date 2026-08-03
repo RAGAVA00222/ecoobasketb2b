@@ -72,13 +72,22 @@ python -m pytest tests -q     # 13 tests
 ```bash
 cd apps/order-booking/mobile
 
-# One-time: generate the Android platform shell (android/, gradle files).
-# Only lib/, test/, pubspec.yaml and analysis_options.yaml are checked in.
-flutter create --platforms=android --project-name ecoo_order_booking .
+# One-time: generate the Android platform shell. Only lib/, test/, pubspec.yaml
+# and analysis_options.yaml are checked in. Generate into a scratch directory
+# and copy android/ in — `flutter create .` over the project would overwrite
+# lib/main.dart with the template counter app.
+shell=$(mktemp -d)/shell
+flutter create --platforms=android --org com.ecoobasket \
+  --project-name ecoo_order_booking "$shell"
+cp -r "$shell/android" ./android
+# Then add INTERNET and ACCESS_NETWORK_STATE to
+# android/app/src/main/AndroidManifest.xml — the CI workflow's "Configure the
+# manifest" step is the reference for exactly what it should contain.
 
 flutter pub get
-flutter run --dart-define=ECOO_API_BASE_URL=http://10.0.2.2:8000
+flutter analyze
 flutter test
+flutter run --dart-define=ECOO_API_BASE_URL=http://10.0.2.2:8000
 ```
 
 `10.0.2.2` is how the Android emulator reaches the host machine. On a real
@@ -88,39 +97,62 @@ pointed at production after install.
 
 ### Getting an APK
 
-The **Order Booking APK** GitHub Actions workflow builds a sideloadable release
-APK and attaches it to the run as a downloadable artifact.
+This app is **sideload-only**. There is no Play Store configuration, no upload
+key and no release keystore anywhere in this repo, and none is needed.
 
-- Actions tab → **Order Booking APK** → **Run workflow**. It takes the server
-  address as an input, so a build can be pointed at staging or production
-  without a code change.
-- It also runs on every push that touches `apps/order-booking/mobile/**`.
-- Download from the **Artifacts** section of the finished run
-  (`ecoo-order-booking-apk`, kept 30 days), then sideload it — the phone will
-  need "install from unknown sources" for whichever app opens the file.
+The **Order Booking APK** workflow builds the APK and attaches it to the run:
 
-The workflow regenerates the `android/` shell, adds the manifest permissions,
-and runs `flutter analyze` and `flutter test` before building, so a failing
-build never produces an APK.
+- It runs on **every push**, and can also be started by hand from the Actions
+  tab → **Order Booking APK** → **Run workflow**, which takes the default
+  server address as an input.
+- Download **`ecoo-order-booking-apk-<run number>`** from the **Artifacts**
+  section at the bottom of the finished run (kept 90 days). GitHub serves
+  artifacts as a zip; unzip it to get `app-release.apk`.
+- Copy the APK to the phone and open it. Android will ask permission to
+  install from that source once — allow it, then install.
 
-**The release APK is signed with Flutter's debug key**, because no keystore is
-committed. That is fine for internal distribution to the distributor's own
-salesmen, and not acceptable for the Play Store. For a Play Store build, add a
-keystore as repository secrets and a `key.properties` step to the workflow.
+The workflow regenerates the `android/` shell, configures the manifest, and
+gates the build on `flutter analyze` and `flutter test`, so a failing build
+never produces an APK. It then runs `apksigner verify` on the output, so a
+broken or unsigned APK fails the build rather than reaching a phone.
+
+**On signing.** The APK is signed with Flutter's debug key. That is not a
+compromise to be fixed later — it is what makes a sideloadable APK installable.
+Android refuses to install *any* package without a valid signature, so a truly
+"unsigned release APK" cannot be installed at all. Debug-key signing needs no
+keystore, no secrets and no Play Store account, which is exactly the intent
+here.
+
+The only consequence worth knowing: the debug key is not stable across
+machines, so if the signing key ever changes, the next APK installs as a
+different app rather than upgrading in place. To upgrade cleanly, keep using
+this workflow — GitHub's runners use the same default debug keystore.
+
+**On plaintext HTTP.** The manifest sets `android:usesCleartextTraffic="true"`.
+Android 9+ blocks plain HTTP by default, the server address is a runtime
+setting, and a distributor's server is very often plain HTTP on a LAN or a bare
+VPS — so the app cannot know the scheme at build time and a blocked request
+would look to the salesman like "sync is broken". This does weaken transport
+security for all traffic. Once the server is on HTTPS, delete that line from
+the manifest step in the workflow.
 
 The APK cannot be built inside the Claude Code container: the Android SDK is
-only served from `dl.google.com`, which this environment's network policy
-blocks.
+served only from `dl.google.com`, which that environment's network policy
+blocks. Everything else — analyze, tests, the manifest step — was verified
+locally.
 
-After `flutter create`, add to `android/app/src/main/AndroidManifest.xml`:
+### Pointing the app at your server
 
-```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-```
+The server address is never hardcoded. It resolves in this order:
 
-`INTERNET` is for sync and Excel download; `ACCESS_NETWORK_STATE` is what
-`connectivity_plus` reads to notice the phone coming back into signal.
+1. Whatever the device has saved (**Settings → Server address**). This wins,
+   and applies to the next request — no app restart.
+2. The build-time default, `--dart-define=ECOO_API_BASE_URL=...`, which the
+   workflow passes.
+3. Failing both, `https://orders.ecoobasketb2b.com`.
+
+So one APK serves every deployment: install it, then point each phone at
+whichever server it should talk to. The salesman code works the same way.
 
 ---
 
@@ -241,11 +273,12 @@ on device.
 
 Both suites pass:
 
-- **43 Dart tests** (`flutter test`, Flutter 3.44.8) covering money formatting
+- **49 Dart tests** (`flutter test`, Flutter 3.44.8) covering money formatting
   and Indian lakh grouping, mobile normalisation, the order draft's incremental
   totals, save-and-next reset, product search ranking, and the SQLite DAO —
-  round-trips, day scoping, load-sheet aggregation, soft delete, and the sync
-  outbox. `flutter analyze` reports no issues.
+  round-trips, day scoping, load-sheet aggregation, soft delete, the sync
+  outbox, and live server-address reconfiguration. `flutter analyze` reports
+  no issues.
 - **13 Python tests** (`pytest`) covering server-side totals, sync idempotency,
   per-order batch isolation, price snapshotting, admin gating and the contents
   of the generated workbook.
