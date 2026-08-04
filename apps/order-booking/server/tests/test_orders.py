@@ -164,7 +164,12 @@ def test_excel_export_has_orders_load_sheet_and_summary(client, catalogue):
     assert rows[1][8] is None
 
     load = wb["Load Sheet"]
-    assert [load.cell(row=2, column=c).value for c in (1, 2)] == ["Good Day Biscuit", 5]
+    assert [c.value for c in load[1]][:3] == [
+        "Brand / Supplier", "Product Name", "Total Boxes",
+    ]
+    assert [load.cell(row=2, column=c).value for c in (1, 2, 3)] == [
+        "Britannia", "Good Day Biscuit", 5,
+    ]
 
 
 def test_prices_are_admin_only(client):

@@ -43,7 +43,9 @@ def catalogue(client, admin_headers):
         json={
             "sku": "BIS-GDAY",
             "name": "Good Day Biscuit",
+            "brand": "Britannia",
             "mrp_paise": 1000,
+            "units_per_box": 90,
             "box_price_paise": 92000,
         },
     ).json()
@@ -53,7 +55,9 @@ def catalogue(client, admin_headers):
         json={
             "sku": "BIS-MILKB",
             "name": "Milk Bikis",
+            "brand": "Britannia",
             "mrp_paise": 1000,
+            "units_per_box": 120,
             "box_price_paise": 88000,
         },
     ).json()

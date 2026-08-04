@@ -1,17 +1,28 @@
 import 'package:ecoo_order_booking/data/models/customer.dart';
+import 'package:ecoo_order_booking/data/models/order.dart';
 import 'package:ecoo_order_booking/data/models/product.dart';
 import 'package:ecoo_order_booking/state/order_draft.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Product product(int id, String name, int boxPricePaise) => Product(
+Product product(
+  int id,
+  String name,
+  int boxPricePaise, {
+  String brand = 'Britannia',
+  int unitsPerBox = 1,
+  int mrpPaise = 1000,
+}) =>
+    Product(
       id: id,
       sku: 'SKU-$id',
       name: name,
-      mrpPaise: 1000,
+      brand: brand,
+      mrpPaise: mrpPaise,
+      unitsPerBox: unitsPerBox,
       boxPricePaise: boxPricePaise,
       updatedAt: DateTime.utc(2026, 1, 1),
-      searchIndex: Product.buildSearchIndex(name, 'SKU-$id'),
+      searchIndex: Product.buildSearchIndex(name, 'SKU-$id', brand),
     );
 
 void main() {
@@ -191,5 +202,120 @@ void main() {
     expect(draft().lines.keys, [goodDay.id]);
     expect(draft().totalBoxes, 5);
     expect(draft().totalValuePaise, 460000);
+  });
+
+  group('one-tap repeat', () {
+    BookedOrder previousOrder(Map<Product, int> basket) => BookedOrder(
+          clientUuid: 'uuid-previous-01',
+          customerMobile: '9876543210',
+          customerName: 'Sri Stores',
+          salesmanCode: 'SM01',
+          bookedAt: DateTime.now().subtract(const Duration(days: 7)),
+          lines: [
+            for (final entry in basket.entries)
+              OrderLine(
+                productId: entry.key.id,
+                productName: entry.key.name,
+                mrpPaise: entry.key.mrpPaise,
+                boxPricePaise: entry.key.boxPricePaise,
+                qtyBoxes: entry.value,
+              ),
+          ],
+        );
+
+    test('drops last week\'s quantities in without touching the customer', () {
+      notifier().setMobile('9876543210');
+      notifier().setCustomerName('Sri Stores');
+
+      final applied = notifier().applyPreviousQuantities(
+        previousOrder({goodDay: 5, milkBikis: 8}),
+        {goodDay.id: goodDay, milkBikis.id: milkBikis},
+      );
+
+      expect(applied, 2);
+      expect(draft().qtyFor(goodDay.id), 5);
+      expect(draft().qtyFor(milkBikis.id), 8);
+      expect(draft().totalBoxes, 13);
+      expect(draft().customerName, 'Sri Stores', reason: 'customer untouched');
+    });
+
+    test('re-prices from today, not from the old order', () {
+      // The previous order was booked at a lower rate; repeating it must
+      // quote today's price, because it is a new sale.
+      final cheaperThen = OrderLine(
+        productId: goodDay.id,
+        productName: goodDay.name,
+        mrpPaise: goodDay.mrpPaise,
+        boxPricePaise: 50000, // ₹500 back then
+        qtyBoxes: 2,
+      );
+      final previous = BookedOrder(
+        clientUuid: 'uuid-previous-02',
+        customerMobile: '9876543210',
+        customerName: 'Sri Stores',
+        salesmanCode: 'SM01',
+        bookedAt: DateTime.now(),
+        lines: [cheaperThen],
+      );
+
+      notifier().applyPreviousQuantities(previous, {goodDay.id: goodDay});
+
+      expect(draft().totalValuePaise, 2 * 92000, reason: "today's ₹920 a box");
+    });
+
+    test('never reduces a quantity already keyed in by hand', () {
+      notifier().setQty(goodDay, 12);
+
+      notifier().applyPreviousQuantities(
+        previousOrder({goodDay: 5, milkBikis: 3}),
+        {goodDay.id: goodDay, milkBikis.id: milkBikis},
+      );
+
+      expect(draft().qtyFor(goodDay.id), 12, reason: 'the higher one wins');
+      expect(draft().qtyFor(milkBikis.id), 3);
+    });
+
+    test('silently skips products that are no longer stocked', () {
+      final applied = notifier().applyPreviousQuantities(
+        previousOrder({goodDay: 5, milkBikis: 8}),
+        {goodDay.id: goodDay}, // Milk Bikis delisted
+      );
+
+      expect(applied, 1);
+      expect(draft().lines.keys, [goodDay.id]);
+      expect(draft().totalBoxes, 5);
+    });
+
+    test('repeating twice is idempotent', () {
+      final previous = previousOrder({goodDay: 5});
+      final catalogue = {goodDay.id: goodDay};
+
+      notifier().applyPreviousQuantities(previous, catalogue);
+      final second = notifier().applyPreviousQuantities(previous, catalogue);
+
+      expect(second, 0, reason: 'nothing left to apply');
+      expect(draft().totalBoxes, 5);
+    });
+  });
+
+  group('pack size', () {
+    test('per-unit rate is derived from the box rate and pack size', () {
+      // Milk Classic: ₹1,067 a box of 120 -> ₹8.89 a packet, matching the
+      // distributor's own rate sheet.
+      final milkClassic =
+          product(9, 'Milk Classic', 106700, unitsPerBox: 120);
+      expect(milkClassic.unitPricePaise, 889);
+    });
+
+    test('a missing MRP is reported as absent, not as zero', () {
+      final maaza = product(10, 'Maaza 1.75 L', 68800,
+          unitsPerBox: 12, mrpPaise: 0);
+      expect(maaza.hasMrp, isFalse);
+      expect(product(11, 'Parle-G', 63000).hasMrp, isTrue);
+    });
+
+    test('a single-unit box does not divide by anything odd', () {
+      expect(product(12, 'Loose', 50000, unitsPerBox: 1).unitPricePaise, 50000);
+    });
   });
 }

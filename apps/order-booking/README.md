@@ -28,9 +28,10 @@ root; it shares nothing but the repo and the brand palette.
 | 2 | Taps **New Order** | Number field is already focused, keypad up |
 | 3 | Types the mobile number | On the 10th digit, a local SQLite lookup fills the name |
 | 4 | Types the name *(new shops only)* | Cursor is already in the name field |
-| 5 | Types 3–4 letters of a product | List filters as the letters land |
-| 6 | Taps `+` / `−`, or the number for a keypad | Line total and grand total update on the same frame |
-| 7 | Taps **Save Order & Next Customer** | Order is written to SQLite, fields clear, number field refocuses |
+| 5 | Taps **Repeat last order** *(returning shops)* | The previous basket's quantities drop straight in |
+| 6 | Types 3–4 letters of a product | List filters as the letters land |
+| 7 | Taps `+` / `−`, or the number for a keypad | Line total and grand total update on the same frame |
+| 8 | Taps **Save Order & Next Customer** | Order is written to SQLite, fields clear, number field refocuses |
 
 No confirmation dialog, no review screen, no "are you sure". The one place the
 app does ask is deleting an already-booked order.
@@ -49,7 +50,7 @@ pip install -r requirements.txt
 cp .env.example .env          # then edit it
 export $(grep -v '^#' .env | xargs)
 
-python seed.py                # demo catalogue; replace with the real price list
+python seed.py                # loads the real price list (price_list.py)
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -64,7 +65,7 @@ Tests:
 ```bash
 cd apps/order-booking/server
 pip install pytest httpx
-python -m pytest tests -q     # 13 tests
+python -m pytest tests -q     # 21 tests
 ```
 
 ### App
@@ -91,9 +92,7 @@ flutter run --dart-define=ECOO_API_BASE_URL=http://10.0.2.2:8000
 ```
 
 `10.0.2.2` is how the Android emulator reaches the host machine. On a real
-device use the LAN or public address of the server. The address is also
-editable in-app under **Settings → Server address**, which is how devices get
-pointed at production after install.
+device use the LAN or public address of the server.
 
 ### Getting an APK
 
@@ -143,16 +142,23 @@ locally.
 
 ### Pointing the app at your server
 
-The server address is never hardcoded. It resolves in this order:
+The server address is never hardcoded, but it is also **not editable by the
+salesman**. A field device that can be re-pointed at another server is a way to
+lose a day's bookings, so Settings shows no server field at all.
 
-1. Whatever the device has saved (**Settings → Server address**). This wins,
-   and applies to the next request — no app restart.
-2. The build-time default, `--dart-define=ECOO_API_BASE_URL=...`, which the
-   workflow passes.
-3. Failing both, `https://orders.ecoobasketb2b.com`.
+It resolves in this order:
 
-So one APK serves every deployment: install it, then point each phone at
-whichever server it should talk to. The salesman code works the same way.
+1. The build-time default, `--dart-define=ECOO_API_BASE_URL=...`, which the CI
+   workflow passes and takes as a run input.
+2. Failing that, `https://orders.ecoobasketb2b.com`.
+
+A saved override is still read at startup if one exists — the plumbing is
+retained so support can set an address on a specific handset — but nothing in
+the app's UI writes it.
+
+The **salesman code** *is* editable in Settings. It is this device's identity,
+not a server setting: it is what attributes the day's figures, and each phone
+needs its own.
 
 ---
 
@@ -273,14 +279,14 @@ on device.
 
 Both suites pass:
 
-- **49 Dart tests** (`flutter test`, Flutter 3.44.8) covering money formatting
+- **57 Dart tests** (`flutter test`, Flutter 3.44.8) covering money formatting
   and Indian lakh grouping, mobile normalisation, the order draft's incremental
   totals, save-and-next reset, product search ranking, and the SQLite DAO —
   round-trips, day scoping, load-sheet aggregation, soft delete, the sync
-  outbox, and live server-address reconfiguration. `flutter analyze` reports
-  no issues.
-- **13 Python tests** (`pytest`) covering server-side totals, sync idempotency,
-  per-order batch isolation, price snapshotting, admin gating and the contents
-  of the generated workbook.
+  outbox, one-tap repeat ordering and pack-size arithmetic. `flutter analyze`
+  reports no issues.
+- **21 Python tests** (`pytest`) covering server-side totals, sync idempotency,
+  per-order batch isolation, price snapshotting, admin gating, the price
+  list's SKU uniqueness and derived unit rates, and the workbook contents.
 
 The APK itself is built in CI, not here — see *Getting an APK* above.

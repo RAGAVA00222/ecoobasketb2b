@@ -34,8 +34,12 @@ def summary(db: Session, from_date: date, to_date: date) -> schemas.ReportSummar
             func.min(models.OrderItem.product_name),
             func.sum(models.OrderItem.qty_boxes),
             func.sum(models.OrderItem.line_total_paise),
+            func.coalesce(func.min(models.Product.brand), ""),
         )
         .join(models.Order, models.Order.id == models.OrderItem.order_id)
+        # Outer join: a product deleted outright must not drop its boxes from
+        # the sheet — the warehouse still has to ship them.
+        .outerjoin(models.Product, models.Product.id == models.OrderItem.product_id)
         .where(where)
         .group_by(models.OrderItem.product_id)
         .order_by(func.sum(models.OrderItem.qty_boxes).desc())
@@ -83,6 +87,7 @@ def summary(db: Session, from_date: date, to_date: date) -> schemas.ReportSummar
                 product_name=r[1],
                 total_boxes=int(r[2]),
                 total_value_paise=int(r[3]),
+                brand=r[4] or "",
             )
             for r in product_rows
         ],
@@ -118,11 +123,18 @@ def load_sheet(db: Session, from_date: date, to_date: date) -> schemas.LoadSheet
             func.min(models.OrderItem.product_name),
             func.sum(models.OrderItem.qty_boxes),
             func.sum(models.OrderItem.line_total_paise),
+            func.coalesce(func.min(models.Product.brand), ""),
         )
         .join(models.Order, models.Order.id == models.OrderItem.order_id)
+        .outerjoin(models.Product, models.Product.id == models.OrderItem.product_id)
         .where(_live_orders(from_date, to_date))
         .group_by(models.OrderItem.product_id)
-        .order_by(func.sum(models.OrderItem.qty_boxes).desc())
+        # Sorted by brand within box count so the sheet reads as one block per
+        # supplier when it is printed.
+        .order_by(
+            func.sum(models.OrderItem.qty_boxes).desc(),
+            func.min(models.Product.brand),
+        )
     ).all()
 
     lines = [
@@ -131,6 +143,7 @@ def load_sheet(db: Session, from_date: date, to_date: date) -> schemas.LoadSheet
             product_name=r[1],
             total_boxes=int(r[2]),
             total_value_paise=int(r[3]),
+            brand=r[4] or "",
         )
         for r in rows
     ]

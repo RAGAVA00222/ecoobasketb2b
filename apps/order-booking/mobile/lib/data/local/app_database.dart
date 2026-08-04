@@ -11,7 +11,7 @@ class AppDatabase {
   final Database db;
 
   static const _fileName = 'ecoo_orders.db';
-  static const _version = 1;
+  static const _version = 2;
 
   static Future<AppDatabase> open({String? path}) async {
     final dbPath = path ?? p.join(await getDatabasesPath(), _fileName);
@@ -22,6 +22,7 @@ class AppDatabase {
         await db.execute('PRAGMA foreign_keys = ON');
       },
       onCreate: _createSchema,
+      onUpgrade: _migrate,
       onOpen: (db) async {
         // WAL keeps the "save order" write from blocking behind a background
         // catalogue sync, which is the difference between a 40ms save and a
@@ -41,8 +42,10 @@ class AppDatabase {
         id INTEGER PRIMARY KEY,
         sku TEXT NOT NULL UNIQUE,
         name TEXT NOT NULL,
+        brand TEXT NOT NULL DEFAULT '',
         image_url TEXT,
         mrp_paise INTEGER NOT NULL,
+        units_per_box INTEGER NOT NULL DEFAULT 1,
         box_price_paise INTEGER NOT NULL,
         active INTEGER NOT NULL DEFAULT 1,
         sort_order INTEGER NOT NULL DEFAULT 0,
@@ -85,6 +88,9 @@ class AppDatabase {
         'CREATE INDEX idx_orders_day ON orders(order_date, is_deleted)');
     batch.execute(
         'CREATE INDEX idx_orders_outbox ON orders(sync_status, is_deleted)');
+    // Powers the one-tap repeat: "what did this shop order last time?"
+    batch.execute('CREATE INDEX idx_orders_customer '
+        'ON orders(customer_mobile, is_deleted, booked_at)');
 
     batch.execute('''
       CREATE TABLE order_lines (
@@ -109,6 +115,24 @@ class AppDatabase {
     ''');
 
     await batch.commit(noResult: true);
+  }
+
+  /// v1 -> v2 adds brand and pack size to the catalogue.
+  ///
+  /// Additive columns with defaults, so an upgrading device keeps every order
+  /// it has already booked. The next catalogue sync refills the new columns;
+  /// until then products simply show no brand, which is cosmetic.
+  static Future<void> _migrate(Database db, int from, int to) async {
+    if (from < 2) {
+      await db.execute(
+          "ALTER TABLE products ADD COLUMN brand TEXT NOT NULL DEFAULT ''");
+      await db.execute(
+          'ALTER TABLE products ADD COLUMN units_per_box INTEGER NOT NULL DEFAULT 1');
+      await db.execute('CREATE INDEX IF NOT EXISTS idx_orders_customer '
+          'ON orders(customer_mobile, is_deleted, booked_at)');
+      // Force a full catalogue re-pull so the new columns are populated.
+      await db.delete('products');
+    }
   }
 
   Future<String?> readMeta(String key) async {

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../core/mobile_number.dart';
 import '../../core/money.dart';
 import '../../core/theme.dart';
 import '../../data/models/order.dart';
+import '../../state/order_draft.dart';
 import '../../state/providers.dart';
 import '../order/new_order_screen.dart';
 import '../reports/export_action.dart';
@@ -236,6 +238,24 @@ class _OrderTile extends ConsumerWidget {
               },
             ),
             ListTile(
+              leading: const Icon(Icons.copy_all_outlined),
+              title: const Text('Duplicate order'),
+              subtitle: const Text('Same basket, new customer'),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                _duplicate(context, ref);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share_outlined),
+              title: const Text('Share order'),
+              subtitle: const Text('Send the lines over WhatsApp or SMS'),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                _share(order);
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.delete_outline_rounded,
                   color: Color(0xFFB3261E)),
               title: const Text('Delete order',
@@ -249,6 +269,47 @@ class _OrderTile extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  /// Opens a fresh order pre-loaded with this basket but no customer.
+  ///
+  /// The common case it serves: a street where six shops take the same
+  /// standing order. Quantities carry over, the shop does not — so it can
+  /// never be confused with editing the original.
+  void _duplicate(BuildContext context, WidgetRef ref) {
+    final draft = ref.read(orderDraftProvider.notifier)..reset();
+    final applied =
+        draft.applyPreviousQuantities(order, ref.read(catalogueByIdProvider));
+    NewOrderScreen.open(context, keepDraft: true);
+
+    final skipped = order.lines.length - applied;
+    if (skipped > 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('$skipped product(s) no longer stocked')),
+      );
+    }
+  }
+
+  /// Plain text on purpose — it has to paste cleanly into WhatsApp, which is
+  /// where a shopkeeper actually wants their copy.
+  Future<void> _share(BookedOrder order) async {
+    final lines = StringBuffer()
+      ..writeln('Ecoo Basket — Order')
+      ..writeln(order.customerName)
+      ..writeln(formatMobile(order.customerMobile))
+      ..writeln(DateFormat('d MMM yyyy, h:mm a').format(order.bookedAt))
+      ..writeln();
+    for (final line in order.lines) {
+      lines.writeln('${line.productName}  x${line.qtyBoxes} box  '
+          '${line.lineTotalPaise.asRupees}');
+    }
+    lines
+      ..writeln()
+      ..writeln('${order.totalBoxes} boxes')
+      ..writeln('Total ${order.totalValuePaise.asRupees}');
+
+    await Share.share(lines.toString(),
+        subject: 'Order — ${order.customerName}');
   }
 
   /// Deleting is the one place the app does ask. Everything else is

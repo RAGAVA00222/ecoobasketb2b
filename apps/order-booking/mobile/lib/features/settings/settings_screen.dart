@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/app_info.dart';
 import '../../core/theme.dart';
 import '../../state/providers.dart';
 import 'product_catalogue_screen.dart';
 
-/// Deliberately thin. Two fields the distributor sets once at handover, and a
-/// sync panel. Everything else — prices, product images, who is a customer —
-/// is decided on the server, not on a field device.
+/// Deliberately thin, and deliberately read-only about anything that decides
+/// money or destination.
+///
+/// The server address is NOT editable here. A salesman changing where orders
+/// are posted is a way to lose a day's bookings, not a feature — the address
+/// is fixed at build time by whoever ships the APK. Prices are the same story:
+/// visible, never editable, so two salesmen can't quote different rates.
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
@@ -36,42 +41,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         ),
         const SizedBox(height: 14),
 
-        AppCard(
-          child: Column(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.badge_outlined),
-                title: const Text('Salesman code'),
-                subtitle: Text(config.salesmanCode),
-                trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () => _edit(
-                  title: 'Salesman code',
-                  initial: config.salesmanCode,
-                  apply: ref.read(appConfigProvider.notifier).setSalesmanCode,
-                ),
-              ),
-              const Divider(height: 1),
-              ListTile(
-                leading: const Icon(Icons.cloud_outlined),
-                title: const Text('Server address'),
-                subtitle: Text(
-                  config.apiBaseUrl,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                trailing: const Icon(Icons.chevron_right_rounded),
-                onTap: () => _edit(
-                  title: 'Server address',
-                  initial: config.apiBaseUrl,
-                  keyboardType: TextInputType.url,
-                  apply: ref.read(appConfigProvider.notifier).setApiBaseUrl,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 14),
-
+        // ---- Offline status ----
         AppCard(
           child: Column(
             children: [
@@ -84,13 +54,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ? const Color(0xFF9A6700)
                       : AppTheme.green,
                 ),
-                title: Text(sync.label),
+                title: Text(
+                  sync.label,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
                 subtitle: Text(
                   sync.lastSyncedAt == null
                       ? 'Not synced yet on this device'
                       : 'Last synced ${DateFormat('d MMM, h:mm a').format(sync.lastSyncedAt!)}',
                 ),
               ),
+              if (sync.pending > 0)
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Text(
+                    'Orders are saved on this phone and will upload by '
+                    'themselves once there is signal. Nothing is lost.',
+                    style: TextStyle(fontSize: 12.5, color: Color(0xFF6B7A73)),
+                  ),
+                ),
               if (sync.lastError != null)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -98,8 +80,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     sync.lastError!,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 12, color: Color(0xFFB3261E)),
+                    style:
+                        const TextStyle(fontSize: 12, color: Color(0xFFB3261E)),
                   ),
                 ),
               const Divider(height: 1),
@@ -136,6 +118,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         ),
         const SizedBox(height: 14),
 
+        // ---- Catalogue ----
         AppCard(
           child: Column(
             children: [
@@ -143,8 +126,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 leading: const Icon(Icons.inventory_2_outlined),
                 title: const Text('Product catalogue'),
                 subtitle: Text(
-                  '${catalogue.valueOrNull?.length ?? 0} active products'
-                  '${catalogue.valueOrNull == null ? '' : ' · prices set by admin'}',
+                  '${catalogue.valueOrNull?.length ?? 0} products · '
+                  'prices set by admin',
                 ),
                 trailing: const Icon(Icons.chevron_right_rounded),
                 onTap: () => Navigator.of(context).push(
@@ -160,10 +143,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   width: double.infinity,
                   child: OutlinedButton.icon(
                     onPressed: () async {
+                      final messenger = ScaffoldMessenger.of(context);
                       await ref.read(syncServiceProvider).syncNow();
                       await ref.read(catalogueProvider.notifier).reload();
-                      if (!context.mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      if (!mounted) return;
+                      messenger.showSnackBar(
                         const SnackBar(content: Text('Catalogue refreshed')),
                       );
                     },
@@ -175,6 +159,39 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ],
           ),
         ),
+        const SizedBox(height: 14),
+
+        // ---- Identity + about ----
+        AppCard(
+          child: Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.badge_outlined),
+                title: const Text('Salesman code'),
+                subtitle: Text(config.salesmanCode),
+                // Editable because it is this device's identity, not a server
+                // setting — the day's figures are attributed by it.
+                trailing: const Icon(Icons.edit_outlined, size: 18),
+                onTap: _editSalesmanCode,
+              ),
+              const Divider(height: 1),
+              const ListTile(
+                leading: Icon(Icons.info_outline_rounded),
+                title: Text('App version'),
+                subtitle: Text('${AppInfo.version} · ${AppInfo.buildFlavour}'),
+              ),
+              const Divider(height: 1),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(16, 12, 16, 14),
+                child: Text(
+                  AppInfo.about,
+                  style: TextStyle(fontSize: 13, height: 1.45),
+                ),
+              ),
+
+            ],
+          ),
+        ),
         const SizedBox(height: 18),
 
         const _PriceNotice(),
@@ -182,22 +199,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Future<void> _edit({
-    required String title,
-    required String initial,
-    required Future<void> Function(String) apply,
-    TextInputType? keyboardType,
-  }) async {
-    final controller = TextEditingController(text: initial);
+  Future<void> _editSalesmanCode() async {
+    final controller = TextEditingController(
+      text: ref.read(appConfigProvider).salesmanCode,
+    );
     final value = await showDialog<String>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: Text(title),
+        title: const Text('Salesman code'),
         content: TextField(
           controller: controller,
           autofocus: true,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(labelText: title),
+          textCapitalization: TextCapitalization.characters,
+          decoration: const InputDecoration(
+            labelText: 'Salesman code',
+            helperText: "Identifies this phone's orders in the day's reports",
+          ),
         ),
         actions: [
           TextButton(
@@ -214,7 +231,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
     if (value == null || value.isEmpty) return;
 
-    await apply(value);
+    await ref.read(appConfigProvider.notifier).setSalesmanCode(value);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Saved')),

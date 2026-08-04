@@ -164,6 +164,29 @@ class OrderDraftNotifier extends Notifier<OrderDraft> {
   /// one with fields to clear by hand.
   void reset() => state = const OrderDraft();
 
+  /// One-tap repeat: drops the shop's previous quantities into the draft,
+  /// leaving the customer fields alone. Products already in the draft keep the
+  /// higher of the two quantities, so tapping repeat after adding a couple of
+  /// lines by hand never quietly reduces an order.
+  ///
+  /// Prices come from today's catalogue, not from the old order — this is a
+  /// new booking that happens to have the same shape as the last one.
+  int applyPreviousQuantities(
+    BookedOrder previous,
+    Map<int, Product> catalogue,
+  ) {
+    var applied = 0;
+    for (final line in previous.lines) {
+      final product = catalogue[line.productId];
+      if (product == null) continue; // delisted since that order
+      final existing = state.qtyFor(product.id);
+      if (line.qtyBoxes <= existing) continue;
+      setQty(product, line.qtyBoxes);
+      applied++;
+    }
+    return applied;
+  }
+
   /// Loads an existing order back into the draft so Today's Orders can edit it.
   void loadFrom(BookedOrder order, Map<int, Product> catalogue) {
     final lines = <int, DraftLine>{};

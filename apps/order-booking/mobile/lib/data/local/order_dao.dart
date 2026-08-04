@@ -148,6 +148,30 @@ class OrderDao {
     );
   }
 
+  /// The shop's previous order, for the "Frequently Ordered" one-tap repeat.
+  ///
+  /// Answered from local SQLite on an indexed lookup, so it lands while the
+  /// salesman is still reading the customer's name — a network round trip
+  /// here would defeat the whole point.
+  Future<BookedOrder?> lastOrderFor(String mobile, {String? excludeUuid}) async {
+    final headers = await _db.query(
+      'orders',
+      where: 'customer_mobile = ? AND is_deleted = 0'
+          '${excludeUuid == null ? '' : ' AND client_uuid != ?'}',
+      whereArgs: [mobile, if (excludeUuid != null) excludeUuid],
+      orderBy: 'booked_at DESC',
+      limit: 1,
+    );
+    if (headers.isEmpty) return null;
+    final rowId = headers.first['row_id'] as int;
+    final lineRows = await _db.query('order_lines',
+        where: 'order_row_id = ?', whereArgs: [rowId], orderBy: 'id ASC');
+    return BookedOrder.fromRow(
+      headers.first,
+      lineRows.map(OrderLine.fromRow).toList(),
+    );
+  }
+
   Future<DayStats> statsFor(String fromDay, [String? toDay]) async {
     final rows = await _db.rawQuery('''
       SELECT COUNT(*) AS orders,

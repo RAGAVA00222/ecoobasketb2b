@@ -133,27 +133,35 @@ def build_workbook(db: Session, from_date: date, to_date: date) -> bytes:
     # ---------------- Load Sheet ----------------
     sheet = reports.load_sheet(db, from_date, to_date)
     ws2 = wb.create_sheet("Load Sheet")
-    _write_header(ws2, ["Product Name", "Total Boxes", "Total Value"])
+    # Brand first: the sheet is filtered by supplier to raise one purchase
+    # order per brand, which is how the warehouse actually buys.
+    _write_header(ws2, ["Brand / Supplier", "Product Name", "Total Boxes", "Total Value"])
     for line in sheet.lines:
-        ws2.append([line.product_name, line.total_boxes, _rupees(line.total_value_paise)])
+        ws2.append([
+            line.brand,
+            line.product_name,
+            line.total_boxes,
+            _rupees(line.total_value_paise),
+        ])
     for row in ws2.iter_rows(min_row=2):
-        row[1].number_format = INT_FMT
-        row[2].number_format = RUPEE_FMT
+        row[2].number_format = INT_FMT
+        row[3].number_format = RUPEE_FMT
     if sheet.lines:
         ws2.append([])
         total_row = ws2.max_row + 1
-        ws2.cell(row=total_row, column=1, value="TOTAL").font = TOTAL_FONT
-        c = ws2.cell(row=total_row, column=2, value=sheet.total_boxes)
+        ws2.cell(row=total_row, column=2, value="TOTAL").font = TOTAL_FONT
+        c = ws2.cell(row=total_row, column=3, value=sheet.total_boxes)
         c.font = TOTAL_FONT
         c.number_format = INT_FMT
         c = ws2.cell(
             row=total_row,
-            column=3,
+            column=4,
             value=_rupees(sum(line.total_value_paise for line in sheet.lines)),
         )
         c.font = TOTAL_FONT
         c.number_format = RUPEE_FMT
-    _autosize(ws2, [34, 14, 16])
+    _autosize(ws2, [24, 34, 14, 16])
+    ws2.auto_filter.ref = f"A1:D{max(ws2.max_row, 1)}"
 
     # ---------------- Summary ----------------
     data = reports.summary(db, from_date, to_date)

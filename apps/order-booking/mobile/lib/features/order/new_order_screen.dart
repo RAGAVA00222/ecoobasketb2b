@@ -7,6 +7,7 @@ import '../../state/order_draft.dart';
 import '../../state/providers.dart';
 import '../shell/sync_pill.dart';
 import 'widgets/customer_header.dart';
+import 'widgets/frequently_ordered.dart';
 import 'widgets/order_summary_bar.dart';
 import 'widgets/product_card.dart';
 
@@ -16,15 +17,23 @@ import 'widgets/product_card.dart';
 /// SQLite and immediately hands back a blank order with the number field
 /// focused — the salesman's next tap is the next shop's first digit.
 class NewOrderScreen extends ConsumerStatefulWidget {
-  const NewOrderScreen({super.key, this.editOrder});
+  const NewOrderScreen({super.key, this.editOrder, this.keepDraft = false});
 
   /// When set, the screen edits an existing order instead of booking a new one.
   final BookedOrder? editOrder;
 
-  static Future<void> open(BuildContext context, {BookedOrder? editOrder}) {
+  /// Opens without clearing the draft, for "duplicate order" — the caller has
+  /// already loaded the quantities it wants carried over.
+  final bool keepDraft;
+
+  static Future<void> open(
+    BuildContext context, {
+    BookedOrder? editOrder,
+    bool keepDraft = false,
+  }) {
     return Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => NewOrderScreen(editOrder: editOrder),
+        builder: (_) => NewOrderScreen(editOrder: editOrder, keepDraft: keepDraft),
       ),
     );
   }
@@ -50,7 +59,7 @@ class _NewOrderScreenState extends ConsumerState<NewOrderScreen> {
       final notifier = ref.read(orderDraftProvider.notifier);
       final editing = widget.editOrder;
       if (editing == null) {
-        notifier.reset();
+        if (!widget.keepDraft) notifier.reset();
         ref.read(productQueryProvider.notifier).state = '';
         return;
       }
@@ -138,6 +147,9 @@ class _NewOrderScreenState extends ConsumerState<NewOrderScreen> {
             child: Column(
               children: [
                 CustomerHeader(key: _customerKey, autofocus: !_isEdit),
+                // Only renders for a known shop with history, so a new
+                // customer's screen is unchanged.
+                if (!_isEdit) const FrequentlyOrdered(),
                 const SizedBox(height: 12),
                 TextField(
                   controller: _searchController,

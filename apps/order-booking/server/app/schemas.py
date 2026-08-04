@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator
 
 
 class ORMModel(BaseModel):
@@ -40,8 +40,13 @@ class CustomerOut(ORMModel):
 class ProductIn(BaseModel):
     sku: str = Field(min_length=1, max_length=40)
     name: str = Field(min_length=1, max_length=120)
+    brand: str = Field(default="", max_length=60)
     image_url: str | None = None
+    # MRP is per retail unit. 0 means "not on the price list" — it is display
+    # only and never enters an order total, so a missing one must not block a
+    # product from being sold.
     mrp_paise: int = Field(ge=0)
+    units_per_box: int = Field(default=1, ge=1)
     box_price_paise: int = Field(ge=0)
     active: bool = True
     sort_order: int = 0
@@ -49,8 +54,10 @@ class ProductIn(BaseModel):
 
 class ProductPatch(BaseModel):
     name: str | None = Field(default=None, min_length=1, max_length=120)
+    brand: str | None = Field(default=None, max_length=60)
     image_url: str | None = None
     mrp_paise: int | None = Field(default=None, ge=0)
+    units_per_box: int | None = Field(default=None, ge=1)
     box_price_paise: int | None = Field(default=None, ge=0)
     active: bool | None = None
     sort_order: int | None = None
@@ -60,12 +67,26 @@ class ProductOut(ORMModel):
     id: int
     sku: str
     name: str
+    brand: str
     image_url: str | None
     mrp_paise: int
+    units_per_box: int
     box_price_paise: int
     active: bool
     sort_order: int
     updated_at: datetime
+
+    @computed_field
+    @property
+    def unit_price_paise(self) -> int:
+        """What one retail unit in the box costs the shop.
+
+        Derived, never stored: it is a function of the box price and the pack
+        size, and storing it would let the three figures drift out of step.
+        """
+        if self.units_per_box <= 0:
+            return 0
+        return round(self.box_price_paise / self.units_per_box)
 
 
 # --------------------------------------------------------------------------
@@ -136,6 +157,9 @@ class SyncResponse(BaseModel):
 class ProductLine(BaseModel):
     product_id: int
     product_name: str
+    # Carried so the warehouse can group the load sheet into one purchase
+    # order per supplier, which is how stock is actually bought.
+    brand: str = ""
     total_boxes: int
     total_value_paise: int
 

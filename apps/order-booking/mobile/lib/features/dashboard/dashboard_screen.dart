@@ -7,6 +7,7 @@ import '../../core/theme.dart';
 import '../../state/providers.dart';
 import '../order/new_order_screen.dart';
 import '../reports/export_action.dart';
+import '../settings/product_catalogue_screen.dart';
 import '../shell/home_shell.dart';
 import '../shell/sync_pill.dart';
 
@@ -130,12 +131,28 @@ class DashboardScreen extends ConsumerWidget {
                       ?.goToTab(2),
                 ),
               ),
-              const SizedBox(width: 12),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
               Expanded(
                 child: _ActionTile(
                   icon: Icons.file_download_outlined,
                   label: 'Export\nExcel',
                   onTap: () => exportExcelForDay(context, ref, day),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _ActionTile(
+                  icon: Icons.inventory_2_outlined,
+                  label: 'Product\nCatalogue',
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const ProductCatalogueScreen(),
+                    ),
+                  ),
                 ),
               ),
             ],

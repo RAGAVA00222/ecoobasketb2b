@@ -121,6 +121,31 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
         ),
         const SizedBox(height: 14),
 
+        // Same data as the load sheet, read the other way round: the load
+        // sheet is what to buy, this is what is selling.
+        _Section(
+          title: 'Top Products',
+          subtitle: 'Best sellers by boxes moved',
+          child: loadSheet.when(
+            loading: () => const _Loading(),
+            error: (error, _) => Text('$error'),
+            data: (lines) => lines.isEmpty
+                ? const _Empty(message: 'Nothing sold on this day yet.')
+                : Column(
+                    children: [
+                      for (final (rank, line) in lines.take(5).indexed)
+                        _Row(
+                          title: '${rank + 1}.  ${line.productName}',
+                          leadValue: '${line.boxes}',
+                          leadLabel: 'boxes',
+                          trailing: line.valuePaise.asRupees,
+                        ),
+                    ],
+                  ),
+          ),
+        ),
+        const SizedBox(height: 14),
+
         _Section(
           title: 'Top Customers',
           subtitle: 'By order value',

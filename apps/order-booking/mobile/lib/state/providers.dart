@@ -180,6 +180,15 @@ final customerSuggestionsProvider =
   return ref.watch(customerDaoProvider).search(term);
 });
 
+/// What this shop bought last time. Drives the Frequently Ordered strip, which
+/// turns a repeat visit into one tap instead of six searches.
+final lastOrderForProvider =
+    FutureProvider.family<BookedOrder?, String>((ref, mobile) {
+  ref.watch(ordersRevisionProvider);
+  if (mobile.isEmpty) return Future.value(null);
+  return ref.watch(orderDaoProvider).lastOrderFor(mobile);
+});
+
 // ---------------------------------------------------------------------------
 // Saving
 // ---------------------------------------------------------------------------

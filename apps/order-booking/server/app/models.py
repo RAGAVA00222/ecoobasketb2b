@@ -61,8 +61,15 @@ class Product(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     sku: Mapped[str] = mapped_column(String(40), unique=True, index=True)
     name: Mapped[str] = mapped_column(String(120))
+    # The supplier the box is bought from. The warehouse places one purchase
+    # order per brand, so the load sheet has to be groupable by it.
+    brand: Mapped[str] = mapped_column(String(60), default="", index=True)
     image_url: Mapped[str | None] = mapped_column(String(500), default=None)
+    # MRP is per retail unit; box price is per box. The same product recurs at
+    # several pack sizes (Milk Classic is ₹10x120 and ₹20x60), so units_per_box
+    # is what tells two otherwise identical-looking lines apart.
     mrp_paise: Mapped[int] = mapped_column(Integer)
+    units_per_box: Mapped[int] = mapped_column(Integer, default=1)
     box_price_paise: Mapped[int] = mapped_column(Integer)
     active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
     sort_order: Mapped[int] = mapped_column(Integer, default=0)

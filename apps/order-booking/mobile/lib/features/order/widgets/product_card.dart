@@ -56,18 +56,39 @@ class ProductCard extends ConsumerWidget {
                       height: 1.2,
                     ),
                   ),
+                  const SizedBox(height: 3),
+                  // Brand and pack size, because the catalogue carries the
+                  // same name at several pack sizes — "Milk Classic" is both
+                  // ₹10x120 and ₹20x60, and a salesman must not have to guess.
+                  Text(
+                    [
+                      if (product.brand.isNotEmpty) product.brand,
+                      if (product.unitsPerBox > 1) '${product.unitsPerBox} per box',
+                    ].join('  ·  '),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF8C9A93),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: 5),
                   Row(
                     children: [
-                      Text(
-                        'MRP ${product.mrpPaise.asRupees}',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFF6B7A73),
-                          fontWeight: FontWeight.w600,
+                      if (product.hasMrp) ...[
+                        // Hidden entirely when the price list has no MRP for
+                        // this line: a blank is honest, "MRP ₹0" is not.
+                        Text(
+                          'MRP ${product.mrpPaise.asRupees}',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Color(0xFF6B7A73),
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
+                        const SizedBox(width: 10),
+                      ],
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 3),
@@ -84,6 +105,21 @@ class ProductCard extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      if (product.unitsPerBox > 1) ...[
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            '${product.unitPricePaise.asRupeesExact}/pc',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF8C9A93),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                   const SizedBox(height: 10),
