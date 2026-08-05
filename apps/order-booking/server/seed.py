@@ -19,7 +19,7 @@ from sqlalchemy import select
 
 from app.db import SessionLocal, init_db
 from app.models import Product, Salesman
-from price_list import SALESMEN, rows
+from price_list import SALESMEN, rows, unpriced
 
 
 def seed(reset: bool = False, update: bool = False) -> None:
@@ -53,6 +53,17 @@ def seed(reset: bool = False, update: bool = False) -> None:
                     setattr(current, field, value)
                 repriced += 1
 
+        # A revised rate sheet can rename a product or move its MRP, which
+        # mints a new SKU. Without this, the superseded row stays active and
+        # the salesman sees the same product twice at two prices.
+        retired = []
+        if update or reset:
+            wanted = {r["sku"] for r in rows()}
+            for sku, product in existing.items():
+                if sku not in wanted and product.active:
+                    product.active = False
+                    retired.append(sku)
+
         have = {s.code for s in db.scalars(select(Salesman))}
         for code, name in SALESMEN:
             if code not in have:
@@ -60,7 +71,19 @@ def seed(reset: bool = False, update: bool = False) -> None:
 
         db.commit()
         total = db.query(Product).count()
-        print(f"catalogue: {total} products ({added} added, {repriced} re-priced)")
+        live = db.query(Product).filter(Product.active.is_(True)).count()
+        print(
+            f"catalogue: {total} products, {live} sellable "
+            f"({added} added, {repriced} re-priced, {len(retired)} retired)"
+        )
+        if retired:
+            print("  retired (no longer on the rate sheet): " + ", ".join(retired))
+        held = unpriced()
+        if held:
+            print(
+                f"  {len(held)} line(s) have no box rate on the sheet and are "
+                "held inactive until priced: " + ", ".join(held)
+            )
 
 
 if __name__ == "__main__":

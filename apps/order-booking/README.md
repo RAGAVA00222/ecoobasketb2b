@@ -50,11 +50,21 @@ pip install -r requirements.txt
 cp .env.example .env          # then edit it
 export $(grep -v '^#' .env | xargs)
 
-python seed.py                # loads the real price list (price_list.py)
+python seed.py                # loads the rate sheet from price_list.py
 uvicorn app.main:app --reload --port 8000
 ```
 
 Interactive API docs at `http://localhost:8000/docs`.
+
+**Updating the rate sheet.** Edit `price_list.py` and run `python seed.py
+--update`. That re-applies changed prices *and* deactivates any SKU the sheet
+no longer carries — a rename or an MRP change mints a new SKU, and without the
+retire step the superseded row would stay sellable and the salesman would see
+one product twice at two prices. Plain `python seed.py` only adds what is
+missing and never touches a live price.
+
+A line the sheet leaves without a box rate is loaded **inactive**: it exists
+for admin to price, but no salesman can sell it at a guessed figure.
 
 With no `DATABASE_URL` set it falls back to a local SQLite file, which is enough
 to run the app end to end on one machine. Point it at PostgreSQL for anything
@@ -65,7 +75,7 @@ Tests:
 ```bash
 cd apps/order-booking/server
 pip install pytest httpx
-python -m pytest tests -q     # 21 tests
+python -m pytest tests -q     # 23 tests
 ```
 
 ### App
@@ -285,7 +295,7 @@ Both suites pass:
   round-trips, day scoping, load-sheet aggregation, soft delete, the sync
   outbox, one-tap repeat ordering and pack-size arithmetic. `flutter analyze`
   reports no issues.
-- **21 Python tests** (`pytest`) covering server-side totals, sync idempotency,
+- **23 Python tests** (`pytest`) covering server-side totals, sync idempotency,
   per-order batch isolation, price snapshotting, admin gating, the price
   list's SKU uniqueness and derived unit rates, and the workbook contents.
 
