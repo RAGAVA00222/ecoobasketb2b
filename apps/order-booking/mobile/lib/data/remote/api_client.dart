@@ -124,6 +124,19 @@ class ApiClient {
     return response.bodyBytes;
   }
 
+  /// The warehouse's printable copy of the load sheet.
+  Future<List<int>> downloadLoadSheetPdf(
+      {required String fromDay, required String toDay}) async {
+    final response = await _client
+        .get(_uri('/api/v1/export/load-sheet.pdf', {
+          'from_date': fromDay,
+          'to_date': toDay,
+        }))
+        .timeout(const Duration(seconds: 60));
+    _ensureOk(response);
+    return response.bodyBytes;
+  }
+
   void _ensureOk(http.Response response) {
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw ApiException(

@@ -75,7 +75,7 @@ Tests:
 ```bash
 cd apps/order-booking/server
 pip install pytest httpx
-python -m pytest tests -q     # 23 tests
+python -m pytest tests -q     # 28 tests
 ```
 
 ### App
@@ -254,6 +254,7 @@ Base path `/api/v1`. Money fields are integer paise.
 | `GET` | `/reports/summary?on=` | Orders, customers, boxes, value + product/customer/salesman splits |
 | `GET` | `/reports/load-sheet?on=` | Product-wise box totals |
 | `GET` | `/export/orders.xlsx?on=` | The workbook |
+| `GET` | `/export/load-sheet.pdf?on=` | The warehouse's printable load sheet |
 
 Mobile numbers are normalised server-side and on-device: `+91 98765 43210`,
 `09876543210` and `9876543210` are all one shop.
@@ -272,6 +273,14 @@ Three sheets, from one click:
 
 Money is written as real numbers with a rupee number format, not as
 pre-formatted text, so the admin can pivot and re-total in Excel.
+
+### The printed load sheet
+
+`GET /export/load-sheet.pdf` renders the same aggregate as A4, laid out to be
+read while counting: one block per supplier, product name left, box count right
+in a large bold figure, and a per-supplier subtotal so a partial delivery can be
+checked off one brand at a time. Excel is for the admin who pivots; PDF is for
+the person with a clipboard next to a stack of cartons. Reports offers both.
 
 ---
 
@@ -295,7 +304,7 @@ Both suites pass:
   round-trips, day scoping, load-sheet aggregation, soft delete, the sync
   outbox, one-tap repeat ordering and pack-size arithmetic. `flutter analyze`
   reports no issues.
-- **23 Python tests** (`pytest`) covering server-side totals, sync idempotency,
+- **28 Python tests** (`pytest`) covering server-side totals, sync idempotency,
   per-order batch isolation, price snapshotting, admin gating, the price
   list's SKU uniqueness and derived unit rates, and the workbook contents.
 

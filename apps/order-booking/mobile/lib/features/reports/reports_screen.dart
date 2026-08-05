@@ -85,10 +85,28 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
         _Section(
           title: 'Load Sheet — Product Wise',
           subtitle: 'Boxes to order from the supplier',
-          trailing: TextButton.icon(
-            onPressed: () => exportExcelForDay(context, ref, _dayKey),
-            icon: const Icon(Icons.file_download_outlined, size: 18),
-            label: const Text('Excel'),
+          // Two formats because they serve two people: Excel for the admin
+          // who pivots and re-totals, PDF for the warehouse hand counting
+          // cartons off a printed page.
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextButton.icon(
+                onPressed: () => exportExcelForDay(context, ref, _dayKey),
+                icon: const Icon(Icons.table_chart_outlined, size: 17),
+                label: const Text('Excel'),
+              ),
+              TextButton.icon(
+                onPressed: () => exportExcelForDay(
+                  context,
+                  ref,
+                  _dayKey,
+                  format: ExportFormat.loadSheetPdf,
+                ),
+                icon: const Icon(Icons.picture_as_pdf_outlined, size: 17),
+                label: const Text('PDF'),
+              ),
+            ],
           ),
           child: loadSheet.when(
             loading: () => const _Loading(),

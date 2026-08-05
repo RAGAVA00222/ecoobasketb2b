@@ -13,19 +13,30 @@ import '../../state/providers.dart';
 /// and the phone hands it straight to WhatsApp, Gmail or Drive via the system
 /// share sheet. Building XLSX on the device would be slower and would still
 /// only see this one salesman's orders.
+enum ExportFormat { excel, loadSheetPdf }
+
+/// One tap: the server builds the file and the phone hands it straight to
+/// WhatsApp, Gmail or Drive via the system share sheet. Building either format
+/// on the device would be slower and would still only see this one salesman's
+/// orders.
 Future<void> exportExcelForDay(
-  BuildContext context, // ignore: use_build_context_synchronously
+  BuildContext context,
   WidgetRef ref,
   String day, {
   String? toDay,
+  ExportFormat format = ExportFormat.excel,
 }) async {
   final messenger = ScaffoldMessenger.of(context);
   final sync = ref.read(syncServiceProvider);
+  final isPdf = format == ExportFormat.loadSheetPdf;
 
   if (sync.state.connection == NetworkStatus.offline) {
     messenger.showSnackBar(
-      const SnackBar(
-        content: Text('Offline — connect to the internet to export Excel.'),
+      SnackBar(
+        content: Text(
+          'Offline — connect to the internet to export '
+          '${isPdf ? 'the load sheet' : 'Excel'}.',
+        ),
       ),
     );
     return;
@@ -42,25 +53,31 @@ Future<void> exportExcelForDay(
   }
 
   messenger.showSnackBar(
-    const SnackBar(content: Text('Preparing Excel…')),
+    SnackBar(content: Text('Preparing ${isPdf ? 'PDF' : 'Excel'}…')),
   );
 
   try {
-    final bytes = await ref
-        .read(apiClientProvider)
-        .downloadExport(fromDay: day, toDay: toDay ?? day);
+    final api = ref.read(apiClientProvider);
+    final end = toDay ?? day;
+    final bytes = isPdf
+        ? await api.downloadLoadSheetPdf(fromDay: day, toDay: end)
+        : await api.downloadExport(fromDay: day, toDay: end);
 
     final dir = await getTemporaryDirectory();
-    final name = (toDay == null || toDay == day)
-        ? 'ecoo-orders-$day.xlsx'
-        : 'ecoo-orders-$day-to-$toDay.xlsx';
+    final stem = isPdf ? 'ecoo-load-sheet' : 'ecoo-orders';
+    final range = (end == day) ? day : '$day-to-$end';
+    final name = '$stem-$range.${isPdf ? 'pdf' : 'xlsx'}';
     final file = File(p.join(dir.path, name));
     await file.writeAsBytes(bytes, flush: true);
 
     await Share.shareXFiles(
-      [XFile(file.path, mimeType: _xlsxMime)],
-      subject: 'Ecoo Basket orders $day',
-      text: 'Orders and load sheet for $day',
+      [XFile(file.path, mimeType: isPdf ? 'application/pdf' : _xlsxMime)],
+      subject: isPdf
+          ? 'Ecoo Basket load sheet $day'
+          : 'Ecoo Basket orders $day',
+      text: isPdf
+          ? 'Product-wise load sheet for $day'
+          : 'Orders and load sheet for $day',
     );
   } catch (error) {
     messenger.showSnackBar(
