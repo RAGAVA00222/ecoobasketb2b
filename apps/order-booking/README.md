@@ -18,6 +18,14 @@ apps/order-booking/
 This subtree is independent of the Next.js marketing site at the repository
 root; it shares nothing but the repo and the brand palette.
 
+Because of that independence, the root `vercel.json` carries an `ignoreCommand`
+that skips the website deploy for commits touching only `apps/order-booking/**`
+or `.github/**`. Rebuilding and redeploying the marketing site because a
+salesman's product card changed is pure waste, and a failed deploy on such a
+commit is pure noise. Website commits still deploy exactly as before — the
+rule excludes only these two paths, and any error in the check falls through
+to building rather than skipping.
+
 ---
 
 ## The 45-second order
