@@ -21,6 +21,8 @@ export const site = {
   cityLine: "VANAGARAM, CHENNAI 600095",
   // Official incorporation record (public info only)
   cin: "U47912TN2026PTC195420",
+  // MSME/Udyam registration (Ministry of MSME) — certificate dated 08/08/2026.
+  udyam: "UDYAM-TN-24-0189186",
   incorporated: "15 July 2026",
   companyType: "Private Limited Company, limited by shares",
   registeredOffice:

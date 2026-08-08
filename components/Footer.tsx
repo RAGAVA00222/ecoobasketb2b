@@ -71,6 +71,7 @@ export default function Footer() {
         {/* compliance row */}
         <div className="mt-12 flex flex-wrap gap-2.5 border-t border-[#16304F] pt-8">
           <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">CIN {site.cin}</span>
+          <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">UDYAM {site.udyam}</span>
           {/* CONTENT NEEDED (CONTENT-NEEDED.md): real GSTIN + FSSAI licence number.
               Shown as clearly-marked visible placeholders — FSSAI is mandatory for a
               food distributor, so the row must stay visible until the number lands. */}
