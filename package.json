@@ -2,12 +2,12 @@
   "name": "ecoo-basket-web",
   "version": "2.0.0",
   "private": true,
-  "description": "Ecoo Basket (Ecoo Hyper Retail Private Limited) — B2B FMCG distribution, Chennai. Next.js rebuild.",
+  "description": "Ecoo Basket (Ecoo Hyper Retail Private Limited) \u2014 B2B FMCG distribution, Chennai. Next.js rebuild.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "framer-motion": "11.15.0",
