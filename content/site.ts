@@ -8,7 +8,10 @@ export const site = {
   brand: "Ecoo Basket",
   legalName: "Ecoo Hyper Retail Private Limited",
   tagline: "B2B FMCG Distribution · Chennai, Tamil Nadu",
-  domain: "https://www.ecoobasketb2b.com",
+  // Apex is the primary domain on Netlify (www 301s here). Canonical, sitemap,
+  // robots and OG all derive from this, so it must be the URL that serves 200 —
+  // pointing them at a redirecting host splits SEO signals.
+  domain: "https://ecoobasketb2b.com",
   orderUrl: "https://www.ecoobasket.com",
   phone: "+91 93423 58226",
   phoneRaw: "+919342358226",
@@ -80,18 +83,6 @@ export const leaders: { name: string; title: string; slug: string; w: number; h:
   { name: "Ragavendren", title: "Chief Strategy Officer", slug: "ragavendren", w: 800, h: 1069 },
 ];
 
-// The Now Delivery hook — factual claim, locked wording.
-export const deliveryPromise = {
-  eyebrow: "Delivery Promise",
-  heading: "Now Delivery across Chennai. Free above ₹10,000.",
-  body:
-    "Built for Kirana stores and HORECA businesses — hotels, restaurants and caterers — who can't afford to wait days for restock. Order now, and any order above ₹10,000 delivers free anywhere in Chennai.",
-  cards: [
-    { k: "SPEED", t: "Now Delivery", d: "Fast turnaround across Chennai — no multi-day waits for restock." },
-    { k: "THRESHOLD", t: "Free Above ₹10,000", d: "Any single order over ₹10,000 ships free, anywhere in Chennai." },
-  ],
-};
-
 // services.html — 6 FMCG categories (locked).
 export const fmcgCategories = [
   "Beverages",
@@ -121,16 +112,6 @@ export const manufacturers: { name: string; slug: string }[] = [
   { name: "Parle", slug: "parle" },
   { name: "Coca-Cola", slug: "coca-cola" },
   { name: "PepsiCo", slug: "pepsico" },
-];
-
-// Distribution process (locked qualitative steps).
-export const processSteps = [
-  { n: "01", t: "Manufacturer", d: "Strategic sourcing from established FMCG brands and our own line." },
-  { n: "02", t: "Warehouse", d: "Received, inspected and stored with stock rotation." },
-  { n: "03", t: "Route Planning", d: "Deliveries planned zone by zone for predictable windows." },
-  { n: "04", t: "Delivery", d: "Direct-to-store, on schedule, on a clean GST invoice." },
-  { n: "05", t: "Retailer", d: "Shelves kept full — kirana, pharmacy, wholesale, HORECA." },
-  { n: "06", t: "Reorder", d: "Reorder any time through our digital ordering platform." },
 ];
 
 // AI-powered supply chain features (qualitative — no fabricated metrics).
