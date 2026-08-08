@@ -79,12 +79,14 @@ export default function Header() {
               {n.label}
             </Link>
           ))}
-          <Link
-            href="/partner"
+          <a
+            href={site.orderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-xl bg-accent px-5 py-2.5 text-[14.5px] font-semibold text-invert shadow-[0_12px_24px_-14px_rgba(22,163,74,0.6)] transition-all hover:-translate-y-0.5 hover:bg-accent-deep"
           >
-            Become a Partner
-          </Link>
+            Order Now
+          </a>
         </nav>
 
         {/* animated hamburger (<1200px) */}
@@ -143,13 +145,15 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <Link
-          href="/partner"
+        <a
+          href={site.orderUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setOpen(false)}
           className="mt-6 w-full rounded-xl bg-accent px-4 py-3.5 text-center text-[16px] font-semibold text-invert shadow-[0_12px_24px_-14px_rgba(22,163,74,0.6)] hover:bg-accent-deep"
         >
-          Become a Partner
-        </Link>
+          Order Now ↗
+        </a>
         <a
           href={site.whatsapp}
           target="_blank"

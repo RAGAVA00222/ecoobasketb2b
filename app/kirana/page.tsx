@@ -37,7 +37,7 @@ export default function KiranaPage() {
           <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white/85">A dependable FMCG wholesale partner for the shelves your customers rely on every day.</p>
           <p lang="ta" className="mt-1 max-w-2xl text-[16px] leading-relaxed text-white/75">உங்கள் வாடிக்கையாளர்கள் தினமும் நம்பும் பொருட்களுக்கு நம்பகமான FMCG மொத்த விற்பனை கூட்டாளர்.</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button href="/partner" variant="solidInvert">Become a Partner <span lang="ta">· கூட்டாளராக இணையுங்கள்</span></Button>
+            <Button href={site.orderUrl} external variant="solidInvert">Order Now <span lang="ta">· இப்போதே ஆர்டர் செய்யுங்கள்</span></Button>
             <Button href={site.whatsapp} external variant="outlineInvert"><MessageCircle size={18} /> Order on WhatsApp</Button>
           </div>
         </Reveal>
@@ -62,7 +62,7 @@ export default function KiranaPage() {
 
     <Section tone="surface"><Container><Reveal className="text-center"><Eyebrow>Available categories</Eyebrow><h2 className="mt-3 text-[clamp(28px,4vw,42px)]">Everyday FMCG, ready for your shelves</h2><p lang="ta" className="mt-2 text-lg text-muted">உங்கள் அலமாரிகளுக்கு அன்றாட FMCG பொருட்கள்</p></Reveal><div className="mx-auto mt-9 flex max-w-4xl flex-wrap justify-center gap-3">{["Biscuits & Snacks", "Noodles", "Soft Drinks", "Tea & Coffee", "Personal Care", "Home Care", "Staples"].map((x)=><span key={x} className="rounded-full border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink shadow-soft">{x}</span>)}</div></Container></Section>
 
-    <section className="forest-grad py-20 text-center text-invert"><Container><Reveal><h2 className="text-[clamp(30px,4vw,48px)] text-invert">Become Our Partner Today</h2><p lang="ta" className="mt-2 text-xl text-[#dcfce7]">இன்றே எங்கள் கூட்டாளராக இணையுங்கள்</p><p className="mx-auto mt-5 max-w-xl text-white/80">Tell us where your shop is and the categories you need. We&apos;ll confirm Chennai delivery availability.</p><div className="mt-8 flex flex-wrap justify-center gap-3"><Button href="/partner" variant="solidInvert">Register Now <span lang="ta">· இப்போதே பதிவு செய்யுங்கள்</span></Button><Button href={site.whatsapp} external variant="outlineInvert"><Clock3 size={17}/> Order on WhatsApp</Button></div></Reveal></Container>
+    <section className="forest-grad py-20 text-center text-invert"><Container><Reveal><h2 className="text-[clamp(30px,4vw,48px)] text-invert">Become Our Partner Today</h2><p lang="ta" className="mt-2 text-xl text-[#dcfce7]">இன்றே எங்கள் கூட்டாளராக இணையுங்கள்</p><p className="mx-auto mt-5 max-w-xl text-white/80">Tell us where your shop is and the categories you need. We&apos;ll confirm Chennai delivery availability.</p><div className="mt-8 flex flex-wrap justify-center gap-3"><Button href={site.orderUrl} external variant="solidInvert">Order Now <span lang="ta">· இப்போதே ஆர்டர் செய்யுங்கள்</span></Button><Button href={site.whatsapp} external variant="outlineInvert"><Clock3 size={17}/> Order on WhatsApp</Button></div></Reveal></Container>
     </section>
   </>;
 }

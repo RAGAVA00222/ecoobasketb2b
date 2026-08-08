@@ -125,7 +125,7 @@ export default function Home() {
               Same-day dispatch and 24–48-hour delivery across Chennai, with free delivery on every order above ₹10,000 — dependable FMCG wholesale for kirana stores and retailers.
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
-              <Button href="/partner" variant="primary">Become a Partner <ArrowRight size={17} /></Button>
+              <Button href={site.orderUrl} external variant="primary">Order Now <ArrowRight size={17} /></Button>
               <Button href={site.whatsapp} external variant="outline"><MessageCircle size={17} /> Order on WhatsApp</Button>
             </div>
           </Reveal>
