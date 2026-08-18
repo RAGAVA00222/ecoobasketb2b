@@ -70,6 +70,7 @@ export default function Home() {
     name: site.legalName, alternateName: site.brand, legalName: site.legalName, url: site.domain,
     logo: `${site.domain}/assets/images/logo/08_Logo_Full_Primary.jpg`,
     email: site.email, telephone: "+91-93423-58226",
+    taxID: site.gstin,
     // Official registration numbers (public record) — CIN from MCA, Udyam from
     // the Ministry of MSME. Both are verifiable third-party identifiers.
     identifier: [
