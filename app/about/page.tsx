@@ -22,6 +22,7 @@ const record: [string, string][] = [
   ["Legal Entity", site.legalName],
   ["CIN", site.cin],
   ["Udyam (MSME) Registration", site.udyam],
+  ["GSTIN", site.gstin],
   ["Date of Incorporation", site.incorporated],
   ["Company Type", site.companyType],
   ["Registered Office", site.registeredOffice],
