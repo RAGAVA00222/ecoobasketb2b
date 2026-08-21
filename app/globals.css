@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
+/*
+  Ecoo Basket uses a single light brand palette. The previous
+  `prefers-color-scheme: dark` block flipped --foreground to #ededed while the
+  page background stayed light (body carries Tailwind's bg-gray-50), so on any
+  device set to dark mode every element without an explicit text colour rendered
+  near-white on near-white. The palette below is intentionally light-only.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f9fafb;
+  --foreground: #111827;
 }
-
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Continuous logo marquee used by the "Supplying Brands You Trust" section. */
+  --animate-scroll-x: scroll-x 40s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* The track renders the logo list twice, so -50% loops seamlessly. */
+    transform: translateX(-50%);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Respect users who have asked the OS to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

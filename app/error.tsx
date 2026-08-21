@@ -6,10 +6,10 @@ import Navbar from "@/components/Navbar";
 
 export default function ErrorPage({
   error,
-  unstable_retry,
+  reset,
 }: {
   error: Error & { digest?: string };
-  unstable_retry: () => void;
+  reset: () => void;
 }) {
   useEffect(() => {
     console.error(error);
@@ -33,7 +33,7 @@ export default function ErrorPage({
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <button
               type="button"
-              onClick={() => unstable_retry()}
+              onClick={() => reset()}
               className="rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
             >
               Try Again

@@ -1,5 +1,5 @@
 import { generatePageMetadata } from "@/lib/metadata";
-import { WebSite } from "schema-dts";
+import { WebSite, WithContext } from "schema-dts";
 import {
   CheckCircleIcon,
   BuildingStorefrontIcon,
@@ -8,7 +8,6 @@ import {
   UserGroupIcon,
   BuildingOffice2Icon,
 } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/20/solid";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,19 +15,20 @@ import BackToTopButton from "../components/BackToTopButton";
 import Navbar from "../components/Navbar";
 import { JsonLd } from "@/components/JsonLd";
 
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, DELIVERY_PROMISE, ORDER_TERMS } from "@/lib/constants";
+
+/** 4.3 - approved operating-model pills. */
+const FEATURE_PILLS = [
+  "Fixed Weekly Beat",
+  "Route Planning",
+  "GST Billing",
+  "WhatsApp Order Capture",
+];
 
 export const metadata: Metadata = generatePageMetadata({
   title: "FMCG Wholesale Distribution Partner for Retailers & Kirana Stores",
   description:
-    "Ecoo Basket is India's trusted B2B FMCG wholesale distribution partner, supplying grocery, beverages, personal care, and more to Kirana stores, supermarkets, hotels, and restaurants with competitive pricing and reliable delivery.",
-  keywords: [
-    "FMCG wholesale",
-    "B2B distribution",
-    "Kirana store supply",
-    "wholesale grocery",
-    "FMCG distributor India",
-  ],
+    "Ecoo Hyper Retail Private Limited - B2B FMCG wholesale distribution to kirana stores, pharmacies and wholesale merchants across Chennai, Tamil Nadu. GSTIN 33AAJCE8472G1ZG.",
   path: "/",
 });
 
@@ -43,7 +43,7 @@ const ecooSolutions = [
   },
   {
     name: "Wide FMCG Product Range",
-    description: "Access over 500+ products from 20+ trusted brands in one place.",
+    description: "Multi-brand FMCG across grocery, beverages, home care, personal care and stationery.",
   },
   {
     name: "Bulk Purchase Benefits",
@@ -78,27 +78,27 @@ const ecooSolutions = [
 const newProductCategories = [
   {
     name: "Grocery & Staples",
-    image: "/images/categories/grocery.webp",
+    image: "/images/categories/grocery.jpg",
   },
   {
     name: "Beverages",
-    image: "/images/categories/beverages.webp",
+    image: "/images/categories/beverages.jpg",
   },
   {
     name: "Personal Care",
-    image: "/images/categories/personal-care.webp",
+    image: "/images/categories/personal-care.jpg",
   },
   {
     name: "Home Care",
-    image: "/images/categories/home-care.webp",
+    image: "/images/categories/home-care.jpg",
   },
   {
     name: "Stationery",
-    image: "/images/categories/stationery.webp",
+    image: "/images/categories/stationery.jpg",
   },
   {
     name: "Hotel & Restaurant Supplies",
-    image: "/images/categories/hotel-supplies.webp",
+    image: "/images/categories/hotel-supplies.jpg",
   },
 ];
 
@@ -112,7 +112,7 @@ const whyChooseUsReasons = [
   {
     name: "One-Stop Sourcing",
     description:
-      "Access a wide range of 500+ FMCG products across all major categories from over 20+ trusted brands in a single order.",
+      "Multi-brand FMCG across grocery, beverages, staples, home care, personal care and stationery - ordered in one place, on one invoice.",
     icon: BuildingStorefrontIcon,
   },
   {
@@ -129,33 +129,6 @@ const whyChooseUsReasons = [
   },
 ];
 
-const testimonials = [
-  {
-    rating: 5,
-    quote:
-      "Ecoo Basket's wholesale pricing is unmatched. It has significantly boosted our profit margins. Their delivery is always on time, which is crucial for our business.",
-    author: "Rajesh Kumar",
-    company: "Kumar Provisions",
-    image: "/images/testimonials/rajesh-kumar.jpg",
-  },
-  {
-    rating: 5,
-    quote:
-      "The wide product range and consistent availability have made inventory management so much easier. Our customers are happier because we rarely run out of stock.",
-    author: "Priya Sharma",
-    company: "Sharma Supermarket",
-    image: "/images/testimonials/priya-sharma.jpg",
-  },
-  {
-    rating: 5,
-    quote:
-      "As a hotel manager, sourcing quality supplies is key. Ecoo Basket provides top-tier products with professional service. They are a trusted partner for our daily needs.",
-    author: "Anand Verma",
-    company: "The Grand Hotel",
-    image: "/images/testimonials/anand-verma.jpg",
-  },
-];
-
 const services = [
   {
     name: "Wholesale Supply",
@@ -164,9 +137,9 @@ const services = [
     icon: BuildingStorefrontIcon,
   },
   {
-    name: "HORECA & Institutional Supply",
+    name: "Wholesale Merchant Supply",
     description:
-      "Customized sourcing and delivery for hotels, restaurants, cafes (HORECA), and other institutions.",
+      "Bulk supply for wholesale merchants and pharmacies on the same weekly beat, against a GST invoice.",
     icon: BuildingOffice2Icon,
   },
   {
@@ -177,42 +150,27 @@ const services = [
   },
 ];
 
-const trustedBrands = [
-  { name: "Brand 1", logo: "/images/brands/logo1.svg" },
-  { name: "Brand 2", logo: "/images/brands/logo2.svg" },
-  { name: "Brand 3", logo: "/images/brands/logo3.svg" },
-  { name: "Brand 4", logo: "/images/brands/logo4.svg" },
-  { name: "Brand 5", logo: "/images/brands/logo5.svg" },
-  { name: "Brand 6", logo: "/images/brands/logo6.svg" },
-  { name: "Brand 7", logo: "/images/brands/logo7.svg" },
-  { name: "Brand 8", logo: "/images/brands/logo8.svg" },
-];
-
-const stats = [
-  { name: "Products", value: "500+" },
-  { name: "Trusted Brands", value: "20+" },
-  { name: "Retailers Served", value: "100+" },
-  { name: "Delivery Network", value: "24/7" },
-];
-
-const websiteSchema: WebSite = {
+const websiteSchema: WithContext<WebSite> = {
+  "@context": "https://schema.org",
   "@type": "WebSite",
-  url: COMPANY.website_b2b,
-  name: COMPANY.name,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${COMPANY.website_b2b}/products?q={search_term_string}`,
-    },
-  } as any,
+  url: COMPANY.siteUrl,
+  name: COMPANY.brandName,
+  publisher: {
+    "@type": "Organization",
+    name: COMPANY.legalName,
+  },
+  // NOTE: a SearchAction was declared here pointing at /products?q={term}.
+  // No search exists on that page (or anywhere on the site), and the action was
+  // also missing the required `query-input` property - so it advertised a
+  // sitelinks searchbox that would have led nowhere. Re-add it only once a real
+  // search is implemented.
 };
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
-      <JsonLd data={{ "@context": "https://schema.org", ...websiteSchema }} />
+      <JsonLd data={websiteSchema} />
       <BackToTopButton />
 
 
@@ -235,16 +193,21 @@ export default function HomePage() {
               </svg>
               <div className="relative px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block">India&apos;s Trusted</span>
+                  <span className="block">B2B FMCG Wholesale</span>
                   <span className="block text-green-600">
-                    FMCG Wholesale Partner
+                    Distribution in Chennai
                   </span>
                 </h1>
                 <p className="mt-6 max-w-md text-lg text-gray-600 sm:text-xl md:mt-8 md:max-w-3xl">
-                  Empowering Kirana stores, supermarkets, hotels, and
-                  restaurants with a reliable supply of top-quality FMCG
-                  products at competitive wholesale prices.
+                  Multi-brand FMCG supplied to kirana stores, pharmacies and
+                  wholesale merchants across Chennai on a fixed weekly beat.
                 </p>
+                {/* 4.4 - delivery promise, identical wording site-wide */}
+                <p className="mt-5 text-lg font-semibold text-gray-900">
+                  {DELIVERY_PROMISE}
+                </p>
+                {/* 4.5 - order terms, identical wording site-wide */}
+                <p className="mt-2 text-base text-gray-600">{ORDER_TERMS}</p>
                 <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
                     <Link
@@ -269,10 +232,11 @@ export default function HomePage() {
           <div className="h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
             <Image
               className="h-full w-full object-cover"
-              src="/images/hero-banner.jpg"
-              alt="Ecoo Basket FMCG wholesale distribution warehouse"
-              width={1920}
-              height={1080}
+              src="/images/hero.jpeg"
+              alt="Ecoo Basket FMCG wholesale distribution in Chennai"
+              width={1536}
+              height={1024}
+              sizes="(max-width: 1024px) 100vw, 50vw"
               priority
             />
           </div>
@@ -297,9 +261,10 @@ export default function HomePage() {
                 >
                   <Image
                     src={category.image}
-                    alt={`Illustration for ${category.name}`}
-                    width={400}
-                    height={300}
+                    alt={`${category.name} products supplied by Ecoo Basket`}
+                    width={1448}
+                    height={1086}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="h-64 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
@@ -314,64 +279,50 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="bg-green-700 py-16 sm:py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.name} className="flex flex-col">
-                  <dt className="order-2 mt-2 text-lg font-medium leading-6 text-green-100">
-                    {stat.name}
-                  </dt>
-                  <dd className="order-1 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* About Ecoo Basket Section */}
         <section className="bg-white py-16 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24">
+            {/*
+              MISSING ASSETS - real photography required.
+              This section previously rendered two images that do not exist
+              (an operations photo and a delivery-vehicle photo).
+              No equivalent photo ships with the project, so they were removed rather
+              than swapped for an unrelated picture. To restore the two-column layout,
+              drop the real photos at the paths above and re-add the image grid.
+            */}
+            <div className="mx-auto max-w-3xl text-center">
               <div>
                 <h2 className="text-base font-semibold uppercase tracking-wider text-green-600">
                   About Ecoo Basket
                 </h2>
                 <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                  India&apos;s Modern FMCG Distribution Backbone
+                  B2B FMCG Wholesale Distribution in Chennai
                 </p>
                 <p className="mt-6 text-lg text-gray-600">
-                  Ecoo Basket is a trusted B2B wholesale and distribution
-                  company dedicated to strengthening India&apos;s retail supply
-                  chain. We supply a comprehensive range of groceries,
-                  beverages, personal care, and daily essentials to retailers,
-                  supermarkets, hotels, and restaurants.
+                  Ecoo Basket supplies multi-brand FMCG to kirana stores,
+                  pharmacies and wholesale merchants across Chennai. We run a
+                  fixed weekly beat &mdash; the same representative visits your
+                  store on the same day every week, takes the order, and
+                  delivers it against a GST invoice with payment on delivery.
                 </p>
                 <p className="mt-4 text-lg text-gray-600">
-                  Our mission is to empower businesses by providing competitive
-                  pricing, consistent product availability, and a reliable
-                  delivery network, all powered by technology and a commitment
-                  to long-term partnerships.
+                  No credit accounts. No stock sitting in a warehouse ageing. No
+                  reconciliation chasing. One accountable contact for every
+                  order.
                 </p>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <Image
-                  className="h-auto w-full rounded-lg object-cover shadow-lg"
-                  src="/images/about/warehouse.jpg"
-                  alt="Ecoo Basket warehouse interior"
-                  width={400}
-                  height={500}
-                />
-                <Image
-                  className="mt-8 h-auto w-full rounded-lg object-cover shadow-lg"
-                  src="/images/about/delivery-vehicle.jpg"
-                  alt="Ecoo Basket delivery vehicle"
-                  width={400}
-                  height={500}
-                />
+
+                {/* 4.3 - four feature pills */}
+                <ul className="mt-8 flex flex-wrap gap-2" aria-label="How we operate">
+                  {FEATURE_PILLS.map((pill) => (
+                    <li
+                      key={pill}
+                      className="rounded-full bg-green-50 px-4 py-2 text-sm font-medium text-green-700"
+                    >
+                      {pill}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -503,93 +454,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Trusted Brands Section */}
-        <section className="bg-gray-50 py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-base font-semibold uppercase tracking-wider text-green-600">
-                Our Brand Partners
-              </h2>
-              <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Supplying Brands You Trust
-              </p>
-            </div>
-            <div className="mt-12 overflow-hidden">
-              <div className="flex animate-scroll-x space-x-12">
-                {[...trustedBrands, ...trustedBrands].map((brand, index) => (
-                  <div
-                    key={`${brand.name}-${index}`}
-                    className="flex-shrink-0"
-                  >
-                    <Image
-                      className="h-12 w-auto"
-                      src={brand.logo}
-                      alt={brand.name}
-                      width={158}
-                      height={48}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Customer Testimonials Section */}
-        <section className="bg-green-50 py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-base font-semibold uppercase tracking-wider text-green-600">
-                Trusted by Businesses Across India
-              </h2>
-              <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                What Our Partners Say
-              </p>
-            </div>
-            <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
-              {testimonials.map((testimonial) => (
-                <div
-                  key={testimonial.author}
-                  className="flex flex-col rounded-xl bg-white shadow-lg"
-                >
-                  <div className="flex-1 p-8">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <StarIcon
-                          key={i}
-                          className={`h-5 w-5 ${
-                            i < testimonial.rating
-                              ? "text-yellow-400"
-                              : "text-gray-300"
-                          }`}
-                          aria-hidden="true"
-                        />
-                      ))}
-                    </div>
-                    <blockquote className="mt-6 text-lg text-gray-600">
-                      <p>&quot;{testimonial.quote}&quot;</p>
-                    </blockquote>
-                  </div>
-                  <div className="mt-auto bg-gray-50 p-6">
-                    <div className="flex items-center">
-                      <Image
-                        className="h-12 w-12 rounded-full object-cover"
-                        src={testimonial.image}
-                        alt={`Photograph of ${testimonial.author}`}
-                        width={48}
-                        height={48}
-                      />
-                      <div className="ml-4">
-                        <div className="text-base font-semibold text-gray-900">{testimonial.author}</div>
-                        <div className="text-base text-gray-500">{testimonial.company}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
     </>
   );

@@ -1,9 +1,14 @@
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, WHATSAPP_MESSAGE } from "@/lib/constants";
 
 export default function WhatsAppButton() {
+  // wa.me requires a digits-only number; a leading "+" makes the link fail.
+  const href = `https://wa.me/${COMPANY.phoneRaw}?text=${encodeURIComponent(
+    WHATSAPP_MESSAGE
+  )}`;
+
   return (
     <a
-      href={`https://wa.me/${COMPANY.phone_link}`}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Ecoo Basket on WhatsApp"

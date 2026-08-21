@@ -1,34 +1,56 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { generatePageMetadata } from "@/lib/metadata";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, LEADERSHIP } from "@/lib/constants";
 import Navbar from "../../components/Navbar";
 import Image from "next/image";
 import { JsonLd } from "@/components/JsonLd";
 
+/*
+  MISSING ASSETS - leadership portraits required.
+  These three files were referenced but have never existed in /public:
+      /images/founders/founder-1.jpg
+      /images/founders/founder-2.jpg
+      /images/founders/founder-3.jpg
+  Until real photographs are supplied, a neutral initials avatar is rendered and
+  the Person structured data omits the `image` property (rather than advertising
+  a 404 to search engines). To restore photos: drop the files at the paths above
+  and set `imageUrl` on the matching entry below.
+*/
 const leaders = [
   {
-    name: "Mrs. Nirmala Devi Nagaraj",
-    role: "Founder & Director",
-    bio: "With a vision for a transparent and tech-driven distribution network, Nirmala established Ecoo Basket to empower retailers through quality products and lasting partnerships.",
-    imageUrl: "/images/founders/nirmala-devi-nagaraj.jpg",
+    name: LEADERSHIP[0].name,
+    role: LEADERSHIP[0].title,
+    bio: "Nirmala Devi established Ecoo Basket to serve kirana stores, pharmacies and wholesale merchants across Chennai through a fixed weekly beat and accountable service.",
+    imageUrl: "",
     linkedinUrl: "https://www.linkedin.com/in/nirmaladevinagaraj",
   },
   {
-    name: "Mrs. SriKeerthana Devi Chakkaravathi",
-    role: "Co-Founder",
-    bio: "SriKeerthana leads operations and digital transformation, focusing on simplifying procurement and enhancing the customer experience through innovation and branding.",
-    imageUrl: "/images/founders/srikeerthana-devi.jpg",
+    name: LEADERSHIP[1].name,
+    role: LEADERSHIP[1].title,
+    bio: "Sri Keerthana Devi leads operations and digital systems, focusing on simplifying ordering and keeping every delivery accountable to one contact.",
+    imageUrl: "",
     linkedinUrl: "https://www.linkedin.com/in/srikeerthanadevic",
   },
   {
-    name: "Mr. Ragavendren Chakkaravathi",
-    role: "Chief Sales Officer (CSO)",
-    bio: "Leveraging 15+ years in FMCG and retail, Ragavendren drives sales strategy and market expansion, building a robust network of Kirana partners and managing the supply chain.",
-    imageUrl: "/images/founders/ragavendren-chakkaravathi.jpg",
+    name: LEADERSHIP[2].name,
+    role: LEADERSHIP[2].title,
+    bio: "Ragavendran leads strategy and route expansion, building the Chennai beat and the merchant relationships behind it.",
+    imageUrl: "",
     linkedinUrl: "https://www.linkedin.com/in/ragavendrenc",
   },
 ];
+
+/** Initials fallback used until real leadership photography is supplied. */
+function initialsOf(name: string) {
+  return name
+    .replace(/^(Mrs\.|Mr\.|Ms\.|Dr\.)\s*/i, "")
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
 
 const values = [
   "Integrity – Honest and transparent business practices",
@@ -43,12 +65,6 @@ export const metadata: Metadata = generatePageMetadata({
   title: "Our Founders & Leadership",
   description:
     "Meet the leadership team behind Ecoo Basket. Our women-led company is driven by a mission to build the most trusted FMCG wholesale distribution network in India.",
-  keywords: [
-    "founders",
-    "leadership team",
-    "women-led company",
-    "FMCG leaders",
-  ],
   path: "/founders",
 });
 
@@ -67,7 +83,9 @@ export default function FoundersPage() {
                 name: leader.name,
                 jobTitle: leader.role,
                 url: leader.linkedinUrl,
-                image: `${COMPANY.website_b2b}${leader.imageUrl}`,
+                ...(leader.imageUrl
+                  ? { image: `${COMPANY.siteUrl}${leader.imageUrl}` }
+                  : {}),
               }}
             />
           ))}
@@ -82,7 +100,10 @@ export default function FoundersPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-8 py-20">
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <h2 className="mb-12 text-center text-3xl font-bold text-green-700">
+            Leadership Team
+          </h2>
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {leaders.map((leader) => (
               <article
@@ -90,13 +111,23 @@ export default function FoundersPage() {
                 className="group space-y-4 text-center"
               >
                 <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full lg:h-48 lg:w-48">
-                  <Image
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    src={leader.imageUrl}
-                    alt={`Photograph of ${leader.name}`}
-                    width={200}
-                    height={200}
-                  />
+                  {leader.imageUrl ? (
+                    <Image
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      src={leader.imageUrl}
+                      alt={`Photograph of ${leader.name}`}
+                      width={200}
+                      height={200}
+                      sizes="(max-width: 1024px) 10rem, 12rem"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className="flex h-full w-full items-center justify-center bg-green-700 text-4xl font-bold text-white lg:text-5xl"
+                    >
+                      {initialsOf(leader.name)}
+                    </span>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <div className="space-y-1 text-lg font-medium leading-6">
@@ -134,7 +165,7 @@ export default function FoundersPage() {
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-600">Women-Led Enterprise</p>
               <h2 className="mt-3 text-3xl font-bold text-green-700">Empowering Retail. Inspiring Growth.</h2>
               <p className="mt-5 text-lg text-gray-700">
-                Ecoo Basket is proudly a women-led FMCG wholesale distribution company. Under the leadership of Mrs. Nirmala Devi Nagaraj and Mrs. SriKeerthana Devi Chakkaravathi, the company is committed to delivering quality products, reliable service, and sustainable growth while creating opportunities for retailers and business partners.
+                Ecoo Basket is proudly a women-led FMCG wholesale distribution company. Under the leadership of N Nirmala Devi and Sri Keerthana Devi C, the company is committed to delivering quality products, reliable service, and sustainable growth while creating opportunities for retailers and business partners.
               </p>
             </div>
 
@@ -196,9 +227,9 @@ export default function FoundersPage() {
               “Our vision is to make Ecoo Basket a trusted partner for every retailer by delivering quality products, dependable service, and lasting business relationships. Together, we are building a stronger and more connected FMCG distribution network for the future.”
             </p>
             <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              — Mrs. Nirmala Devi Nagaraj, Founder & Director
+              — N Nirmala Devi, Founder & Managing Director
               <br />
-              — Mrs. SriKeerthana Devi Chakkaravathi, Co-Founder
+              — Sri Keerthana Devi C, Co-Founder & Director
             </p>
           </div>
         </section>
@@ -210,7 +241,7 @@ export default function FoundersPage() {
             </h2>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a
-                href={COMPANY.website}
+                href={COMPANY.storeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${COMPANY.website_b2b}/sitemap.xml`,
+    sitemap: `${COMPANY.siteUrl}/sitemap.xml`,
   };
 }

@@ -4,57 +4,8 @@ import Navbar from "../../components/Navbar";
 import Image from "next/image";
 import { generatePageMetadata } from "@/lib/metadata";
 import { slugify } from "@/lib/utils";
+import { PRODUCT_CATEGORY_DETAILS } from "@/lib/constants";
 
-const categories = [
-  {
-    title: "Grocery",
-    image: "/images/categories/grocery.svg",
-    description:
-      "Staple food essentials for retailers, supermarkets, and homes.",
-    items: ["Rice", "Sugar", "Flour", "Pulses", "Cooking Oil"],
-    brands: ["Aachi", "Fortune", "India Gate"],
-  },
-  {
-    title: "Beverages",
-    image: "/images/categories/beverages.svg",
-    description:
-      "Tea, coffee, juices, and soft drinks for everyday demand.",
-    items: ["Tea", "Coffee", "Soft Drinks", "Juices"],
-    brands: ["Tata Consumer", "Bru", "Paper Boat"],
-  },
-  {
-    title: "Personal Care",
-    image: "/images/categories/personal-care.svg",
-    description:
-      "Daily personal care essentials trusted by modern households.",
-    items: ["Soap", "Shampoo", "Toothpaste", "Face Wash"],
-    brands: ["HUL", "Dove", "Patanjali"],
-  },
-  {
-    title: "Home Care",
-    image: "/images/categories/home-care.svg",
-    description:
-      "Effective cleaning and hygiene products for homes and businesses.",
-    items: ["Detergent", "Floor Cleaner", "Dishwash"],
-    brands: ["Lizol", "Surf Excel", "Harpic"],
-  },
-  {
-    title: "Snacks & Biscuits",
-    image: "/images/categories/snacks-biscuits.svg",
-    description:
-      "Popular snack packs and biscuits for retail shelves and festive demand.",
-    items: ["Biscuits", "Namkeen", "Chips", "Cookies"],
-    brands: ["Parle", "Britannia", "Bikaji"],
-  },
-  {
-    title: "Dairy Products",
-    image: "/images/categories/dairy.svg",
-    description:
-      "Milk products and daily dairy staples for bulk and retail supply.",
-    items: ["Milk", "Butter", "Paneer", "Curd"],
-    brands: ["Amul", "Arokya", "Nandini"],
-  },
-];
 
 
 
@@ -62,12 +13,6 @@ export const metadata: Metadata = generatePageMetadata({
   title: "Products",
   description:
     "Browse our comprehensive range of FMCG products including grocery, beverages, personal care, home care, snacks, and dairy. Premium wholesale products for retailers and institutions.",
-  keywords: [
-    "FMCG products",
-    "wholesale products",
-    "grocery wholesale",
-    "product categories",
-  ],
   path: "/products",
 });
 
@@ -92,7 +37,7 @@ export default function ProductsPage() {
           </div>
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((category) => (
+            {PRODUCT_CATEGORY_DETAILS.map((category) => (
               <article
                 key={category.title}
                 id={slugify(category.title)}
@@ -100,10 +45,11 @@ export default function ProductsPage() {
               >
                 <Image
                   src={category.image}
-                  alt={`${category.title} products`}
+                  alt={`${category.title} products supplied by Ecoo Basket`}
                   width={900}
                   height={320}
                   loading="lazy"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="h-48 w-full object-cover"
                 />
                 <div className="p-6">
@@ -121,15 +67,6 @@ export default function ProductsPage() {
                         <li key={item}>• {item}</li>
                       ))}
                     </ul>
-                  </div>
-
-                  <div className="mt-5">
-                    <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-                      Featured Brands
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-700">
-                      {category.brands.join(", ")}
-                    </p>
                   </div>
 
                   <Link

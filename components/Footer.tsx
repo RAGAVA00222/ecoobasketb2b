@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { COMPANY, FOOTER_QUICK_LINKS, PRODUCT_CATEGORIES, SERVICES, SOCIAL_LINKS } from "@/lib/constants";
+import { COMPANY, FOOTER_QUICK_LINKS, ORDER_TERMS, PRODUCT_CATEGORIES, SERVICES, SOCIAL_LINKS, STATUTORY_LINE } from "@/lib/constants";
 import { slugify } from "@/lib/utils";
 
 const socialIcons = {
@@ -29,9 +29,12 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-4">
           {/* Brand Section */}
           <div>
-            <h2 className="text-xl font-semibold text-white">{COMPANY.name}</h2>
+            <h2 className="text-xl font-semibold text-white">{COMPANY.brandName}</h2>
+            <p className="mt-1 text-xs uppercase tracking-[0.2em] text-gray-500">
+              A unit of {COMPANY.legalName}
+            </p>
             <p className="mt-4 max-w-sm text-sm leading-7 text-gray-400">
-              {COMPANY.name} is a trusted FMCG wholesale and distribution partner supporting retailers, supermarkets, hotels, restaurants, and institutions with reliable supply and competitive pricing.
+              {COMPANY.brandName} is a trusted FMCG wholesale and distribution partner supporting retailers, supermarkets, hotels, restaurants, and institutions with reliable supply and competitive pricing.
             </p>
             <nav className="mt-6 flex gap-3" aria-label="Social media links">
               {SOCIAL_LINKS.map((link) => (
@@ -107,7 +110,7 @@ export default function Footer() {
             <div className="mt-5 space-y-2 text-sm text-gray-400">
               <p>
                 <a
-                  href={`tel:${COMPANY.phone_link}`}
+                  href={`tel:+${COMPANY.phoneRaw}`}
                   className="hover:text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 rounded px-1 py-0.5"
                 >
                   {COMPANY.phone}
@@ -121,13 +124,22 @@ export default function Footer() {
                   {COMPANY.email}
                 </a>
               </p>
-              <p>{COMPANY.address.street}</p>
+              <p>{COMPANY.address.line1}</p>
+              <p>{COMPANY.address.line2}</p>
+              <p>{COMPANY.address.line3}</p>
             </div>
           </nav>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
+        <div className="mt-10 border-t border-white/10 pt-6">
+          <p className="mb-3 text-center text-xs tracking-wide text-gray-400">
+            {STATUTORY_LINE}
+          </p>
+          <p className="mb-4 text-center text-sm text-gray-400">{ORDER_TERMS}</p>
+          <p className="text-center text-sm text-gray-500">
+            © {new Date().getFullYear()} {COMPANY.legalName}. All rights
+            reserved. {COMPANY.brandName} is a brand of {COMPANY.legalName}.
+          </p>
         </div>
       </div>
     </footer>

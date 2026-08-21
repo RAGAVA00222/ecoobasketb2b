@@ -2,39 +2,8 @@ import { Metadata } from "next";
 import Navbar from "../../components/Navbar";
 import { generatePageMetadata } from "@/lib/metadata";
 import { slugify } from "@/lib/utils";
+import { SERVICE_DETAILS } from "@/lib/constants";
 
-const servicesData = [
-  {
-    title: "FMCG Wholesale Distribution",
-    description:
-      "Reliable sourcing and supply of essential consumer products for modern trade and wholesale channels.",
-  },
-  {
-    title: "Retail Supply",
-    description:
-      "Consistent product availability for kirana stores, retail outlets, and neighborhood shops.",
-  },
-  {
-    title: "Supermarket Supply",
-    description:
-      "Wide assortment support for supermarkets, mini marts, and convenience stores.",
-  },
-  {
-    title: "Hotel & Restaurant Supply",
-    description:
-      "Bulk supply for hospitality and food service operations with dependable restocking.",
-  },
-  {
-    title: "Institutional Supply",
-    description:
-      "Tailored procurement solutions for schools, offices, hospitals, and institutions.",
-  },
-  {
-    title: "Logistics & Delivery",
-    description:
-      "On-time dispatch and delivery support backed by a strong logistics network.",
-  },
-];
 
 
 
@@ -42,7 +11,6 @@ export const metadata: Metadata = generatePageMetadata({
   title: "Services",
   description:
     "Explore Ecoo Basket's comprehensive FMCG supply services including wholesale distribution, retail supply, supermarket supply, hotel services, and logistics.",
-  keywords: ["FMCG services", "wholesale services", "supply solutions", "logistics"],
   path: "/services",
 });
 
@@ -61,13 +29,12 @@ export default function ServicesPage() {
               End-to-end FMCG supply solutions for business growth
             </h1>
             <p className="mt-6 text-base text-gray-600 sm:text-lg">
-              Ecoo Basket offers flexible supply services designed for retailers,
-              distributors, hotels, and institutions.
+              Ecoo Basket supplies kirana stores, pharmacies and wholesale merchants across Chennai.
             </p>
           </div>
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-            {servicesData.map((service) => (
+            {SERVICE_DETAILS.map((service) => (
               <article
                 key={service.title}
                 id={slugify(service.title)}

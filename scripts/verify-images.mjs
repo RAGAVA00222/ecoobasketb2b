@@ -10,9 +10,14 @@ const __dirname = path.dirname(__filename);
 // Project root is one level up from /scripts
 const projectRoot = path.resolve(__dirname, '..');
 const publicDir = path.join(projectRoot, 'public');
+// glob requires POSIX separators. On Windows path.join() produces backslashes,
+// which matched nothing at all - the script then reported "0 references found"
+// and exited 0, so a broken image could never fail the check.
+const toPosix = (p) => p.split(path.sep).join('/');
 const sourceDirs = [
-    path.join(projectRoot, 'app/**/*.{tsx,jsx}'),
-    path.join(projectRoot, 'components/**/*.{tsx,jsx}'),
+    toPosix(path.join(projectRoot, 'app')) + '/**/*.{ts,tsx,js,jsx}',
+    toPosix(path.join(projectRoot, 'components')) + '/**/*.{ts,tsx,js,jsx}',
+    toPosix(path.join(projectRoot, 'lib')) + '/**/*.{ts,tsx,js,jsx}',
 ];
 
 // Regex to find image paths like "/images/..."
@@ -42,7 +47,13 @@ async function verifyImageAssets() {
         }
     }
 
+    console.log(`🔎 Scanned ${sourceFiles.length} source files.`);
     console.log(`🔎 Found ${imagePaths.size} unique image references in ${filesWithImages} files.`);
+
+    if (sourceFiles.length === 0) {
+        console.error('❌ Error: no source files matched. The glob patterns are wrong; refusing to report success.');
+        process.exit(1);
+    }
 
     // 3. Check if each image exists in the public directory
     const missingImages = [];

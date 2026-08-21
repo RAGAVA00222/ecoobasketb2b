@@ -1,22 +1,16 @@
 import { MetadataRoute } from "next";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, NAV_ITEMS } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = COMPANY.website_b2b;
+  const baseUrl = COMPANY.siteUrl;
+  const lastModified = new Date();
 
-  // Add all your static routes here
-  const staticRoutes = ["/", "/founders", "/contact", "/products"];
-
-  const sitemapEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: "monthly",
-    priority: route === "/" ? 1.0 : 0.8,
+  // Derived from NAV_ITEMS so a new page can never be silently left out of the
+  // sitemap. The previous hard-coded list omitted /about and /services.
+  return NAV_ITEMS.map((item) => ({
+    url: `${baseUrl}${item.href === "/" ? "" : item.href}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: item.href === "/" ? 1.0 : 0.8,
   }));
-
-  // If you add dynamic pages later (e.g., for individual products),
-  // you would fetch them from your database and map them here.
-  // const productEntries = ...
-
-  return [...sitemapEntries];
 }

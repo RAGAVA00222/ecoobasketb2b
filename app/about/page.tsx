@@ -2,13 +2,6 @@ import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import { generatePageMetadata } from "@/lib/metadata";
 
-const stats = [
-  { value: "5000+", label: "Products" },
-  { value: "200+", label: "Trusted Brands" },
-  { value: "1000+", label: "Retailers Served" },
-  { value: "24/7", label: "Support" },
-];
-
 const values = [
   "Integrity in every transaction",
   "Transparent wholesale pricing",
@@ -20,7 +13,6 @@ export const metadata: Metadata = generatePageMetadata({
   title: "About Us",
   description:
     "Learn about Ecoo Basket's mission, vision, and values as a trusted FMCG wholesale distribution company serving retailers and institutions across India.",
-  keywords: ["about us", "company mission", "FMCG distributor", "wholesale partner"],
   path: "/about",
 });
 
@@ -40,10 +32,9 @@ export default function AboutPage() {
                 About Ecoo Basket
               </h1>
               <p className="mt-6 text-base text-gray-600 sm:text-lg leading-relaxed">
-                Ecoo Basket is a trusted FMCG wholesale and distribution company
-                that supplies grocery, beverages, personal care, home care, and
-                daily essentials to retailers, supermarkets, hotels,
-                restaurants, and institutions across India.
+                Ecoo Basket supplies multi-brand FMCG - grocery, beverages,
+                personal care, home care, stationery and
+                daily essentials to kirana stores, pharmacies and wholesale merchants across Chennai.
               </p>
             </div>
 
@@ -102,26 +93,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section
-          className="bg-green-700 py-16 sm:py-20 text-white"
-          aria-label="Company statistics"
-        >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-8 text-center sm:grid-cols-2 md:grid-cols-4">
-              {stats.map((stat) => (
-                <article key={stat.label}>
-                  <dl>
-                    <dt className="sr-only">{stat.label}</dt>
-                    <dd className="text-4xl font-bold sm:text-5xl">
-                      {stat.value}
-                    </dd>
-                    <dt className="mt-2 text-base sm:text-lg">{stat.label}</dt>
-                  </dl>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
     </>
   );

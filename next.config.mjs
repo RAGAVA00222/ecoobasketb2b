@@ -1,29 +1,35 @@
-import { withSentryConfig } from "@sentry/nextjs";
+/**
+ * Security headers applied to every response.
+ * The site serves no user accounts and no third-party scripts beyond an
+ * embedded Google Map, so these can be strict without breaking anything.
+ */
+const securityHeaders = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-DNS-Prefetch-Control", value: "on" },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+  },
+];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Your Next.js configuration options go here.
+  reactStrictMode: true,
+  poweredByHeader: false,
+  images: {
+    // Every image ships from /public; no remote hosts are allowed.
+    remotePatterns: [],
+    formats: ["image/avif", "image/webp"],
+  },
+  async headers() {
+    return [{ source: "/:path*", headers: securityHeaders }];
+  },
 };
 
-export default withSentryConfig(
-  nextConfig,
-  {
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options
-
-    // Suppresses source map uploading logs during build
-    silent: true,
-    org: "your-sentry-org-slug",
-    project: "your-sentry-project-slug",
-  },
-  {
-    // For all available options, see:
-    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-
-    // Hides source maps from generated client bundles
-    hideSourceMaps: true,
-
-    // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
-  }
-);
+export default nextConfig;

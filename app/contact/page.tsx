@@ -8,7 +8,6 @@ export const metadata: Metadata = generatePageMetadata({
   title: "Contact Us",
   description:
     "Get in touch with Ecoo Basket for wholesale inquiries, bulk supply requests, and product information. Contact us via phone, email, or inquiry form.",
-  keywords: ["contact us", "inquiry", "wholesale contact", "customer support"],
   path: "/contact",
 });
 
@@ -35,20 +34,20 @@ export default function ContactPage() {
                   Office Address
                 </h2>
                 <p className="mt-4 leading-relaxed text-gray-700">
-                  {COMPANY.address.street}
+                  {COMPANY.address.line1}
                   <br />
-                  {COMPANY.address.area}
+                  {COMPANY.address.line2}
                   <br />
-                  {COMPANY.address.city} – {COMPANY.address.postalCode}
+                  {COMPANY.address.line3}
                   <br />
-                  {COMPANY.address.state}, {COMPANY.address.country}
+                  {COMPANY.address.state}
                 </p>
 
                 <div className="mt-8 space-y-4 text-gray-700">
                   <p>
                     <span className="block font-semibold">Phone</span>
                     <a
-                      href={`tel:${COMPANY.phone_link}`}
+                      href={`tel:+${COMPANY.phoneRaw}`}
                       className="text-green-600 hover:text-green-700 underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                     >
                       {COMPANY.phone}
@@ -71,6 +70,7 @@ export default function ContactPage() {
                     src="https://www.google.com/maps?q=Plot%20No.%20120,%20Shop%20No.%205,%20Raajas%20Garden,%20Chettiyar%20Agaram,%20Vanagaram,%20Chennai%20600095&output=embed"
                     className="h-64 w-full"
                     loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
                     style={{ border: "none" }}
                   />
                 </div>

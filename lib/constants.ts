@@ -1,72 +1,86 @@
-import type {
-  Company,
-  SocialLink,
-  NavItem,
-  SEO as SEOType,
-  Breakpoints,
-  AnimationDuration,
-  ZIndex,
-  Spacing,
-  Colors,
-} from "./types";
-
 /**
- * Global constants for Ecoo Basket
- * This file contains all magic numbers, strings, and configuration values
+ * SINGLE SOURCE OF TRUTH for every Ecoo Basket company fact.
+ *
+ * No company detail - name, number, address, statutory identifier, delivery
+ * promise or order term - may be hard-coded anywhere else in this repository.
+ * If a page needs a fact, it imports it from here.
+ *
+ * Statutory values below were supplied by the business. Nothing here is
+ * inferred, estimated or invented.
  */
 
-// Company information
-export const COMPANY: Company = {
-  name: "Ecoo Basket",
-  tagline: "India's Trusted FMCG Wholesale Distribution Partner",
+export const COMPANY = {
+  legalName: "Ecoo Hyper Retail Private Limited",
+  brandName: "Ecoo Basket",
+
+  // Statutory identifiers.
+  cin: "U47912TN2026PTC195420",
+  gstin: "33AAJCE8472G1ZG",
+  udyam: "UDYAM-TN-24-0189186",
+
   phone: "+91 93423 58226",
-  phone_link: "+919342358226",
+  /** Digits only - required by wa.me and used to build tel: links. */
+  phoneRaw: "919342358226",
   email: "info@ecoobasketb2b.com",
-  website: "https://www.ecoobasket.com",
-  website_b2b: "https://ecoobasketb2b.com",
+  whatsapp: "https://wa.me/919342358226",
+
   address: {
-    street: "Plot No. 120, Shop No. 5, Raajas Garden",
-    area: "Chettiyar Agaram, Vanagaram",
-    city: "Chennai",
-    postalCode: "600095",
-    state: "Tamil Nadu",
-    country: "India",
+    line1: "Sf. No. 215, Pt No. 120, Sh No. 5",
+    line2: "Rajesh Garden Main Road, Vanagaram",
+    line3: "Poonamallee, Tiruvallur - 600095",
+    state: "Tamil Nadu, India",
   },
-};
 
-// SEO Keywords
-export const SEO: SEOType = {
-  baseKeywords: [
-    "FMCG wholesale",
-    "wholesale distributor",
-    "bulk supply",
-    "wholesale distribution",
-    "Ecoo Basket",
-  ],
-  locations: ["Chennai", "India", "Tamil Nadu"],
-};
+  hours: "MON-SAT · 09:00-18:00 IST",
 
-// Social links
-export const SOCIAL_LINKS: SocialLink[] = [
-  {
-    label: "Instagram",
-    href: "https://instagram.com/ecoobasket",
-    icon: "instagram",
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com/ecoobasket",
-    icon: "facebook",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/company/ecoo-basket",
-    icon: "linkedin",
-  },
+  // Commercial terms. Published commitments - change only with the business.
+  minOrderValue: 10000,
+  orderCutoff: "3:00 PM",
+  deliveryPromise: "Next working day across Chennai",
+
+  /** Consumer storefront. */
+  storeUrl: "https://www.ecoobasket.com",
+  /** This B2B site, used for canonical URLs and structured data. */
+  siteUrl: "https://ecoobasketb2b.com",
+} as const;
+
+export const LEADERSHIP = [
+  { name: "N Nirmala Devi", title: "Founder & Managing Director" },
+  { name: "Sri Keerthana Devi C", title: "Co-Founder & Director" },
+  { name: "Ragavendran", title: "Chief Strategy Officer" },
 ];
 
-// Navigation items
-export const NAV_ITEMS: NavItem[] = [
+export const STATUTORY_LINE =
+  "CIN U47912TN2026PTC195420 · GSTIN 33AAJCE8472G1ZG · UDYAM-TN-24-0189186";
+
+/** Approved delivery wording. Identical in hero, FAQ and process steps. */
+export const DELIVERY_PROMISE =
+  "Order by 3:00 PM — delivered the next working day across Chennai.";
+
+/** Approved order-terms wording. Replaces every free-delivery line. */
+export const ORDER_TERMS =
+  "Minimum order ₹10,000. Delivery included on every order within Chennai city.";
+
+/** Prefilled message for the WhatsApp deep link. */
+export const WHATSAPP_MESSAGE =
+  "Hello Ecoo Basket, I would like to enquire about wholesale/bulk FMCG supply.";
+
+// ---------------------------------------------------------------------------
+// Site structure
+// ---------------------------------------------------------------------------
+
+export const SEO = {
+  baseKeywords: [] as string[],
+  locations: ["Chennai", "Tamil Nadu", "India"],
+};
+
+export const SOCIAL_LINKS = [
+  { label: "Instagram", href: "https://instagram.com/ecoobasket", icon: "instagram" },
+  { label: "Facebook", href: "https://facebook.com/ecoobasket", icon: "facebook" },
+  { label: "LinkedIn", href: "https://linkedin.com/company/ecoo-basket", icon: "linkedin" },
+];
+
+export const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
@@ -75,8 +89,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Footer quick links
-export const FOOTER_QUICK_LINKS: NavItem[] = [
+export const FOOTER_QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
@@ -84,66 +97,97 @@ export const FOOTER_QUICK_LINKS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Product categories
-export const PRODUCT_CATEGORIES: string[] = [
-  "Grocery",
-  "Beverages",
-  "Personal Care",
-  "Home Care",
-  "Snacks & Biscuits",
-  "Dairy Products",
-];
+/** Verified asset paths. Every one is confirmed to exist in /public. */
+export const ASSETS = {
+  ogImage: "/images/social-banner.jpg",
+  logoHorizontal: "/images/logo-horizontal.jpg",
+  logoSquare: "/images/logo.svg",
+} as const;
 
-// Services
-export const SERVICES: string[] = [
-  "Wholesale Distribution",
-  "Retail Supply",
-  "Hotel & Restaurant Supply",
-  "Institutional Supply",
-  "Bulk Enquiries",
-  "Fast Delivery",
-];
+/**
+ * Product categories rendered on /products.
+ *
+ * Brand names were removed: listing a manufacturer implies a distribution
+ * agreement the company does not hold.
+ */
+export const PRODUCT_CATEGORY_DETAILS = [
+  {
+    title: "Grocery",
+    image: "/images/categories/grocery.jpg",
+    description: "Staple food essentials for kirana stores, supermarkets and merchants.",
+    items: ["Rice", "Sugar", "Flour", "Pulses", "Cooking Oil"],
+  },
+  {
+    title: "Beverages",
+    image: "/images/categories/beverages.jpg",
+    description: "Tea, coffee, juices and soft drinks for everyday demand.",
+    items: ["Tea", "Coffee", "Soft Drinks", "Juices"],
+  },
+  {
+    title: "Personal Care",
+    image: "/images/categories/personal-care.jpg",
+    description: "Daily personal care essentials trusted by modern households.",
+    items: ["Soap", "Shampoo", "Toothpaste", "Face Wash"],
+  },
+  {
+    title: "Home Care",
+    image: "/images/categories/home-care.jpg",
+    description: "Cleaning and hygiene products for homes and businesses.",
+    items: ["Detergent", "Floor Cleaner", "Dishwash"],
+  },
+  {
+    title: "Snacks & Biscuits",
+    // PLACEHOLDER ARTWORK - real product photography still required.
+    image: "/images/categories/snacks-biscuits.svg",
+    description: "Snack packs and biscuits for retail shelves and festive demand.",
+    items: ["Biscuits", "Namkeen", "Chips", "Cookies"],
+  },
+  {
+    title: "Stationery",
+    image: "/images/categories/stationery.jpg",
+    description: "Everyday stationery lines for retail counters and institutions.",
+    items: ["Notebooks", "Pens", "Paper", "Office Supplies"],
+  },
+] as const;
 
-// Responsive breakpoints (Tailwind)
-export const BREAKPOINTS: Breakpoints = {
-  mobile: "375px",
-  tablet: "768px",
-  desktop: "1024px",
-  wide: "1280px",
-};
+export const PRODUCT_CATEGORIES: string[] = PRODUCT_CATEGORY_DETAILS.map(
+  (category) => category.title
+);
 
-// Animation durations (in milliseconds)
-export const ANIMATION_DURATION: AnimationDuration = {
-  fast: 150,
-  normal: 300,
-  slow: 500,
-};
+/**
+ * Services rendered on /services. The footer derives its deep links from these
+ * titles, so page anchors and footer links can never drift apart.
+ */
+export const SERVICE_DETAILS = [
+  {
+    title: "FMCG Wholesale Distribution",
+    description:
+      "Multi-brand FMCG supplied to kirana stores, pharmacies and wholesale merchants across Chennai.",
+  },
+  {
+    title: "Fixed Weekly Beat",
+    description:
+      "The same representative visits your store on the same day every week, takes the order and confirms delivery.",
+  },
+  {
+    title: "Route Planning",
+    description:
+      "Planned Chennai routes so every store on the beat is served on a predictable cycle.",
+  },
+  {
+    title: "GST Billing",
+    description:
+      "Every order delivered against a GST invoice, with payment on delivery. No credit accounts.",
+  },
+  {
+    title: "WhatsApp Order Capture",
+    description:
+      "Place or adjust an order on WhatsApp between beat visits, against the same accountable contact.",
+  },
+  {
+    title: "Next-Day Delivery",
+    description: DELIVERY_PROMISE,
+  },
+] as const;
 
-// Z-index values
-export const Z_INDEX: ZIndex = {
-  dropdown: 10,
-  sticky: 20,
-  fixed: 40,
-  modal: 50,
-  tooltip: 60,
-};
-
-// Common spacing values
-export const SPACING: Spacing = {
-  xs: "0.5rem",
-  sm: "1rem",
-  md: "1.5rem",
-  lg: "2rem",
-  xl: "3rem",
-  "2xl": "4rem",
-};
-
-// Colors
-export const COLORS: Colors = {
-  primary: "#16a34a", // green-600
-  primaryDark: "#15803d", // green-700
-  secondary: "#f3f4f6", // gray-100
-  accent: "#10b981", // emerald-500
-  dark: "#111827", // gray-900
-  light: "#f9fafb", // gray-50
-};
+export const SERVICES: string[] = SERVICE_DETAILS.map((service) => service.title);
