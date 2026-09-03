@@ -72,10 +72,10 @@ export default function Footer() {
         <div className="mt-12 flex flex-wrap gap-2.5 border-t border-[#16304F] pt-8">
           <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">CIN {site.cin}</span>
           <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">UDYAM {site.udyam}</span>
-          {/* CONTENT NEEDED (CONTENT-NEEDED.md): real GSTIN + FSSAI licence number.
-              Shown as clearly-marked visible placeholders — FSSAI is mandatory for a
+          <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">GST {site.gstin}</span>
+          {/* CONTENT NEEDED (CONTENT-NEEDED.md): real FSSAI licence number.
+              Shown as a clearly-marked visible placeholder — FSSAI is mandatory for a
               food distributor, so the row must stay visible until the number lands. */}
-          <span className="rounded-lg border border-dashed border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#8DA0B5]">GST · to be updated</span>
           <span className="rounded-lg border border-dashed border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#8DA0B5]">FSSAI Lic. · to be updated</span>
         </div>
 

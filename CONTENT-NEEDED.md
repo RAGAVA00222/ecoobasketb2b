@@ -7,7 +7,7 @@ blocks a build. Never fabricate any of these values.
 | # | Item | Needed for | Status |
 |---|------|-----------|--------|
 | 1 | Manufacturer/partner logo files — drop `<slug>.(png/svg/webp/jpg)` in `public/assets/images/partners/` (hul, itc, nestle, britannia, parle, coca-cola, pepsico) **and redeploy** | Phase 6 logo strip — **build-time gated**: renders only logos that exist; **section is hidden entirely while 0 files present** (no name chips, no 404s) | pending |
-| 2 | GST number (GSTIN) | Phase 3.4 footer legal row | pending |
+| 2 | GST number (GSTIN) | Phase 3.4 footer legal row | ✅ RESOLVED — GSTIN `33AAJCE8472G1ZG` approved 17 Aug 2026; applied to the footer compliance row + Organization JSON-LD `taxID` 2026-08-18 |
 | 3 | FSSAI licence number | Phase 3.4 footer legal row | pending |
 | 4 | 1200×630 OG/Twitter share image (warehouse photo, free-delivery hook legible for WhatsApp) | Phase 3.3 | pending |
 | 5 | Minimum order value — a fixed ₹ minimum **exists**; exact figure still **PENDING**. Insertion points ready: homepage "How We Deliver" step 1, FAQ, and /kirana. Do not guess. | Phase 4.5 / 5.2 | partial |
@@ -28,7 +28,7 @@ blocks a build. Never fabricate any of these values.
   - Note: `additionalType` is a text label ("Wholesaler"). Google accepts it; if a strict schema.org URL is required, supply a URI (e.g. a Wikidata/productontology link) and I'll swap it in.
 - **08_Logo_Full_Primary.png → .jpg** (was JPEG-as-png). **06_Logo_Brand_Banner.png STILL JPEG-as-png** — left because it is the OG/Twitter image; it will be corrected when item #4 (1200×630 share image) is supplied and og:image is replaced.
 - **#4 OG/Twitter image (1200×630):** still pending → og:image left as the current logo banner (skipped per brief). BLOCKS the 06 logo fix too.
-- **#2 GST + #3 FSSAI:** still pending → footer shows visible, clearly-marked "· to be updated" placeholder rows (Incorporated line removed).
+- **#2 GST:** RESOLVED 2026-08-18 — GSTIN approved 17 Aug 2026, now rendered in the footer compliance row in the same solid treatment as CIN/UDYAM and exposed as `taxID` on the Organization JSON-LD. **#3 FSSAI:** still pending → footer keeps the visible, clearly-marked "· to be updated" placeholder row (Incorporated line removed).
 - **#5 Minimum order value + #6 Credit terms:** still pending → left blank. No value invented and no vague filler added (per brief 4.5).
 - Product grid returned to locked 6 categories (Biscuits + Snacks merged; Staples → "Staples & Groceries"); Ecoo Nuts & Spices rendered as a distinct own-brand tile. Grid links to /downloads.
 

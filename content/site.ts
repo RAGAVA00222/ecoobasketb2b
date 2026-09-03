@@ -23,6 +23,8 @@ export const site = {
   cin: "U47912TN2026PTC195420",
   // MSME/Udyam registration (Ministry of MSME) — certificate dated 08/08/2026.
   udyam: "UDYAM-TN-24-0189186",
+  // GST registration (GSTIN) — approved 17/08/2026. Company PAN AAJCE8472G.
+  gstin: "33AAJCE8472G1ZG",
   incorporated: "15 July 2026",
   companyType: "Private Limited Company, limited by shares",
   registeredOffice:
