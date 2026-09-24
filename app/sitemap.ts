@@ -10,8 +10,8 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((r) => ({
     url: `${site.domain}/${r}`,
-    lastModified: new Date("2026-07-22"),
-    changeFrequency: r === "" ? "monthly" : "monthly",
+    lastModified: new Date("2026-09-24"),
+    changeFrequency: ["", "products", "kirana", "services"].includes(r) ? "weekly" : "monthly",
     priority: r === "" ? 1 : r.match(/privacy|terms|returns/) ? 0.3 : 0.7,
   }));
 }

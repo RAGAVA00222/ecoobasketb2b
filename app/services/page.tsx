@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
-import { Store, Boxes, Warehouse, ClipboardList, Workflow, ShoppingCart, LineChart, Tags, Cpu, ArrowRight, Sparkles, Pill, Building2, UtensilsCrossed, Briefcase, GraduationCap } from "lucide-react";
+import { Store, Boxes, Warehouse, ClipboardList, Workflow, ShoppingCart, LineChart, Tags, Cpu, ArrowRight, Sparkles, Building2, UtensilsCrossed, Briefcase, GraduationCap } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
@@ -27,16 +27,15 @@ const services: { n: string; t: string; d: string; Icon: LucideIcon }[] = [
 
 // Who we serve — merged from the former /we-serve page (now 301 → /services).
 const servingNow: { t: string; d: string; Icon: LucideIcon }[] = [
-  { t: "Kirana & General Trade", d: "The largest share of our retail partners — neighbourhood stores that need dependable, regular delivery over flashy minimums.", Icon: Store },
-  { t: "Pharmacies", d: "Retail pharmacies stocking FMCG and personal care alongside their core inventory.", Icon: Pill },
+  { t: "Kirana & General Trade", d: "Neighbourhood stores that need dependable, regular delivery and clear wholesale ordering.", Icon: Store },
   { t: "Wholesale Outlets", d: "Wholesale and semi-wholesale traders who buy in volume and redistribute locally.", Icon: Boxes },
   { t: "Supermarkets", d: "Modern trade outlets we supply across Chennai, with the volume capacity to keep shelves stocked.", Icon: Building2 },
-  { t: "HORECA (Hotels, Restaurants & Catering)", d: "Hotels, restaurants and caterers we supply with consistent FMCG stock — Now Delivery available, free above ₹10,000.", Icon: UtensilsCrossed },
+  { t: "HORECA (Hotels, Restaurants & Catering)", d: "Hotels, restaurants and caterers we supply with consistent FMCG stock and direct Chennai delivery; orders above ₹10,000 qualify for free delivery.", Icon: UtensilsCrossed },
 ];
 
 const expanding: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Corporate Offices", d: "Workplace pantry and hygiene essentials.", Icon: Briefcase },
-  { t: "Institutions", d: "Schools, hospitals and similar bulk buyers, evaluated case by case.", Icon: GraduationCap },
+  { t: "Institutions", d: "Schools, hostels and similar bulk buyers, evaluated case by case.", Icon: GraduationCap },
 ];
 
 export default function ServicesPage() {

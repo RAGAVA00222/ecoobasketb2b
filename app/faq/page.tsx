@@ -5,7 +5,7 @@ import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "FAQ | B2B FMCG Wholesale in Chennai",
-  description: "Frequently asked questions about Ecoo Basket — delivery areas, wholesale ordering, delivery times, and B2B/B2C options in Chennai.",
+  description: "Frequently asked questions about Ecoo Basket — Chennai delivery areas, wholesale ordering, payment, products and online ordering.",
   alternates: { canonical: "/faq" },
 };
 
@@ -13,9 +13,9 @@ const faqs = [
   { q: "What areas do you deliver to?", a: "We're headquartered in Vanagaram, Chennai, and currently serve retailers across our Chennai coverage area. We're expanding zone by zone across Chennai and, over time, the wider Tamil Nadu market — area by area, so delivery reliability doesn't slip as we grow." },
   { q: "What's your delivery time?", a: "Same-day dispatch with 24–48 hour delivery across Chennai. Any single order above ₹10,000 delivers free anywhere in Chennai." },
   { q: "How do I place a wholesale order?", a: "You can order online through our B2B digital ordering platform at ecoobasket.com, or reach us by phone, WhatsApp, or the contact form and we'll set you up. Every order comes with a clean, GST-compliant invoice." },
-  { q: "Do you offer both B2B and B2C ordering?", a: "Yes. Our core business is B2B FMCG distribution to kirana stores, general trade, pharmacies, wholesale outlets and HORECA businesses. Separately, online B2C ordering is available at ecoobasket.com." },
+  { q: "Can I order online?", a: "Yes. EcooBasketB2B.com is our corporate B2B website, while online product ordering is available through EcooBasket.com. You can also order by WhatsApp or phone." },
   { q: "What products do you distribute?", a: "Multi-brand FMCG across everyday categories — beverages, biscuits & snacks, staples & groceries, home care, personal care and stationery — plus our own-brand Nuts & Spices line." },
-  { q: "Who do you currently serve?", a: "We serve retailers across Chennai today: kirana & general trade, pharmacies, wholesale outlets, supermarkets and HORECA (hotels, restaurants & catering). Corporate offices and institutions are on our roadmap as coverage expands." },
+  { q: "Who do you currently serve?", a: "We serve retailers across Chennai today: kirana & general trade, wholesale outlets, supermarkets and HORECA (hotels, restaurants & catering). Corporate offices and institutions are on our roadmap as coverage expands." },
 ];
 
 export default function FaqPage() {

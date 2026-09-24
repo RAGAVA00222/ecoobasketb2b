@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Careers | Ecoo Basket Chennai",
+  title: "Careers in Chennai",
   description: "Careers at Ecoo Basket, a B2B FMCG distributor in Chennai — a small, founder-led team building reliable retail distribution.",
   alternates: { canonical: "/careers" },
 };

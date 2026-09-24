@@ -3,7 +3,7 @@ import LegalLayout, { type LegalSection } from "@/components/LegalLayout";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | Ecoo Basket Chennai",
+  title: "Terms & Conditions",
   description: "Terms & Conditions for Ecoo Basket, a B2B FMCG distributor in Chennai — the terms governing use of this website and our services.",
   alternates: { canonical: "/terms" },
 };

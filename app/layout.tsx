@@ -19,19 +19,34 @@ const notoTamil = Noto_Sans_Tamil({ subsets: ["tamil"], weight: ["400", "600"], 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: "B2B FMCG Wholesale Distribution in Chennai | Ecoo Basket",
+    default: "B2B FMCG Wholesale Distributor in Chennai | Ecoo Basket",
     template: "%s | Ecoo Basket",
   },
   description:
-    "Ecoo Hyper Retail Private Limited — B2B FMCG distribution and own-brand Nuts & Spices, Chennai, Tamil Nadu.",
+    "Ecoo Basket supplies FMCG products to kirana and retail stores across Chennai with wholesale case rates, GST billing, same-day dispatch and 24–48 hour delivery.",
+  keywords: [
+    "B2B FMCG wholesale Chennai", "FMCG distributor Chennai", "kirana store supplier Chennai",
+    "grocery wholesale Chennai", "biscuit wholesale Chennai", "beverage wholesale Chennai",
+  ],
+  applicationName: "Ecoo Basket",
+  category: "B2B FMCG Wholesale Distribution",
   openGraph: {
     type: "website",
+    url: site.domain,
     siteName: "Ecoo Basket",
+    title: "B2B FMCG Wholesale Distributor in Chennai | Ecoo Basket",
+    description: "Wholesale FMCG supply for kirana and retail stores across Chennai with GST billing and reliable delivery.",
     locale: "en_IN",
+    images: [{ url: "/assets/images/logo/06_Logo_Brand_Banner.png", alt: "Ecoo Basket B2B FMCG Wholesale Chennai" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "B2B FMCG Wholesale Distributor in Chennai | Ecoo Basket",
+    description: "Wholesale FMCG supply for kirana and retail stores across Chennai.",
     images: ["/assets/images/logo/06_Logo_Brand_Banner.png"],
   },
-  twitter: { card: "summary_large_image", images: ["/assets/images/logo/06_Logo_Brand_Banner.png"] },
   alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

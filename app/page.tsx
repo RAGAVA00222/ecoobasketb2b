@@ -14,10 +14,10 @@ import FoundersTeaser from "@/components/FoundersTeaser";
 import { site, features, leaders } from "@/content/site";
 
 const heroBadges: { t: string; Icon: LucideIcon }[] = [
-  { t: "GST Compliant", Icon: ReceiptText },
-  { t: "24–48 Hour Delivery", Icon: Clock },
-  { t: "Technology Enabled", Icon: Cpu },
-  { t: "Direct Store Delivery", Icon: Truck },
+  { t: "Wholesale Case Rates", Icon: IndianRupee },
+  { t: "24–48h Chennai Delivery", Icon: Clock },
+  { t: "₹10,000+ Free Delivery", Icon: Truck },
+  { t: "GST-Compliant Billing", Icon: ReceiptText },
 ];
 
 const services: { t: string; d: string; Icon: LucideIcon }[] = [
@@ -31,9 +31,9 @@ const services: { t: string; d: string; Icon: LucideIcon }[] = [
 const whyChoose: { t: string; d: string; Icon: LucideIcon }[] = [
   { t: "Direct Store Delivery", d: "Route-planned delivery straight to the storefront, on the window we quote.", Icon: Truck },
   { t: "Technology Enabled", d: "Digital ordering, route planning and inventory visibility across the chain.", Icon: Cpu },
-  { t: "GST Compliant", d: "A clean, GST-compliant invoice on every order, with licensing kept current.", Icon: ReceiptText },
+  { t: "GST-Compliant Billing", d: "A clear GST-compliant invoice on every order.", Icon: ReceiptText },
   { t: "Multi-Brand Distribution", d: "Trusted FMCG brands plus our own Nuts & Spices line, stored with rotation for quality.", Icon: Boxes },
-  { t: "Competitive Pricing", d: "Strategic sourcing and operational efficiency keep pricing sharp.", Icon: IndianRupee },
+  { t: "Wholesale Case Pricing", d: "Clear case-level pricing for fast-moving FMCG categories.", Icon: IndianRupee },
   { t: "Dedicated Support", d: "A real account contact, reachable on WhatsApp — not a call-centre queue.", Icon: Headset },
 ];
 
@@ -41,10 +41,10 @@ const whyChoose: { t: string; d: string; Icon: LucideIcon }[] = [
 const products: { name: string; img: string; own?: boolean }[] = [
   { name: "Beverages", img: "/assets/images/products/beverages.jpg" },
   { name: "Biscuits & Snacks", img: "/assets/images/products/biscuits-snacks.jpg" },
+  { name: "Noodles & Instant Foods", img: "/assets/images/products/staples.jpg" },
   { name: "Staples & Groceries", img: "/assets/images/products/staples.jpg" },
   { name: "Home Care", img: "/assets/images/products/home-care.jpg" },
   { name: "Personal Care", img: "/assets/images/products/personal-care.jpg" },
-  { name: "Stationery", img: "/assets/images/products/stationery.jpg" },
   { name: "Ecoo Nuts & Spices", img: "/assets/images/products/05_Premium_Dry_Fruits.jpg", own: true },
 ];
 
@@ -67,6 +67,7 @@ function Chip({ Icon }: { Icon: LucideIcon }) {
 export default function Home() {
   const orgLd = {
     "@context": "https://schema.org", "@type": "Organization",
+    "@id": `${site.domain}/#organization`,
     name: site.legalName, alternateName: site.brand, legalName: site.legalName, url: site.domain,
     logo: `${site.domain}/assets/images/logo/08_Logo_Full_Primary.jpg`,
     email: site.email, telephone: "+91-93423-58226",
@@ -86,19 +87,29 @@ export default function Home() {
   };
   const localLd = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
-    additionalType: "Wholesaler",
-    name: site.legalName, alternateName: site.brand, legalName: site.legalName, url: site.domain,
+    "@id": `${site.domain}/#localbusiness`,
+    name: site.brand, legalName: site.legalName, url: site.domain,
     image: `${site.domain}/assets/images/logo/06_Logo_Brand_Banner.png`,
-    description: "Technology-enabled B2B FMCG distribution and own-brand Nuts & Spices, headquartered in Chennai, Tamil Nadu.",
-    telephone: "+91-93423-58226", email: site.email,
+    description: "B2B FMCG wholesale distribution for kirana and retail stores across Chennai, Tamil Nadu.",
+    telephone: site.phoneRaw, email: site.email,
+    currenciesAccepted: "INR", paymentAccepted: "Cash, UPI",
     address: { "@type": "PostalAddress", streetAddress: "Sf. No. 215 Pt No. 120, Sh No. 5, Rajesh Garden Main Road, Vanagaram, Poonamallee, Tiruvallur", addressLocality: "Chennai", addressRegion: "Tamil Nadu", postalCode: "600095", addressCountry: "IN" },
-    areaServed: "Chennai",
+    areaServed: { "@type": "City", name: "Chennai" },
+    contactPoint: { "@type": "ContactPoint", contactType: "sales", telephone: site.phoneRaw, email: site.email, areaServed: "Chennai" },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       opens: "09:00", closes: "18:00",
     },
+    hasOfferCatalog: { "@type": "OfferCatalog", name: "FMCG Wholesale Categories", itemListElement: products.filter((p) => !p.own).map((p) => ({ "@type": "OfferCatalog", name: p.name })) },
     sameAs: [site.social.facebook, site.social.instagram],
+  };
+  const websiteLd = {
+    "@context": "https://schema.org", "@type": "WebSite",
+    "@id": `${site.domain}/#website`,
+    name: "Ecoo Basket B2B", alternateName: site.brand, url: site.domain,
+    inLanguage: ["en-IN", "ta-IN"],
+    publisher: { "@id": `${site.domain}/#organization` },
   };
   const faqLd = {
     "@context": "https://schema.org", "@type": "FAQPage",
@@ -113,6 +124,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* 1. HERO */}
@@ -122,16 +134,16 @@ export default function Home() {
         <Container className="grid items-center gap-14 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-accent shadow-soft">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" /> FMCG Distribution · Chennai, Tamil Nadu
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" /> B2B FMCG WHOLESALE · CHENNAI
             </span>
             <h1 className="mt-6 text-[clamp(38px,5.4vw,64px)] leading-[1.03]">
-              FMCG wholesale that keeps <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">Chennai stores moving</span>
+              Chennai&apos;s FMCG wholesale partner for <span className="bg-gradient-to-r from-accent to-navy bg-clip-text text-transparent">kirana &amp; retail stores</span>
             </h1>
             <p className="mt-6 max-w-[560px] text-[clamp(16px,1.5vw,19px)] leading-relaxed text-muted">
-              Same-day dispatch and 24–48-hour delivery across Chennai, with free delivery on every order above ₹10,000 — dependable FMCG wholesale for kirana stores and retailers.
+              Buy trusted FMCG brands at wholesale case rates through EcooBasket.com. Same-day dispatch, 24–48-hour Chennai delivery, GST billing, and free delivery on orders above ₹10,000.
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
-              <Button href={site.orderUrl} external variant="primary">Order Now <ArrowRight size={17} /></Button>
+              <Button href={site.orderUrl} external variant="primary">Shop Wholesale <ArrowRight size={17} /></Button>
               <Button href={site.whatsapp} external variant="outline"><MessageCircle size={17} /> Order on WhatsApp</Button>
             </div>
           </Reveal>
@@ -252,7 +264,7 @@ export default function Home() {
           <Reveal className="mx-auto max-w-[680px] text-center">
             <Eyebrow>Product Categories</Eyebrow>
             <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Everyday categories, dependable supply</h2>
-            <p className="mt-4 text-muted">The FMCG categories we move across our retail network. Shown for reference — not a full catalogue.</p>
+            <p className="mt-4 text-muted">Explore the fast-moving FMCG categories we supply across Chennai. For live products, current stock and ordering, continue to EcooBasket.com.</p>
           </Reveal>
           {/* CONTENT NEEDED: uniform original product photography (some categories share a placeholder) */}
           {/* 6 locked FMCG categories */}
@@ -278,8 +290,9 @@ export default function Home() {
               </div>
             </Reveal>
           ))}
-          <div className="mt-10 text-center">
-            <Button href="/downloads" variant="outline">Catalogue &amp; price list <ArrowRight size={16} /></Button>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <Button href={site.orderUrl} external variant="primary">Shop Wholesale <ArrowRight size={16} /></Button>
+            <Button href="/downloads" variant="outline">Catalogue &amp; price list</Button>
           </div>
         </Container>
       </Section>
@@ -290,7 +303,7 @@ export default function Home() {
           <Reveal>
             <Eyebrow>Chennai Distribution Network</Eyebrow>
             <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Chennai operations, expanding across Tamil Nadu</h2>
-            <p className="mt-5 text-muted">We onboard retailers zone by zone rather than spreading thin — so delivery reliability doesn&apos;t slip as the network grows. Every route runs from our Chennai hub to warehouses, kirana stores, supermarkets, pharmacies, HORECA and wholesale partners.</p>
+            <p className="mt-5 text-muted">We onboard retailers zone by zone rather than spreading thin — so delivery reliability doesn&apos;t slip as the network grows. Every route runs from our Chennai hub to warehouses, kirana stores, general trade, supermarkets, HORECA and wholesale partners.</p>
             <div className="mt-8 flex flex-wrap gap-8">
               {[["Chennai", "Live operations"], ["24–48h", "Delivery window"], ["Zone-by-zone", "Expansion roadmap"]].map(([b, s]) => (
                 <div key={b}><div className="text-[24px] font-extrabold tracking-[-0.02em] text-accent">{b}</div><div className="text-[12.5px] text-muted">{s}</div></div>
@@ -340,11 +353,11 @@ export default function Home() {
         <div aria-hidden className="absolute inset-0" style={{ background: "radial-gradient(60% 120% at 50% -10%, rgba(255,255,255,0.14), transparent 60%)" }} />
         <Container className="relative">
           <Reveal>
-            <h2 className="text-invert text-[clamp(30px,4vw,52px)]">Ready to Grow Your Retail Business?</h2>
-            <p className="mx-auto mt-4 max-w-[560px] text-[17px] text-white/85">Tell us your area and order pattern — we&apos;ll tell you honestly whether we&apos;re a fit today or on the roadmap, and get you set up.</p>
+            <h2 className="text-invert text-[clamp(30px,4vw,52px)]">Ready to Restock Your Store?</h2>
+            <p className="mx-auto mt-4 max-w-[560px] text-[17px] text-white/85">Browse wholesale products online or message us on WhatsApp. We&apos;ll confirm availability, billing and Chennai delivery for your order.</p>
             <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-              <Button href={site.whatsapp} external variant="solidInvert"><MessageCircle size={17} /> WhatsApp</Button>
-              <Button href="/partner" variant="outlineInvert">Become Retail Partner</Button>
+              <Button href={site.orderUrl} external variant="solidInvert">Shop Wholesale <ArrowRight size={17} /></Button>
+              <Button href={site.whatsapp} external variant="outlineInvert"><MessageCircle size={17} /> Order on WhatsApp</Button>
             </div>
           </Reveal>
         </Container>

@@ -56,7 +56,7 @@ export default function Footer() {
             {footerNav.business.map((l) => (
               <Link key={l.href} href={l.href} className="mb-3 block text-[14px] text-[#B6C2CF] transition-colors hover:text-invert">{l.label}</Link>
             ))}
-            <a href={site.orderUrl} target="_blank" rel="noopener noreferrer" className="mb-3 block text-[14px] text-[#B6C2CF] transition-colors hover:text-invert">Order Online ↗</a>
+            <a href={site.orderUrl} target="_blank" rel="noopener noreferrer" className="mb-3 block text-[14px] text-[#B6C2CF] transition-colors hover:text-invert">Shop Wholesale ↗</a>
           </div>
 
           <div>
@@ -72,11 +72,6 @@ export default function Footer() {
         <div className="mt-12 flex flex-wrap gap-2.5 border-t border-[#16304F] pt-8">
           <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">CIN {site.cin}</span>
           <span className="rounded-lg border border-accent-strong/40 bg-accent-strong/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#4ADE80]">UDYAM {site.udyam}</span>
-          {/* CONTENT NEEDED (CONTENT-NEEDED.md): real GSTIN + FSSAI licence number.
-              Shown as clearly-marked visible placeholders — FSSAI is mandatory for a
-              food distributor, so the row must stay visible until the number lands. */}
-          <span className="rounded-lg border border-dashed border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#8DA0B5]">GST · to be updated</span>
-          <span className="rounded-lg border border-dashed border-[#1B3555] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.05em] text-[#8DA0B5]">FSSAI Lic. · to be updated</span>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-[#16304F] pt-7 font-mono text-[11px] text-[#8DA0B5]">

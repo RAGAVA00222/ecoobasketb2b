@@ -12,8 +12,8 @@ const routes: Node[] = [
     icon: <path d="M-8 -4 H8 V8 H-8 Z M-8 -4 L-6 -9 H6 L8 -4" /> },
   { x: 78, y: 250, label: "Kirana Store", d: "M320 230 Q 188 250 78 250",
     icon: <path d="M-7 -2 H7 V9 H-7 Z M-9 -2 L-6 -8 H6 L9 -2 M-2 9 V2 H2 V9" /> },
-  { x: 562, y: 250, label: "Pharmacy", d: "M320 230 Q 452 250 562 250",
-    icon: <path d="M-7 -7 H7 V7 H-7 Z M0 -3 V3 M-3 0 H3" /> },
+  { x: 562, y: 250, label: "General Trade", d: "M320 230 Q 452 250 562 250",
+    icon: <path d="M-7 -2 H7 V9 H-7 Z M-9 -2 L-6 -8 H6 L9 -2 M-2 9 V2 H2 V9" /> },
   { x: 176, y: 402, label: "HORECA", d: "M320 230 Q 236 330 176 402",
     icon: <path d="M-6 -8 V0 M-3 -8 V0 M-4.5 0 V9 M5 -8 C1 -8 1 0 5 0 V9" /> },
   { x: 464, y: 402, label: "Wholesale", d: "M320 230 Q 404 330 464 402",
@@ -27,7 +27,7 @@ export default function NetworkViz() {
         viewBox="0 0 640 470"
         className="h-auto w-full"
         role="img"
-        aria-label="Logistics network: Chennai HQ connected to warehouse, kirana stores, supermarkets, pharmacies, HORECA and wholesale partners with delivery routes"
+        aria-label="Logistics network: Chennai HQ connected to warehouse, kirana stores, supermarkets, general trade, HORECA and wholesale partners with delivery routes"
       >
         <defs>
           <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">

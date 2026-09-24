@@ -85,7 +85,7 @@ export default function Header() {
             rel="noopener noreferrer"
             className="rounded-xl bg-accent px-5 py-2.5 text-[14.5px] font-semibold text-invert shadow-[0_12px_24px_-14px_rgba(22,163,74,0.6)] transition-all hover:-translate-y-0.5 hover:bg-accent-deep"
           >
-            Order Now
+            Shop Wholesale
           </a>
         </nav>
 
@@ -152,7 +152,7 @@ export default function Header() {
           onClick={() => setOpen(false)}
           className="mt-6 w-full rounded-xl bg-accent px-4 py-3.5 text-center text-[16px] font-semibold text-invert shadow-[0_12px_24px_-14px_rgba(22,163,74,0.6)] hover:bg-accent-deep"
         >
-          Order Now ↗
+          Shop Wholesale ↗
         </a>
         <a
           href={site.whatsapp}

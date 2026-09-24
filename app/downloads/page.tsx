@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Download Center | Ecoo Basket",
+  title: "Download Center",
   description: "Request the Ecoo Basket company profile, product brochure, catalogue and partner presentation.",
   alternates: { canonical: "/downloads" },
 };

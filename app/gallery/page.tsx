@@ -5,7 +5,7 @@ import { Container, Section, Eyebrow } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Gallery | Ecoo Basket Chennai",
+  title: "Gallery",
   description: "A look inside Ecoo Basket — warehouse, supply-chain operations, retail partners and product lines across Chennai.",
   alternates: { canonical: "/gallery" },
 };

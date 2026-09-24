@@ -3,7 +3,7 @@ import LegalLayout, { type LegalSection } from "@/components/LegalLayout";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Ecoo Basket Chennai",
+  title: "Privacy Policy",
   description: "Privacy Policy for Ecoo Basket, a B2B FMCG distributor in Chennai — how we handle information collected through this website and our services.",
   alternates: { canonical: "/privacy" },
 };

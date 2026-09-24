@@ -3,7 +3,7 @@ import LegalLayout, { type LegalSection } from "@/components/LegalLayout";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Return & Refund Policy | Ecoo Basket Chennai",
+  title: "Return & Refund Policy",
   description: "Return & Refund Policy for Ecoo Basket, B2B FMCG distributor in Chennai — how returns, replacements and refunds are handled.",
   alternates: { canonical: "/returns" },
 };

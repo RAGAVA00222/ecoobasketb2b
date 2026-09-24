@@ -6,7 +6,7 @@ import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Investor Relations | Ecoo Basket",
+  title: "Investor Relations",
   description: "Ecoo Basket investor relations — growth story, roadmap and market opportunity narrative. No financial figures.",
   alternates: { canonical: "/investor" },
 };
