@@ -56,7 +56,7 @@ export default function Footer() {
             {footerNav.business.map((l) => (
               <Link key={l.href} href={l.href} className="mb-3 block text-[14px] text-[#B6C2CF] transition-colors hover:text-invert">{l.label}</Link>
             ))}
-            <a href={site.orderUrl} target="_blank" rel="noopener noreferrer" className="mb-3 block text-[14px] text-[#B6C2CF] transition-colors hover:text-invert">Shop Wholesale ↗</a>
+            <a href={site.orderUrl} target="_blank" rel="noopener noreferrer" className="mb-3 block text-[14px] text-[#B6C2CF] transition-colors hover:text-invert">Order on EcooBasket.com ↗</a>
           </div>
 
           <div>

@@ -44,10 +44,11 @@ export const features = {
 // /services ("who we serve" block) with a 301 — no longer a nav route.
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Products", href: "/products" },
+  { label: "About Company", href: "/about" },
+  { label: "Founders", href: "/founders" },
+  { label: "Business", href: "/services" },
   { label: "Kirana Stores", href: "/kirana" },
+  { label: "Investors", href: "/investor" },
   { label: "Contact", href: "/contact" },
 ];
 

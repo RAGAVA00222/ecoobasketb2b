@@ -4,6 +4,7 @@ import { Smartphone, Map, MapPinned, TrendingUp, Target, Rocket, ArrowRight } fr
 import Reveal from "@/components/Reveal";
 import { Container, Section, Eyebrow, Button } from "@/components/primitives";
 import PageHero from "@/components/PageHero";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Investor Relations",
@@ -97,7 +98,7 @@ export default function InvestorPage() {
         <Container className="relative">
           <h2 className="text-invert text-[clamp(24px,3.4vw,38px)]">Interested in the journey?</h2>
           <p className="mx-auto mt-3 max-w-[560px] text-white/85">We&apos;re glad to talk to prospective partners and investors about where this is headed.</p>
-          <div className="mt-8 flex justify-center"><Button href="/contact" variant="solidInvert">Get In Touch <ArrowRight size={16} /></Button></div>
+          <div className="mt-8 flex flex-wrap justify-center gap-3"><Button href="/contact" variant="solidInvert">Investor Enquiry <ArrowRight size={16} /></Button><Button href={site.orderUrl} external variant="outlineInvert">View Order Platform</Button></div>
         </Container>
       </section>
     </>

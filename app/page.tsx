@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
   ReceiptText, Clock, Cpu, Truck, Boxes, Users, ClipboardList, Smartphone,
-  MessageCircle, IndianRupee, UserCheck, Route, Headset, ArrowRight, Plus,
+  MessageCircle, IndianRupee, Headset, ArrowRight, Plus,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import PartnerLogos from "@/components/PartnerLogos";
@@ -181,34 +181,90 @@ export default function Home() {
       {/* DISTRIBUTION PARTNERS — trust strip, directly below the hero */}
       <PartnerLogos />
 
-      {/* 2. ABOUT */}
+      {/* 2. SIMPLE COMPANY INTRODUCTION */}
       <Section id="about">
-        <Container className="grid items-center gap-14 md:grid-cols-2">
-          <Reveal>
+        <Container>
+          <Reveal className="mx-auto max-w-[760px] text-center">
             <Eyebrow>About Ecoo Basket</Eyebrow>
-            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Technology-enabled FMCG Distribution Built for Reliability</h2>
-            <p className="mt-5 text-muted">Ecoo Basket connects manufacturers to retailers across Chennai — moving multi-brand FMCG and our own Nuts &amp; Spices line from warehouse to shelf on schedule, on invoice, and with a real person accountable for every order.</p>
-            <ul className="mt-7 grid gap-4 sm:grid-cols-2">
-              {[["Route Planning", Route], ["Inventory Visibility", ClipboardList], ["GST Billing", ReceiptText], ["Dedicated Support", UserCheck]].map(([t, Ic]) => {
-                const I = Ic as LucideIcon;
-                return (
-                  <li key={t as string} className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-mint text-accent"><I size={19} strokeWidth={1.8} /></span>
-                    <span className="text-[15px] font-semibold text-ink">{t as string}</span>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="mt-8"><Button href="/about" variant="primary">More about us <ArrowRight size={17} /></Button></div>
+            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Ecoo Basket, in simple terms.</h2>
+            <p className="mt-4 text-muted">
+              Ecoo Hyper Retail Private Limited is a Chennai-focused B2B FMCG wholesale and distribution company built to make everyday retail supply simpler and more dependable.
+            </p>
           </Reveal>
-          <Reveal delay={0.1} className="relative aspect-[5/4.4] overflow-hidden rounded-3xl border border-line shadow-soft-lg">
-            {/* CONTENT NEEDED: original facility / operations photo */}
-            <Image src="/assets/images/services/03_Supply_Chain_Network.jpg" alt="Ecoo Basket supply chain operations" fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover" />
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { t: "Chennai B2B FMCG", d: "Wholesale and distribution focused on Chennai retail businesses.", Icon: Boxes },
+              { t: "Who we serve", d: "Kirana stores, general trade, mini supermarkets and food-service businesses.", Icon: Users },
+              { t: "What we supply", d: "Trusted multi-brand FMCG plus selected Ecoo Nuts & Spices categories.", Icon: ClipboardList },
+              { t: "Easy ordering", d: "Place wholesale orders through EcooBasket.com or connect with our team on WhatsApp.", Icon: Smartphone },
+              { t: "Fast local delivery", d: "Same-day dispatch with a typical 24–48 hour Chennai delivery window.", Icon: Truck },
+              { t: "Clear payment & billing", d: "UPI or Cash on Delivery with GST-compliant invoicing on every order.", Icon: ReceiptText },
+            ].map(({ t, d, Icon }, i) => (
+              <Reveal key={t} delay={(i % 3) * 0.05} className="rounded-2xl border border-line bg-surface p-6 shadow-soft">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-accent"><Icon size={21} strokeWidth={1.8} /></span>
+                <h3 className="mt-4 text-[17px]">{t}</h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-muted">{d}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-9 flex flex-wrap justify-center gap-3">
+            <Button href="/about" variant="outline">Know Our Company <ArrowRight size={17} /></Button>
+            <Button href={site.orderUrl} external variant="primary">Place Wholesale Order <ArrowRight size={17} /></Button>
           </Reveal>
         </Container>
       </Section>
 
-      {/* 3. SERVICES */}
+      {/* 3. LOCAL RETAIL STORY */}
+      <Section tone="surface">
+        <Container className="grid items-center gap-12 md:grid-cols-[1.05fr_0.95fr]">
+          <Reveal className="relative aspect-[5/4] overflow-hidden rounded-3xl border border-line shadow-soft-lg">
+            <Image src="/assets/images/services/04_Retail_Partner.jpg" alt="Neighbourhood retail partnership in Tamil Nadu" fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover" />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <Eyebrow>Our Story Begins With Local Retail</Eyebrow>
+            <h2 className="mt-3 text-[clamp(28px,3.6vw,44px)]">Built around the everyday needs of neighbourhood stores.</h2>
+            <p className="mt-5 text-muted">Ecoo Basket was built with a simple belief: local retailers deserve a dependable supply partner. Chennai&apos;s kirana stores and general-trade businesses serve families every day, support local livelihoods and keep neighbourhood commerce moving.</p>
+            <p className="mt-3 text-muted">Our role is practical: coordinate the right FMCG products, keep order details clear, support fast local dispatch and stay reachable when a retailer needs help.</p>
+            <div className="mt-6 rounded-2xl border border-accent-strong/20 bg-mint/70 p-5">
+              <p className="font-semibold leading-relaxed text-ink">தமிழ்நாட்டின் மளிகை கடைகள் நம்பிக்கையின் மையங்கள். அந்த நம்பிக்கைக்கு வலு சேர்க்கும் மொத்த விற்பனை கூட்டாளியாக Ecoo Basket செயல்படுகிறது.</p>
+            </div>
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              {["Chennai-focused distribution", "Kirana store support", "Warehouse-to-store coordination", "Human business support"].map((item) => (
+                <div key={item} className="flex items-center gap-3 rounded-xl border border-line bg-base px-4 py-3 text-[14px] font-semibold text-ink"><span className="h-2.5 w-2.5 rounded-full bg-accent-strong" />{item}</div>
+              ))}
+            </div>
+            <div className="mt-7"><Button href="/about" variant="outline">Read Our Company Story <ArrowRight size={16} /></Button></div>
+          </Reveal>
+        </Container>
+      </Section>
+
+      {/* 4. TWO SITES, TWO PURPOSES */}
+      <Section>
+        <Container>
+          <Reveal className="mx-auto max-w-[720px] text-center">
+            <Eyebrow>Two Sites. Two Clear Purposes.</Eyebrow>
+            <h2 className="mt-3 text-[clamp(26px,3.4vw,40px)]">Company information here. Wholesale ordering on EcooBasket.com.</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <Reveal className="rounded-2xl border border-line bg-surface p-7 shadow-soft">
+              <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-accent">EcooBasketB2B.com</span>
+              <h3 className="mt-2 text-[20px]">Corporate website</h3>
+              <p className="mt-2 text-[14.5px] text-muted">Learn about the company, founders, services, kirana support, partnerships, investor information and careers.</p>
+              <div className="mt-5"><Button href="/about" variant="outline">About Company</Button></div>
+            </Reveal>
+            <Reveal delay={0.06} className="rounded-2xl border border-accent-strong/30 bg-mint/45 p-7 shadow-soft">
+              <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-accent">EcooBasket.com</span>
+              <h3 className="mt-2 text-[20px]">Wholesale ordering website</h3>
+              <p className="mt-2 text-[14.5px] text-muted">Browse products, check current pricing, build your cart and place wholesale orders for Chennai delivery.</p>
+              <div className="mt-5"><Button href={site.orderUrl} external variant="primary">Order Now <ArrowRight size={16} /></Button></div>
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 5. SERVICES */}
       <Section tone="surface" id="services">
         <Container>
           <Reveal className="mx-auto max-w-[680px] text-center">

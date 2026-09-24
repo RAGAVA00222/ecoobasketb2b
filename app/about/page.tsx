@@ -36,8 +36,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="Our Story"
-        title="Built to close the gap between manufacturer and shopkeeper."
-        subtitle="Chennai-headquartered, founder-led, and focused on getting distribution basics right before chasing scale."
+        title="A Chennai B2B FMCG company built for dependable local supply."
+        subtitle="Ecoo Hyper Retail Private Limited combines wholesale distribution, digital ordering and human business support for retailers across Chennai."
       >
         {["12 years across HUL, Reliance Retail and BigBasket", "Founder-led", "Chennai HQ", "Two parallel tracks"].map((c) => (
           <span key={c} className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[13px] font-medium text-white backdrop-blur">{c}</span>
@@ -140,8 +140,9 @@ export default function AboutPage() {
           <h2 className="text-invert text-[clamp(24px,3.4vw,38px)]">Want to know more before you commit?</h2>
           <p className="mx-auto mt-3 max-w-[560px] text-white/85">Talk to us directly — no sales script, just a straight answer about whether we&apos;re the right fit.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="/contact" variant="solidInvert">Get In Touch</Button>
-            <Button href="/founders" variant="outlineInvert">Meet the Founders <ArrowRight size={16} /></Button>
+            <Button href={site.orderUrl} external variant="solidInvert">Order on EcooBasket.com <ArrowRight size={16} /></Button>
+            <Button href="/founders" variant="outlineInvert">Meet the Founders</Button>
+            <Button href="/contact" variant="outlineInvert">Contact Company</Button>
           </div>
         </Container>
       </section>
