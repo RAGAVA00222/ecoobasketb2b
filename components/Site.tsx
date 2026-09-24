@@ -2,7 +2,7 @@
 import { ArrowRight, ChevronDown, Menu, MessageCircle, Phone, ShoppingCart, X } from 'lucide-react';
 
 const nav = [
-  ['About', '/company'], ['Founders', '/founders'], ['Business', '/business'],
+  ['Home', '/'], ['About', '/company'], ['Founders', '/founders'], ['Business', '/business'],
   ['Kirana Stores', '/kirana'], ['Partners', '/partners'], ['Investors', '/investors'], ['Contact', '/contact'],
 ];
 
@@ -26,3 +26,5 @@ export function Metric({value,label}:{value:string,label:string}) {return <div c
 export function CTA({title,body,primary,primaryHref,secondary,secondaryHref}:{title:string,body:string,primary:string,primaryHref:string,secondary?:string,secondaryHref?:string}) {return <section className='cta'><div className='wrap cta-inner'><div><span className='eyebrow light'>NEXT STEP</span><h2>{title}</h2><p>{body}</p></div><div className='actions'><a className='btn btn-light' href={primaryHref} target={primaryHref.startsWith('http')?'_blank':undefined} rel={primaryHref.startsWith('http')?'noreferrer':undefined}>{primary} <ArrowRight size={18}/></a>{secondary&&secondaryHref&&<a className='btn btn-outline-light' href={secondaryHref}>{secondary}</a>}</div></div></section>}
 export function InnerHero({eyebrow,title,body,aside}:{eyebrow:string,title:string,body:string,aside?:ReactNode}) {return <section className='inner-hero'><div className='wrap inner-hero-grid'><div><span className='eyebrow light'>{eyebrow}</span><h1>{title}</h1><p>{body}</p></div>{aside&&<div className='hero-aside'>{aside}</div>}</div></section>}
 export function Accordion({items}:{items:{q:string,a:string}[]}) {return <div className='faq-list'>{items.map((it,i)=><details key={it.q} open={i===0}><summary>{it.q}<ChevronDown size={19}/></summary><p>{it.a}</p></details>)}</div>}
+
+
