@@ -9,8 +9,20 @@ export default function Investors(){return <PageShell><Head>
 <InnerHero eyebrow='INVESTOR RELATIONS' title='Seeking growth capital to build a stronger B2B FMCG distribution business.' body='Ecoo Hyper Retail Private Limited is building a Chennai-first wholesale platform for kirana stores and local retailers. We are open to conversations with strategic and financial investors who can support disciplined, execution-led growth.' aside={<div className='aside-stat'><b>Growth Capital</b><span>Strategic investment discussions</span></div>}/>
 
 <section className='section wrap'><SectionHead eyebrow='COMPANY SNAPSHOT' title='A focused B2B FMCG platform built around local retail.'/><div className='facts-grid'>{[
-['Legal entity','Ecoo Hyper Retail Private Limited'],['Headquarters','Vanagaram, Chennai'],['Current market','Chennai'],['Customer focus','Kirana & general trade'],['Business model','Multi-brand FMCG distribution'],['Digital order channel','EcooBasket.com']
+['Legal entity','Ecoo Hyper Retail Private Limited'],['Headquarters','Vanagaram, Chennai'],['Current market','Chennai'],['Customer focus','Kirana & general trade'],['Business model','Multi-brand FMCG + own-brand Nuts & Spices'],['Digital order channel','EcooBasket.com']
 ].map(([k,v])=><div className='fact' key={k}><span>{k}</span><b>{v}</b></div>)}</div></section>
+
+<section className='section soft'><div className='wrap'><SectionHead eyebrow='BUSINESS MODEL' title='Three complementary engines: multi-brand FMCG, retail & wholesale sales, and Ecoo-owned brands.' body='Ecoo Basket is designed to combine distribution scale with direct customer access and higher-value own-brand opportunities.'/><div className='card-grid three'>
+<article className='feature-card'><Boxes/><h3>Multi-brand FMCG distribution</h3><p>Source and supply a broad range of everyday FMCG products across trusted national and regional brands for kirana stores, general trade and other business customers.</p></article>
+<article className='feature-card'><Store/><h3>Retail & wholesale sales channels</h3><p>Serve wholesale B2B demand while also supporting selected retail sales channels, creating multiple routes to market and stronger product movement.</p></article>
+<article className='feature-card'><Building2/><h3>Own brands: ECOO Nutzes & ECOO Spizees</h3><p>Develop differentiated Nuts & Dry Fruits and Spices ranges under Ecoo-owned brands, with the potential to strengthen brand equity, category control and long-term margin quality.</p></article>
+</div></div></section>
+
+<section className='section wrap'><div className='story-grid'><div><span className='eyebrow'>HOW THE MODEL WORKS</span><h2>Distribution creates reach. Own brands create long-term value.</h2><p>The multi-brand FMCG business builds retailer relationships, order frequency and route density. Retail and wholesale channels expand market access. ECOO Nutzes and ECOO Spizees add a proprietary brand layer that can grow alongside the distribution platform.</p><p>The objective is a balanced model: dependable third-party FMCG distribution for scale, supported by selective own-brand categories for differentiation and value creation.</p></div><div className='principles'>
+<div><PackageCheck/><b>Volume engine</b><span>Everyday FMCG demand supports recurring orders and distribution activity.</span></div>
+<div><Network/><b>Channel engine</b><span>Wholesale and selected retail routes increase access to customers and product movement.</span></div>
+<div><TrendingUp/><b>Brand engine</b><span>Ecoo-owned categories create a path toward stronger differentiation and margin potential.</span></div>
+</div></div></section>
 
 <section className='section soft'><div className='wrap'><SectionHead eyebrow='WHY ECOO BASKET' title='A practical opportunity in an essential retail supply chain.' body='Our model is designed around frequent FMCG demand, fragmented local sourcing and the need for dependable last-mile wholesale support.'/><div className='card-grid three'>
 <article className='feature-card'><Store/><h3>Large local-retail base</h3><p>Kirana and neighbourhood stores remain important access points for everyday FMCG consumption.</p></article>
