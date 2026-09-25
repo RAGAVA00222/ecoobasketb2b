@@ -24,3 +24,10 @@
 /* Kirana bilingual typography */
 .kirana-page{font-family:Inter,'Noto Sans Tamil',sans-serif}.kirana-page .tamil,.kirana-page [lang='ta']{font-family:'Noto Sans Tamil',Inter,sans-serif;line-height:1.78;letter-spacing:0}.kirana-page h1,.kirana-page h2,.kirana-page h3{line-height:1.24}.kirana-page .eyebrow{letter-spacing:.055em;line-height:1.65}.kirana-page .feature-card p.tamil{font-size:1rem;font-weight:600;color:#40566b}.kirana-page .en-support{margin-top:10px!important;font-size:.88rem!important;line-height:1.55!important;color:#758392!important}.kirana-page .support-table b{line-height:1.55}.kirana-page .support-table span{line-height:1.65}.kirana-page .inner-hero h1{font-family:'Noto Sans Tamil',Inter,sans-serif;font-weight:800;letter-spacing:-.025em}.kirana-page .split-copy h2,.kirana-page .story-grid h2{font-family:'Noto Sans Tamil',Inter,sans-serif;letter-spacing:-.02em}@media(max-width:640px){.kirana-page .inner-hero h1{font-size:2.45rem;line-height:1.22}.kirana-page .section-head h2,.kirana-page .split-copy h2,.kirana-page .story-grid h2{font-size:1.85rem;line-height:1.3}.kirana-page .feature-card h3{line-height:1.45}}
 
+
+/* End-to-end mobile overflow fix */
+@media(max-width:640px){
+  .actions{display:grid;grid-template-columns:1fr;width:100%}
+  .actions .btn{width:100%;min-width:0}
+  .topbar-inner span{min-width:0;text-align:center;white-space:normal;line-height:1.4}
+}
