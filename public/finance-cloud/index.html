@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta name="robots" content="noindex,nofollow,noarchive"><meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; script-src &#39;self&#39;; style-src &#39;self&#39;; connect-src https://tgupsygjvnesdpdjwdbp.supabase.co; img-src &#39;self&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECOO BASKET | Finance Cloud Viewer</title>
+<link rel="stylesheet" href="/finance-cloud/style.css">
+</head>
+<body><header><h1><span class="mark">ECOO</span> BASKET · Finance Cloud</h1><small>Secure read-only snapshot</small></header>
+<main>
+<div class="warning"><b>Historical snapshot only · 25 October 2026.</b> இது live Finance App அல்ல. Laptop-ல் புதிதாகச் செய்யும் entries இங்கு தானாக update ஆகாது.</div>
+<section id="authPanel">
+<h2>Finance Owner Login / கணக்கு உள்நுழைவு</h2>
+<p class="muted">Finance-only access uses an administrator-approved company login. No Sales App access is granted.</p>
+<label>Email (approved company contact)</label><input value="ecoobasket@gmail.com" disabled aria-label="Owner email">
+<label for="password">Finance cloud password / Password</label>
+<input type="password" id="password" minlength="12" autocomplete="current-password" placeholder="Minimum 12 characters">
+<div><button id="login">Sign in / உள்நுழை</button><button id="signup" class="secondary" disabled>Administrator invite required</button></div>
+<p class="muted">Public sign-up is disabled for security. A Supabase project administrator must invite the Finance Owner, verify email ownership, and approve read-only Finance access before this page can be used. This page does not save your password.</p>
+<div id="status" aria-live="polite"></div><div id="error" role="alert"></div>
+</section>
+<section id="dashboard" class="hidden">
+<h2>Imported Finance Summary · வரலாற்றுக் கணக்கு</h2>
+<p class="muted" id="signedIn"></p><button id="reload" class="secondary">Refresh cloud snapshot</button><button id="logout" class="secondary">Lock & Sign out</button>
+<div class="grid" id="metrics"></div>
+<h2 style="margin-top:23px">Category totals</h2>
+<div id="table"></div>
+<p class="muted" id="rowsMeta"></p>
+<div class="notice"><b>Read-only.</b> No order entry, cash collection correction, supplier payment or financial adjustment is enabled here. Continue using the existing Finance App for daily entry until the verified cutover.</div>
+</section>
+<p class="footer">ECOO Hyper Retail Private Limited · Same Supabase Pro Project</p>
+</main>
+<script src="/finance-cloud/app.js" defer></script></body></html>
