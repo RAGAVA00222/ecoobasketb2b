@@ -15,7 +15,7 @@ async function api(path,options={},jwt=null){
  if(!response.ok){const e=new Error(body.msg||body.error_description||body.message||"Request failed");e.status=response.status;throw e;}
  return body;
 }
-async function withBusy(fn){if(busy)return;busy=true;$("login").disabled=$("signup").disabled=true;clearMessages();try{await fn();}catch(e){msg("error",e?.message||"Something went wrong");}finally{busy=false;$("login").disabled=$("signup").disabled=false;}}
+async function withBusy(fn){if(busy)return;busy=true;$("login").disabled=true;$("signup").disabled=true;clearMessages();try{await fn();}catch(e){msg("error",e?.message||"Something went wrong");}finally{busy=false;$("login").disabled=false;$("signup").disabled=true;}}
 async function signup(){
  await withBusy(async()=>{
   const password=$("password").value;
