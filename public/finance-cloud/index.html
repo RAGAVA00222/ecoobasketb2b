@@ -10,12 +10,23 @@
 <section id="authPanel">
 <h2>Finance Owner Login / கணக்கு உள்நுழைவு</h2>
 <p class="muted">Finance-only access uses an administrator-approved company login. No Sales App access is granted.</p>
-<label>Email (approved company contact)</label><input value="ecoobasket@gmail.com" disabled aria-label="Owner email">
+<label>Email (approved company contact)</label><input type="email" name="username" autocomplete="username" value="ecoobasket@gmail.com" readonly aria-label="Owner email">
 <label for="password">Finance cloud password / Password</label>
-<input type="password" id="password" minlength="12" autocomplete="current-password" placeholder="Minimum 12 characters">
-<div><button id="login">Sign in / உள்நுழை</button><button id="signup" class="secondary" disabled>Administrator invite required</button></div>
+<input type="password" id="password" name="password" minlength="12" autocomplete="current-password" placeholder="Minimum 12 characters">
+<div><button id="login">Sign in / உள்நுழை</button><button id="requestPasswordReset" class="secondary">Set / reset password</button><button id="signup" class="secondary" disabled>Administrator invite required</button></div>
 <p class="muted">Public sign-up is disabled for security. A Supabase project administrator must invite the Finance Owner, verify email ownership, and approve read-only Finance access before this page can be used. This page does not save your password.</p>
 <div id="status" aria-live="polite"></div><div id="error" role="alert"></div>
+</section>
+<section id="passwordSetup" class="hidden">
+<h2>Set Finance Cloud password / கடவுச்சொல் அமைக்கவும்</h2>
+<p class="muted">This is a password setup for the invited ECOO Finance account. Your password is sent only to Supabase Auth and is never stored by this website.</p>
+<label for="newFinancePassword">New password (minimum 12 characters)</label>
+<input id="newFinancePassword" name="new-password" type="password" autocomplete="new-password" minlength="12" placeholder="At least 12 characters">
+<label for="confirmFinancePassword">Confirm password</label>
+<input id="confirmFinancePassword" name="confirm-password" type="password" autocomplete="new-password" minlength="12" placeholder="Type the same password">
+<div><button id="saveFinancePassword">Save password securely</button></div>
+<div id="passwordSetupStatus" role="status" aria-live="polite"></div>
+<div id="passwordSetupError" role="alert"></div>
 </section>
 <section id="dashboard" class="hidden">
 <h2>Imported Finance Summary · வரலாற்றுக் கணக்கு</h2>

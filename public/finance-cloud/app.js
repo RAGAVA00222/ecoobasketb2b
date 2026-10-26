@@ -92,6 +92,62 @@ async function refresh(){
  msg("rowsMeta","Loading cloud snapshot…");
  try{render(await fetchAll());}catch(e){msg("rowsMeta","Error loading Finance snapshot: "+(e.message||"unknown"));}
 }
+// Finance-only invitation/recovery finish: use HTTPS callback and a one-time Supabase session.
+// Keep credentials only in memory; immediately remove the hash from browser history.
+const FINANCE_CALLBACK="https://ecoobasketb2b.com/finance-cloud/index.html";
+let setupToken=null;
+async function setupFromRedirect(){
+ const hash=window.location.hash;
+ if(!hash)return;
+ const params=new URLSearchParams(hash.slice(1));
+ const kind=params.get("type");
+ const candidate=params.get("access_token");
+ const err=params.get("error_description")||params.get("error");
+ // Remove the token from browser chrome/history before any remote requests.
+ window.history.replaceState(null,"",window.location.pathname+window.location.search);
+ if(err){msg("error",err);return;}
+ if(!candidate || !["invite","recovery"].includes(kind))return;
+ try{
+  const user=await api("/auth/v1/user",{},candidate);
+  if(user.email?.toLowerCase()!==OWNER)throw Error("Invitation belongs to a different account.");
+  setupToken=candidate;
+  hide("authPanel",true);hide("passwordSetup",false);
+  msg("passwordSetupStatus","Invitation verified. Choose a new Finance Cloud password.");
+ }catch(e){
+  setupToken=null;
+  msg("error","Invitation or recovery link invalid/expired. Use Set / reset password to request a fresh link.");
+ }
+}
+async function requestPasswordReset(){
+ await withBusy(async()=>{
+  const u="/auth/v1/recover?redirect_to="+encodeURIComponent(FINANCE_CALLBACK);
+  await api(u,{method:"POST",body:{email:OWNER}});
+  msg("status","Password setup email requested. Open the new email in ecoobasket@gmail.com. Do not share the link or OTP.");
+ });
+}
+async function saveFinancePassword(){
+ if(!setupToken){msg("passwordSetupError","Open a current email invitation or recovery link first.");return;}
+ const password=$("newFinancePassword").value;
+ if(password.length<12 || password!==$("confirmFinancePassword").value){
+  msg("passwordSetupError","Passwords must match and be at least 12 characters.");return;
+ }
+ $("saveFinancePassword").disabled=true;
+ msg("passwordSetupError","");
+ try{
+  await api("/auth/v1/user",{method:"PUT",body:{password}},setupToken);
+  $("newFinancePassword").value="";$("confirmFinancePassword").value="";
+  setupToken=null;
+  hide("passwordSetup",true);hide("authPanel",false);
+  msg("status","Finance password saved. Use Sign in. Finance data access still needs administrator approval.");
+ }catch(e){
+  msg("passwordSetupError",e?.message||"Could not save password. Request a new recovery link.");
+ }finally{$("saveFinancePassword").disabled=false;}
+}
+$("requestPasswordReset").addEventListener("click",requestPasswordReset);
+$("saveFinancePassword").addEventListener("click",saveFinancePassword);
+window.addEventListener("hashchange",()=>{void setupFromRedirect();});
+void setupFromRedirect();
+
 $("signup").addEventListener("click",signup);
 $("login").addEventListener("click",login);
 $("reload").addEventListener("click",refresh);
